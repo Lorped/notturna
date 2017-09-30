@@ -1,0 +1,71 @@
+<!--
+  Generated template for the ConoscenzePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="moredark">
+    <ion-title>Skill e Conoscenze</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="master" padding>
+
+     <ion-row style="align-items: center;">
+      <ion-col ><hr/></ion-col>
+      <ion-col col-6 style="color:#FFFFFF; text-align: center; font-size: 1.1em;">Discipline e Taumaturgie</ion-col>
+      <ion-col ><hr/></ion-col>
+    </ion-row>      
+  
+  <ion-row *ngFor="let desc of myskill">
+      <ion-col col-7 *ngIf="desc.tipologia == 2 ">{{ desc.nomeskill }}</ion-col>
+      <ion-col *ngIf="desc.tipologia == 2 "><img src="assets/img/10/{{ desc.livello }}.png"></ion-col>
+ </ion-row>
+  
+    <ion-row *ngFor="let desc of myskill">
+      <ion-col col-7 *ngIf="desc.tipologia == 3 "><span stype="color:#FF0000;">&nbsp;&nbsp;- </span> {{ desc.nomeskill }}</ion-col>
+      <ion-col *ngIf="desc.tipologia == 3 "><img src="assets/img/5/{{ desc.livello }}.png"></ion-col>
+ </ion-row>
+ 
+	  <ion-row style="align-items: center;" *ngIf="rituali == 1">
+      <ion-col ><hr/></ion-col>
+      <ion-col col-6 style="text-align: center; font-size: 1em;">Rituali</ion-col>
+      <ion-col ><hr/></ion-col>
+    </ion-row>    
+	
+	  <ion-row *ngFor="let desc of myskill">
+      <ion-col *ngIf="desc.tipologia == 11 "><span stype="color:#FF0000;"></span> {{ desc.nomeskill }}</ion-col>
+		</ion-row>
+	
+	
+  
+     <ion-row style="align-items: center;">
+      <ion-col ><hr/></ion-col>
+      <ion-col col-6 style="text-align: center; font-size: 1em;">Competenze del Personaggio</ion-col>
+      <ion-col ><hr/></ion-col>
+    </ion-row>    
+  
+   <ion-row *ngFor="let desc of myskill">
+      <ion-col col-7 *ngIf="desc.tipologia == 0 ">{{ desc.nomeskill }}</ion-col>
+      <ion-col *ngIf="desc.tipologia == 0 "><img src="assets/img/5/{{ desc.livello }}.png"></ion-col>
+ </ion-row>
+  
+  
+   <ion-row style="align-items: center;">
+      <ion-col ><hr/></ion-col>
+      <ion-col col-5 style="text-align: center;">Skill di Combattimento</ion-col>
+      <ion-col ><hr/></ion-col>
+    </ion-row>      
+  
+  <ion-row *ngFor="let desc of myskill">
+      <ion-col col-7 *ngIf="desc.tipologia == 1 ">{{ desc.nomeskill }}</ion-col>
+      <ion-col *ngIf="desc.tipologia == 1 && desc.livello < 3 "><img src="assets/img/5/{{ desc.livello }}.png"></ion-col>
+	  <ion-col *ngIf="desc.tipologia == 1 && desc.livello > 2 "><img src="assets/img/5/{{ desc.livello }}.png">&nbsp;&nbsp;&nbsp; ( +{{ desc.livello - 2 }} )</ion-col>
+ </ion-row>
+  
+  
+</ion-content>
