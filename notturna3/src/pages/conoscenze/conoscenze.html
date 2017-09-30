@@ -20,7 +20,13 @@
       <ion-col col-6 style="color:#FFFFFF; text-align: center; font-size: 1.1em;">Discipline e Taumaturgie</ion-col>
       <ion-col ><hr/></ion-col>
     </ion-row>      
+ 
+ <ion-row >
+      <ion-col col-7>Bonus attivazione</ion-col>
+	  <ion-col>+{{ scheda.attivazione }}</ion-col>
+ </ion-row>
   
+	
   <ion-row *ngFor="let desc of myskill">
       <ion-col col-7 *ngIf="desc.tipologia == 2 ">{{ desc.nomeskill }}</ion-col>
       <ion-col *ngIf="desc.tipologia == 2 "><img src="assets/img/10/{{ desc.livello }}.png"></ion-col>

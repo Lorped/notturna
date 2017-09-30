@@ -26,10 +26,8 @@
 		<ion-grid >
 		<ion-row>
 			<ion-col col-8 class="red"> {{item.contatto}} </ion-col>
-			<ion-col col-2 *ngIf="item.cell==1" class="med"> <ion-icon name="call"></ion-icon></ion-col>
-			<ion-col col-2 *ngIf="item.cell==0">&nbsp;</ion-col>
-			<ion-col col-2 *ngIf="item.email==1" class="med"> <ion-icon name="mail"></ion-icon></ion-col>
-			<ion-col col-2 *ngIf="item.email==0">&nbsp;</ion-col>
+			<ion-col col-2 class="med"> <ion-icon *ngIf="item.cell==1"   name="call"></ion-icon></ion-col>
+			<ion-col col-2 class="med"> <ion-icon *ngIf="item.email==1"   name="mail"></ion-icon></ion-col>
 		</ion-row>
 		<ion-row *ngIf="item.note!=''"><ion-col class="med"> Note : {{item.note}} </ion-col></ion-row>
 		</ion-grid>			

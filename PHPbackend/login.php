@@ -34,6 +34,11 @@ $password = $request->password;
 if (isset($postdata) && $username != "" && $password !="" ) {
     
   include ('db.inc.php');
+	
+	// pulizia periodica
+	$MM="DELETE FROM dadi WHERE DATE_ADD( Ora , INTERVAL 4 HOUR )<NOW()";
+	mysql_query($MM);	
+	//
  
   $MySql = "SELECT idutente FROM utente WHERE nome = '".addslashes($username)."' AND password = '".addslashes($password)."'";
     $Result = mysql_query($MySql);

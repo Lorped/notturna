@@ -18,12 +18,14 @@ import { AuthService } from '../../providers/auth-service/auth-service';
 export class ConoscenzePage {
   
   myskill: Array<any>;
+  scheda: Array<any>;
 
 	rituali: number;
 
   constructor(public navCtrl: NavController, private auth: AuthService, public navParams: NavParams) {
     
     this.myskill=this.auth.getUserSKILLInfo();
+	this.scheda=this.auth.getUserPGInfo();
     
     //console.log("myskill");
     //console.log(this.myskill);
