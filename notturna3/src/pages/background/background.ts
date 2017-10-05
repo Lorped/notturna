@@ -17,9 +17,11 @@ import { AuthService } from '../../providers/auth-service/auth-service';
 export class BackgroundPage {
   
   myskill: Array<any>;
+  fulldata: Array<any>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthService) {
     this.myskill=this.auth.getUserSKILLInfo();
+	this.fulldata=this.auth.getUserPGInfo();
   }
 
   ionViewDidLoad() {

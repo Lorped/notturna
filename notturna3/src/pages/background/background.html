@@ -53,6 +53,14 @@
       <ion-col *ngIf="desc.tipologia == 8 && desc.livello < 0 ">{{ desc.nomeskill}}</ion-col>
     </ion-row>  
   
+	<ion-row style="align-items: center;" *ngIf="fulldata.note != ''">
+      <ion-col ><hr/></ion-col>
+      <ion-col col-6 style="color:#FFFFFF; text-align: center; font-size: 1.1em;">Annotazioni</ion-col>
+      <ion-col ><hr/></ion-col>
+    </ion-row>
+	<ion-row >
+      <ion-col style="color:#FFFFFF; text-align: justify; font-size: 1.1em;">{{ fulldata.note}}</ion-col>
+    </ion-row>    
   
   
 </ion-content>

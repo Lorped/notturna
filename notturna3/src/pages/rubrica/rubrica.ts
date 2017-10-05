@@ -67,6 +67,11 @@ export class RubricaPage {
 	}
 
 
+	add() {
+		this.navCtrl.push('AddcontattoPage', { "parentPage": this });
+		//this.navCtrl.push('AddcontattoPage'); 
+	}
+
 	
 	ionViewDidLoad() {
 		this.loadRubrica();
