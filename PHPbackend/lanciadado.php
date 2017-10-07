@@ -36,7 +36,7 @@ include ("db.inc.php");
 		if ( $res=mysql_fetch_array(mysql_query($Mysql)) ) {	
 		$nomepg=$res['nomepg'];
 		} else {
-			$nomepg="Guest";
+			$nomepg="NARRAZIONE";
 		}	
 
 
