@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+
 import 'rxjs/add/operator/map';
 
 export class User {
@@ -29,7 +29,7 @@ export class AuthService {
 
   constructor(public http: Http   ) { }
    
-
+/*
  public register(credentials) {
     if (credentials.username === null || credentials.email === null || credentials.password === null) {
       return Observable.throw("Please insert credentials");
@@ -41,6 +41,7 @@ export class AuthService {
       });
     }
   }
+ */
  
   public getUserInfo() : User {
     return this.currentUser;
@@ -67,7 +68,7 @@ export class AuthService {
     
   } 
 
-
+/*
     public logout() {
      return Observable.create(observer => {
       this.currentUser = null;
@@ -75,7 +76,8 @@ export class AuthService {
       observer.complete();
     });
   }
-    
+  
+  */
 
    
     

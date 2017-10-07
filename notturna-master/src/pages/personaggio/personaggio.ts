@@ -35,6 +35,7 @@ export class PersonaggioPage {
 	scheda: Array<any>;
 	myskill: Array<any>;
 	
+	rituali: number;
 
   
   constructor(   public navParams: NavParams , public http: Http) {
@@ -67,6 +68,15 @@ export class PersonaggioPage {
             
         		this.currentUser.skill = res;
 				this.myskill = res;
+				
+				this.rituali=0;
+		
+				for (var i = 0; i < this.myskill.length; i++) {
+  					if ( this.myskill[i].tipologia==11)  {
+    		 			this.rituali=1;
+    					break;
+  					}
+				}
 
 			});
 		});

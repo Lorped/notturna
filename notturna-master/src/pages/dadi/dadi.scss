@@ -1,3 +1,8 @@
 page-dadi {
 
+		@media (max-width:320px)  { /* smartphones, iPhone, portrait 480x320 phones */ 
+		ion-item {
+			font-size:1em;
+		}
+	}
 }

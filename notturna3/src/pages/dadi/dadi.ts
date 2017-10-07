@@ -20,10 +20,12 @@ export class DadiPage {
 
 	tiridado: FeedItem[];	
 	myuser: User;
+	fdv:	number;
 	
 	constructor(public navCtrl: NavController, public navParams: NavParams, private feedProvider: FeedProvider , private http: Http , private auth: AuthService) {
 		
 		this.myuser=this.auth.getUserInfo();
+		this.fdv=this.myuser.fulldata['fdv'];
 		this.loadDadi();
 	}
 
@@ -54,6 +56,24 @@ export class DadiPage {
       	.subscribe(res =>  {     
 			setTimeout( this.loadDadi() , 1000); 
      	 });
+		
 	}
+
+	usafdv(){
+		let headers = new Headers();
+    	headers.append('Content-Type', 'application/json'); 
+    	var link = 'http://www.roma-by-night.it/ionicPHP/usofdv.php';
+   		var mypost = JSON.stringify({userid: this.myuser['userid'] });   
+		 
+   		this.http.post(link, mypost, headers)
+      	.subscribe(res =>  {     
+			setTimeout( this.loadDadi() , 1000); 
+     	 });
+		this.fdv=this.fdv-1;
+		this.myuser.fulldata['fdv']=this.fdv;
+		this.auth.setUserInfo(this.myuser);
+console.log(this.fdv);
+	}
+
 
 }

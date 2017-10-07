@@ -45,6 +45,56 @@ if (isset($postdata) && $username != "" && $password !="" ) {
   if ( $res = mysql_fetch_array($Result)   ) {
     
     $idutente = $res['idutente'];
+	  
+
+	  
+		//controllo-aggiorno fdv
+		
+		$Mysql="SELECT fdv,fdvmax,lastfdv FROM personaggio WHERE idutente=$idutente";
+		$Result=mysql_query ($Mysql);
+		$res=mysql_fetch_array($Result);
+
+		$fdv=$res['fdv'];
+		$fdvmax=$res['fdvmax'];
+		$lastfdv=$res['lastfdv'];
+
+		if ( $fdv == $fdvmax ) {  // tutto ok 
+
+			$Mysql="UPDATE personaggio SET lastfdv=NOW()  WHERE idutente=$idutente";
+			$Result=mysql_query ($Mysql);
+		} else {
+	
+			$base=strtotime("2017-01-01 18:00:00");	
+			$qlastftv=strtotime($lastfdv);	
+			$now=time();
+	
+			$tramonti0=floor( ($qlastftv - $base)/( 24*60*60 )) ;
+			$tramonti1=floor(($now - $base) / ( 24*60*60 ) );
+	
+			$difftramonti=$tramonti1-$tramonti0;
+	
+	
+			if ( $difftramonti > 0 ) {
+		
+				$newfdv=$fdv+$difftramonti;
+				if ($newfdv > $fdvmax)  {$newfdv=$fdvmax ;}
+		
+				$newlastfdv=$base + $tramonti1*( 24*60*60 )+1;
+		
+				$newlastfdvstring=date("Y-m-d H:i:s",$newlastfdv );
+		
+				$Mysql="UPDATE personaggio SET fdv = $newfdv , lastfdv = '$newlastfdvstring' WHERE idutente=$idutente";
+				$Result=mysql_query ($Mysql);
+			
+			} else {
+				// echo "<br>da quando ho controlato fdv non è passato un tramonto";
+			}	
+
+		}// fine controllo fdv
+	  
+		  
+	  
+	  
     
     $MySql = "SELECT *  FROM personaggio 
           LEFT JOIN clan ON personaggio.idclan=clan.idclan 
