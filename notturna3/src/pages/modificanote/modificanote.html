@@ -1,0 +1,31 @@
+<!--
+  Generated template for the ModificanotePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="moredark">
+    <ion-title>Modifica Annotazioni</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class=master>
+
+	<form (ngSubmit)="modifica()" #modificaForm="ngForm">
+	<ion-item class=master>
+      <ion-label stacked>Note</ion-label>
+      <ion-textarea type="text" rows="20" [(ngModel)]="annotazioni" name="newaanotazioni" autofocus ></ion-textarea>
+	</ion-item>
+<ion-footer >		
+	<ion-item class=master>
+		<button ion-button color="mydanger" class="submit-btn" full type="submit" >Modifica</button>
+
+	</ion-item>
+</ion-footer>		
+	</form>
+	
+</ion-content>

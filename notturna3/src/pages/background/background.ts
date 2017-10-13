@@ -18,14 +18,38 @@ export class BackgroundPage {
   
   myskill: Array<any>;
   fulldata: Array<any>;
+  note: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthService) {
     this.myskill=this.auth.getUserSKILLInfo();
 	this.fulldata=this.auth.getUserPGInfo();
+	  this.note=this.nl2br(this.fulldata['note']);
   }
 
+ modifica(){
+	 this.navCtrl.push('ModificanotePage', { "parentPage": this });
+ }
   ionViewDidLoad() {
     //console.log('ionViewDidLoad BackgroundPage');
   }
 
+ 	nl2br (str) {
+	// Some latest browsers when str is null return and unexpected null value
+		if (typeof str === 'undefined' || str === null) {
+    		return '';
+		}
+  	// Adjust comment to avoid issue on locutus.io display
+  		var breakTag =  '<br>'   ; 
+  		return (str + '')
+    		.replace(/(\r\n|\n\r|\r|\n)/g, breakTag + '$1')
+	}
+
+	reloadnote(){
+		 this.note=this.nl2br(this.fulldata['note']);
+	}
+ 
+ //filterItemsLOTzero(){
+ //   return this.myskill.filter(x => x.tipologia == 8).filter(x => x.livello <0);
+ //}
+ 
 }
