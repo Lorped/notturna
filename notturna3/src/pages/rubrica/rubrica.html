@@ -21,13 +21,14 @@
   <ion-spinner *ngIf="loading" id="feed-spinner"></ion-spinner>
 	
 		
-   <ion-list  >
-    <ion-item *ngFor="let item of rubrica" class="master">
+   <ion-list class="master" >
+    <ion-item-sliding *ngFor="let item of rubrica" style="background-color:#000000">
+		<ion-item class="master">
 	
-		<h2 style="color:#ff0000;">{{item.contatto}}</h2>
-		<ion-icon *ngIf="item.cell==1"  name="call" class="mymed" item-end></ion-icon>
-		<ion-icon *ngIf="item.email==1" name="mail" class="mymed" item-end></ion-icon>
-		<p class="mymed">{{item.note}}</p>
+			<h2 style="color:#ff0000;">{{item.contatto}}</h2>
+			<ion-icon *ngIf="item.cell==1"  name="call" class="mymed" item-end></ion-icon>
+			<ion-icon *ngIf="item.email==1" name="mail" class="mymed" item-end></ion-icon>
+			<p class="mymed">{{item.note}}</p>
 <!---		
 		
 		<ion-grid class="mypad">
@@ -39,7 +40,24 @@
 		<ion-row *ngIf="item.note!=''"><ion-col class="mymed">Note: {{item.note}} </ion-col></ion-row>
 		</ion-grid>			
 -->
-    </ion-item>
+		</ion-item>
+		<ion-item-options>
+			<button ion-button color="moredark" (click)="edit(item)">
+				<ion-icon name="create"></ion-icon>
+				Edit
+			</button>
+		</ion-item-options>
+		<ion-item-options side="left">
+			<button ion-button color="danger" (click)="delete(item)">
+				<ion-icon name="trash"></ion-icon>
+				Delete
+			</button>
+		</ion-item-options>
+	</ion-item-sliding>
+  </ion-list>
+  <ion-list>
+	<ion-item class="master">
+	</ion-item>
   </ion-list>
 
 

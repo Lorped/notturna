@@ -10,12 +10,14 @@ export class RubricaItem {
 	cell: number;
 	email: number;
 	note: string;
+	idrubrica: number;
  
-	constructor(contatto: string, cell: number, email: number, note: string) {
+	constructor(contatto: string, cell: number, email: number, note: string, idrubrica: number) {
 		this.contatto = contatto;
 		this.cell = cell;
 		this.email = email;
 		this.note = note;
+		this.idrubrica = idrubrica;
 	}
 }
 
@@ -55,7 +57,7 @@ export class RubricaPage {
 
       			for (let i = 0; i < res.length; i++) {
         			let item = res[i];
-        			let newRubricaItem = new RubricaItem(item.contatto, item.cell, item.email, item.note);
+        			let newRubricaItem = new RubricaItem(item.contatto, item.cell, item.email, item.note, item.idrubrica);
         			miarubrica.push(newRubricaItem);
       			}						      	
 			}
@@ -71,6 +73,15 @@ export class RubricaPage {
 		this.navCtrl.push('AddcontattoPage', { "parentPage": this });
 		//this.navCtrl.push('AddcontattoPage'); 
 	}
+	
+	edit(item: RubricaItem) {
+		//this.navCtrl.push('ChangecontattoPage', { "parentPage": this });
+	}
+	
+	delete(item: RubricaItem) {
+		//
+	}
+
 
 	
 	ionViewDidLoad() {
