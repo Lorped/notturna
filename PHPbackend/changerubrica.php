@@ -33,11 +33,13 @@ $request = json_decode($postdata);
 
 
 
-$idutente = $request->idutente;
+$idrubrica = $request->idrubrica;
 $contatto = mysql_real_escape_string($request->contatto);
 $email = $request->email;
 $cell = $request->cell;
 $note = mysql_real_escape_string($request->note);
+
+
 
 
 // inizio output XML
@@ -45,8 +47,9 @@ $note = mysql_real_escape_string($request->note);
 
 	
 	
-	$MySql = "INSERT INTO rubrica ( owner , contatto, cell, email, note ) VALUES ( $idutente, '$contatto', $cell, $email, '$note')  ";
+	$MySql = "UPDATE rubrica SET  contatto='$contatto' ,cell=$cell, email=$email, note='$note' WHERE idrubrica=$idrubrica  ";
 	$Result = mysql_query($MySql);
 	if (mysql_errno()) die ( mysql_errno().": ".mysql_error()."+". $Mysql );
+
 
 ?>

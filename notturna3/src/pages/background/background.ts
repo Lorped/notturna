@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service/auth-service';
 
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+
 /**
  * Generated class for the BackgroundPage page.
  *
@@ -19,11 +21,77 @@ export class BackgroundPage {
   myskill: Array<any>;
   fulldata: Array<any>;
   note: string;
+  
+  link: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthService , private iab: InAppBrowser) {
     this.myskill=this.auth.getUserSKILLInfo();
 	this.fulldata=this.auth.getUserPGInfo();
-	  this.note=this.nl2br(this.fulldata['note']);
+	this.note=this.nl2br(this.fulldata['note']);
+	
+	console.log(this.fulldata['idclan']);
+	switch (this.fulldata['idclan']) {
+       
+		case "1":   //  Toreador
+			this.link = "https://drive.google.com/file/d/0BwbyMyT-GT-UZ2pKb0RzRlZoaVU/view";
+		break;
+		
+		case "2":   //  Ventrue
+			this.link = "https://drive.google.com/file/d/0BwbyMyT-GT-UTTRodGZXdzdCVXM/view";
+		break;
+		
+		case "3":		// Nosferatu
+			this.link = "https://drive.google.com/file/d/0BwbyMyT-GT-UUDNmT3llNjZ3UXM/view";
+		break;
+		
+		case "4":		// Brujah
+			this.link = "https://drive.google.com/file/d/0BwbyMyT-GT-UNFZURFpYR2pfNVk/view";
+		break;
+		
+		case "5":		// Gangrel
+			this.link = "https://drive.google.com/file/d/0BwbyMyT-GT-UcFRxVFRkNnRLb28/view";
+		break;
+		
+		case "6":		// Malkavian
+			this.link = "https://drive.google.com/file/d/0BwbyMyT-GT-UZ2dRSW1VOGFWNDQ/view";
+		break;  
+		
+		case "7":		// Tremere
+			this.link = "https://drive.google.com/file/d/0BwbyMyT-GT-US3d3OEpnbV9Ccjg/view";
+		break;
+		
+		case "8":		// Lasombra
+			this.link = "#";
+		break;
+		
+		case "9":		// Tzimisce
+			this.link = "#";
+		break;
+		
+		case "10":	// Assamiti
+			this.link = "https://drive.google.com/file/d/0BwbyMyT-GT-ULXpGWkxLNWZhaDg/view";
+		break;
+		
+		case "11":	// Giovanni
+			this.link = "https://drive.google.com/file/d/0BwbyMyT-GT-UYTVUZFlNeEo2N0k/view";
+		break;
+		
+		case "12":	// Ravnos
+			this.link = "https://drive.google.com/file/d/0BwbyMyT-GT-UVTF3QWJ2TzNXZk0/view";
+		break;
+		
+		case "13":	// Setiti
+			this.link = "https://drive.google.com/file/d/0BwbyMyT-GT-UOUo0dll2NjRDOHc/view";
+		break;
+		
+		case "20":	// vili
+			this.link = "https://drive.google.com/file/d/0BwbyMyT-GT-UOWhsMExKd2YzTVU/view";
+		break;   
+		
+
+	}
+	
+	
   }
 
  modifica(){
@@ -47,6 +115,13 @@ export class BackgroundPage {
 	reloadnote(){
 		 this.note=this.nl2br(this.fulldata['note']);
 	}
+	
+	openUrl() {
+
+		//const browser = this.iab.create(this.link);
+		this.iab.create(this.link);
+
+}    
  
  //filterItemsLOTzero(){
  //   return this.myskill.filter(x => x.tipologia == 8).filter(x => x.livello <0);

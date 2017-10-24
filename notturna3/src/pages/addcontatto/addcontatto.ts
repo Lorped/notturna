@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { RubricaItem } from '../rubrica/rubrica'
 
 import { AuthService, User } from '../../providers/auth-service/auth-service';
 
+/*
 export class RubricaItem {
 	contatto: string;
 	cell: number;
@@ -18,7 +20,7 @@ export class RubricaItem {
 		this.note = note;
 	}
 }
-
+*/
 
 /**
  * Generated class for the AddcontattoPage page.
@@ -35,7 +37,7 @@ export class RubricaItem {
 export class AddcontattoPage {
 	myuser: User;
 	
-	nuovoContatto= new RubricaItem('',0,0,'');
+	nuovoContatto= new RubricaItem('',0,0,'',0);
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AuthService, public http: Http ) {
 	  this.myuser=this.auth.getUserInfo();

@@ -39,6 +39,7 @@ export class RubricaPage {
 
 	rubrica: RubricaItem[];	
 	myuser: User;
+	tochange: RubricaItem;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams,  private http: Http , private auth: AuthService) {		
 		this.myuser=this.auth.getUserInfo();
@@ -75,11 +76,14 @@ export class RubricaPage {
 	}
 	
 	edit(item: RubricaItem) {
-		//this.navCtrl.push('ChangecontattoPage', { "parentPage": this });
+		this.tochange=item;
+		//console.log (this.tochange.cell);
+		//console.log (this.tochange.email);
+		this.navCtrl.push('ChangecontattoPage', { "parentPage": this } );
 	}
 	
 	delete(item: RubricaItem) {
-		console.log("da cancellare "+item.idrubrica);
+		//console.log("da cancellare "+item.idrubrica);
 		var url = 'http://www.roma-by-night.it/ionicPHP/delrubrica.php?id='+item.idrubrica;
 		this.http.get(url)
 		.subscribe( data => {

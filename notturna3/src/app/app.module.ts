@@ -6,6 +6,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { HttpModule } from '@angular/http';
 
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+
 import { MyApp } from './app.component';
 import { FeedProvider } from '../providers/feed/feed';
 
@@ -27,7 +29,8 @@ import { FeedProvider } from '../providers/feed/feed';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthService,
-    FeedProvider
+    FeedProvider,
+    InAppBrowser
   ]
 })
 export class AppModule {}

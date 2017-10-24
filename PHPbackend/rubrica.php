@@ -30,7 +30,7 @@
 	if ($idutente=="") $idutente=0;
 	
 
-	$Mysql="SELECT * FROM rubrica WHERE owner = $idutente";
+	$Mysql="SELECT * FROM rubrica WHERE owner = $idutente ORDER BY idrubrica";
 	$Result=mysql_query($Mysql);
 
 	$out1 = [];
