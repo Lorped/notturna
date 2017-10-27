@@ -37,7 +37,7 @@ export class RubricaItem {
 export class AddcontattoPage {
 	myuser: User;
 	
-	nuovoContatto= new RubricaItem('',0,0,'',0);
+	nuovoContatto= new RubricaItem('',0,0,0, '',0);
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AuthService, public http: Http ) {
 	  this.myuser=this.auth.getUserInfo();
@@ -45,7 +45,7 @@ export class AddcontattoPage {
 
 	add () {
 		var url = 'http://www.roma-by-night.it/ionicPHP/addrubrica.php';
-		var mypost = JSON.stringify({idutente: this.myuser.userid, contatto: this.nuovoContatto.contatto, cell: this.nuovoContatto.cell, email: this.nuovoContatto.email, note: this.nuovoContatto.note });
+		var mypost = JSON.stringify({idutente: this.myuser.userid, contatto: this.nuovoContatto.contatto, cell: this.nuovoContatto.cell, home: this.nuovoContatto.home, email: this.nuovoContatto.email, note: this.nuovoContatto.note });
 		
 		let headers = new Headers();
 		

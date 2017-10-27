@@ -9,13 +9,15 @@ export class RubricaItem {
 	contatto: string;
 	cell: number;
 	email: number;
+	home: number;
 	note: string;
 	idrubrica: number;
  
-	constructor(contatto: string, cell: number, email: number, note: string, idrubrica: number) {
+	constructor(contatto: string, cell: number, email: number, home: number, note: string, idrubrica: number) {
 		this.contatto = contatto;
 		this.cell = cell;
 		this.email = email;
+		this.home = home;
 		this.note = note;
 		this.idrubrica = idrubrica;
 	}
@@ -58,7 +60,7 @@ export class RubricaPage {
 
       			for (let i = 0; i < res.length; i++) {
         			let item = res[i];
-        			let newRubricaItem = new RubricaItem(item.contatto, item.cell, item.email, item.note, item.idrubrica);
+        			let newRubricaItem = new RubricaItem(item.contatto, item.cell, item.email, item.home, item.note, item.idrubrica);
         			miarubrica.push(newRubricaItem);
       			}						      	
 			}

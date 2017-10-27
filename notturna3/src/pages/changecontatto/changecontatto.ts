@@ -25,6 +25,10 @@ export class ChangecontattoPage {
 	hasEmail = {
 		checked: true
 	};
+	
+	hasHome = {
+		checked: true
+	};
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
 		this.oldContatto=this.navParams.get("parentPage").tochange;
@@ -32,6 +36,7 @@ export class ChangecontattoPage {
 		//console.log(this.oldContatto.cell);
 		if (this.oldContatto.cell==0) {this.hasCell.checked=false;}
 		if (this.oldContatto.email==0) {this.hasEmail.checked=false;}
+		if (this.oldContatto.home==0) {this.hasHome.checked=false;}
 	}
 
 	change(){
@@ -40,9 +45,11 @@ export class ChangecontattoPage {
 		
 		this.oldContatto.cell=0;
 		this.oldContatto.email=0;
+		this.oldContatto.home=0;
 		if (this.hasCell.checked == true ) this.oldContatto.cell=1 ; 
 		if (this.hasEmail.checked == true ) this.oldContatto.email=1 ; 
-		var mypost = JSON.stringify({idrubrica: this.oldContatto.idrubrica, contatto: this.oldContatto.contatto, cell: this.oldContatto.cell, email: this.oldContatto.email, note: this.oldContatto.note });
+		if (this.hasHome.checked == true ) this.oldContatto.home=1 ; 
+		var mypost = JSON.stringify({idrubrica: this.oldContatto.idrubrica, contatto: this.oldContatto.contatto, cell: this.oldContatto.cell, email: this.oldContatto.email,  home: this.oldContatto.home, note: this.oldContatto.note });
 		
 		let headers = new Headers();
 		

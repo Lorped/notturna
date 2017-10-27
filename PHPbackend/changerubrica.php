@@ -37,6 +37,7 @@ $idrubrica = $request->idrubrica;
 $contatto = mysql_real_escape_string($request->contatto);
 $email = $request->email;
 $cell = $request->cell;
+$home = $request->home;
 $note = mysql_real_escape_string($request->note);
 
 
@@ -47,7 +48,7 @@ $note = mysql_real_escape_string($request->note);
 
 	
 	
-	$MySql = "UPDATE rubrica SET  contatto='$contatto' ,cell=$cell, email=$email, note='$note' WHERE idrubrica=$idrubrica  ";
+	$MySql = "UPDATE rubrica SET  contatto='$contatto' ,cell=$cell, email=$email, home=$home,  note='$note' WHERE idrubrica=$idrubrica  ";
 	$Result = mysql_query($MySql);
 	if (mysql_errno()) die ( mysql_errno().": ".mysql_error()."+". $Mysql );
 
