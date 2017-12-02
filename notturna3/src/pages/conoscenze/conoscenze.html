@@ -72,6 +72,16 @@
       <ion-col *ngIf="desc.tipologia == 1 && desc.livello < 3 "><img src="assets/img/5/{{ desc.livello }}.png"></ion-col>
 	  <ion-col *ngIf="desc.tipologia == 1 && desc.livello > 2 "><img src="assets/img/5/{{ desc.livello }}.png">&nbsp;&nbsp;&nbsp; ( +{{ desc.livello - 2 }} )</ion-col>
  </ion-row>
+ 
+ 	<ion-row style="align-items: center;">
+      <ion-col ><hr/></ion-col>
+      <ion-col col-6 style="color:#FFFFFF; text-align: center; font-size: 1.1em;">Analizza Oggetto</ion-col>
+      <ion-col ><hr/></ion-col>
+    </ion-row>   
+    
+    <ion-row >
+      <ion-col style="text-align: center;"><button ion-button color="#FFFFFF;" round outline (click)="openbarcode()">Scan</button></ion-col>
+    </ion-row>   
   
   
 </ion-content>

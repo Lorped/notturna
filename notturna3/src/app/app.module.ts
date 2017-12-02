@@ -7,6 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { HttpModule } from '@angular/http';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 import { MyApp } from './app.component';
 import { FeedProvider } from '../providers/feed/feed';
@@ -30,7 +31,8 @@ import { FeedProvider } from '../providers/feed/feed';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthService,
     FeedProvider,
-    InAppBrowser
+    InAppBrowser,
+    BarcodeScanner
   ]
 })
 export class AppModule {}

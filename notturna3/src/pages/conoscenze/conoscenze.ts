@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AuthService } from '../../providers/auth-service/auth-service';
+import { AuthService, User } from '../../providers/auth-service/auth-service';
+
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 
 /**
@@ -19,13 +21,18 @@ export class ConoscenzePage {
   
   myskill: Array<any>;
   scheda: Array<any>;
+  
+  myuser: User;
+  
+  oggetto: string;
 
 	rituali: number;
 
-  constructor(public navCtrl: NavController, private auth: AuthService, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, private auth: AuthService, public navParams: NavParams , private barcodeScanner: BarcodeScanner) {
     
     this.myskill=this.auth.getUserSKILLInfo();
 	this.scheda=this.auth.getUserPGInfo();
+	this.myuser=this.auth.getUserInfo();
     
     //console.log("myskill");
     //console.log(this.myskill);
@@ -47,6 +54,21 @@ export class ConoscenzePage {
 		//console.log ( this.rituali);
     
   }
+
+	openbarcode() {
+		
+		this.barcodeScanner.scan( {"showTorchButton": true} ).then((barcodeData) => {
+			// Success! Barcode data is here
+			console.log(barcodeData.text);
+			
+			this.oggetto=barcodeData.text;
+			this.navCtrl.push('OggettoPage', { "parentPage": this });
+				
+		}, (err) => {
+				// An error occurred
+		});
+		
+	}
 
   ionViewDidLoad() {
     //console.log('ionViewDidLoad ConoscenzePage');
