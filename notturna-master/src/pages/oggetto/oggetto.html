@@ -1,0 +1,51 @@
+<!--
+  Generated template for the OggettoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="moredark">
+    <ion-title>Oggetto</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="master" padding>
+	
+	 <ion-row style="align-items: center;">
+      <ion-col ><hr/></ion-col>
+      <ion-col col-6 style="color:#FFFFFF; text-align: center; font-size: 1.1em;">Analisi Oggetto</ion-col>
+      <ion-col ><hr/></ion-col>
+    </ion-row>
+    
+    <ion-row >
+      <ion-col style="color:#FFFFFF; text-align: center; font-size: 1.1em;"><h3 class="mypad2">{{nomeoggetto}}</h3></ion-col>
+    </ion-row>        
+    <ion-row >
+      <ion-col style="color:#FFFFFF; text-align: center; font-size: 1.1em;">{{descrizione}}</ion-col>
+    </ion-row>   
+    
+    <ion-row style="align-items: center;">
+      <ion-col ><hr/></ion-col>
+      <ion-col col-6 style="text-align: center; font-size: 1em;">Requisiti base</ion-col>
+      <ion-col ><hr/></ion-col>
+    </ion-row>  
+    
+    <ion-row *ngFor="let x of oggetto">
+      <ion-col  *ngIf="x.tipo == 3 " style="color:#FFFFFF; text-align: center; font-size: 1.1em;">{{x.desc}}</ion-col>
+    </ion-row>    
+    
+     <ion-row style="align-items: center;">
+      <ion-col ><hr/></ion-col>
+      <ion-col col-6 style="text-align: center; font-size: 1em;">Requisiti estesi</ion-col>
+      <ion-col ><hr/></ion-col>
+    </ion-row> 
+     
+    <ion-row *ngFor="let x of oggetto">
+      <ion-col  *ngIf="x.tipo == 2 " style="color:#FFFFFF; text-align: center; font-size: 1.1em;">{{x.desc}}<br><br><span style="text-align:left">{{x.descX}}</span>=</ion-col>
+    </ion-row>     
+
+</ion-content>

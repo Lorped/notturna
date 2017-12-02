@@ -8,6 +8,8 @@ import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 import { FeedProvider } from '../providers/feed/feed';
 
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { FeedProvider } from '../providers/feed/feed';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    FeedProvider
+    FeedProvider,
+    BarcodeScanner
   ]
 })
 export class AppModule {}
