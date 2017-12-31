@@ -55,10 +55,10 @@
       <ion-col ><hr/></ion-col>
     </ion-row>    
   
-   <ion-row *ngFor="let desc of myskill">
+	<ion-row *ngFor="let desc of myskill">
       <ion-col col-7 *ngIf="desc.tipologia == 0 ">{{ desc.nomeskill }}</ion-col>
       <ion-col *ngIf="desc.tipologia == 0 "><img src="assets/img/5/{{ desc.livello }}.png"></ion-col>
- </ion-row>
+	</ion-row>
   
   
    <ion-row style="align-items: center;">
@@ -83,5 +83,98 @@
       <ion-col style="text-align: center;"><button ion-button color="#FFFFFF;" round outline (click)="openbarcode()">Scan</button></ion-col>
     </ion-row>   
   
+	<ion-row style="align-items: center;">
+      <ion-col ><hr/></ion-col>
+      <ion-col col-6 style="color:#FFFFFF; text-align: center; font-size: 1.1em;">Danni delle Armi</ion-col>
+      <ion-col ><hr/></ion-col>
+    </ion-row>
+    
+    <ion-row>
+      <ion-col col-7 >Pugno/Calcio</ion-col>
+      <ion-col >{{ 1*forza + 2 + 1*rissa + 1*potenza  }} </ion-col>
+	</ion-row>
+	<ion-row>
+      <ion-col col-7 >Artiglio</ion-col>
+      <ion-col >{{ 1*forza + 3 + 1*rissa + 1*potenza }} </ion-col>
+	</ion-row>
+	<ion-row *ngIf="artigli == 1">
+      <ion-col col-7 >Artiglio Aggr.</ion-col>
+      <ion-col >{{ 2*forza + 4 + 1*rissa + 1*potenza }} </ion-col>
+	</ion-row>
+	<ion-row>
+      <ion-col col-7 >Morso (Aggr.)</ion-col>
+      <ion-col >{{ 2*forza + 4 + 1*rissa + 1*potenza }} </ion-col>
+	</ion-row>
+	<ion-row>
+      <ion-col col-7 >Pugnale</ion-col>
+      <ion-col >{{ 1*forza + 3 + 1*rissa + 1*potenza }} </ion-col>
+	</ion-row> 
+	<ion-row>
+      <ion-col col-7 >Pugnale da lancio</ion-col>
+      <ion-col >{{ 1*forza + 3 + 1*lancio + 1*potenza }} </ion-col>
+	</ion-row> 
+	<ion-row>
+      <ion-col col-7 >Freccia</ion-col>
+      <ion-col >{{ 1*forza + 3 + 1*tiro }} </ion-col>
+	</ion-row> 
+	<ion-row>
+      <ion-col col-7 >Paletto</ion-col>
+      <ion-col >{{ 1*forza + 3 + 1*mischia + 1*potenza }} </ion-col>
+	</ion-row>  
+	<ion-row>
+      <ion-col col-7 >Mazza/Bastone</ion-col>
+      <ion-col >{{ 1*forza + 4 + 1*mischia + 1*potenza }} </ion-col>
+	</ion-row> 
+	<ion-row>
+      <ion-col col-7 >Spada corta</ion-col>
+      <ion-col >{{ 1*forza + 4 + 1*mischia + 1*potenza }} </ion-col>
+	</ion-row>  
+	<ion-row>
+      <ion-col col-7 >Spada lunga</ion-col>
+      <ion-col >{{ 1*forza + 5 + 1*mischia + 1*potenza }} </ion-col>
+	</ion-row>    
+	
+	<ion-row style="align-items: center;">
+      <ion-col ><hr/></ion-col>
+      <ion-col col-6 style="color:#FFFFFF; text-align: center; font-size: 1.1em;">Armi da Fuoco</ion-col>
+      <ion-col ><hr/></ion-col>
+    </ion-row>
+	
+	<ion-row *ngIf="fuoco > 0">
+      <ion-col col-7 >Revolver leggero</ion-col>
+      <ion-col >{{ 4 + 1*Bfuoco }} </ion-col>
+	</ion-row>   
+	<ion-row *ngIf="fuoco > 0">
+      <ion-col col-7 >Revolver pesante</ion-col>
+      <ion-col >{{ 6 + 1*Bfuoco }} </ion-col>
+	</ion-row> 
+	<ion-row *ngIf="fuoco > 0">
+      <ion-col col-7 >Pistola leggera</ion-col>
+      <ion-col >{{ 5 + 1*Bfuoco }} </ion-col>
+	</ion-row>
+	<ion-row *ngIf="fuoco > 1">
+      <ion-col col-7 >Pistola pesante</ion-col>
+      <ion-col >{{ 7 + 1*Bfuoco }} </ion-col>
+	</ion-row> 
+	<ion-row *ngIf="fuoco > 2">
+      <ion-col col-7 >Fucile</ion-col>
+      <ion-col >{{ 8 + 1*Bfuoco -1 }} </ion-col>
+	</ion-row>  
+	<ion-row *ngIf="fuoco > 2">
+      <ion-col col-7 >Mitra leggero</ion-col>
+      <ion-col >{{ 6 + 1*Bfuoco -1 }} </ion-col>
+	</ion-row>  
+	<ion-row *ngIf="fuoco > 3">
+      <ion-col col-7 >Mitra pesante</ion-col>
+      <ion-col >{{ 8 + 1*Bfuoco -2 }} </ion-col>
+	</ion-row> 
+	<ion-row *ngIf="fuoco > 3">
+      <ion-col col-7 >Fucile d'assalto</ion-col>
+      <ion-col >{{ 9 + 1*Bfuoco -2 }} </ion-col>
+	</ion-row>  
+	<ion-row *ngIf="fuoco > 4">
+      <ion-col col-7 >Shotgun</ion-col>
+      <ion-col >{{ 12 + 1*Bfuoco -3 }} </ion-col>
+	</ion-row>                    
   
 </ion-content>
