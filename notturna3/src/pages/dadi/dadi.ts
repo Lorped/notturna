@@ -21,11 +21,13 @@ export class DadiPage {
 	tiridado: FeedItem[];	
 	myuser: User;
 	fdv:	number;
+	PScorrenti: number;
 	
 	constructor(public navCtrl: NavController, public navParams: NavParams, private feedProvider: FeedProvider , private http: Http , private auth: AuthService) {
 		
 		this.myuser=this.auth.getUserInfo();
 		this.fdv=this.myuser.fulldata['fdv'];
+		this.PScorrenti=this.myuser.fulldata['PScorrenti'];
 		this.loadDadi();
 	}
 
@@ -72,7 +74,24 @@ export class DadiPage {
 		this.fdv=this.fdv-1;
 		this.myuser.fulldata['fdv']=this.fdv;
 		this.auth.setUserInfo(this.myuser);
-console.log(this.fdv);
+//console.log(this.fdv);
+	}
+	
+	menops(){
+		
+    	
+    	var link = 'http://www.roma-by-night.it/ionicPHP/menops2.php?id='+this.myuser['userid'] 
+		 
+   		this.http.get(link)
+      	.subscribe(res =>  {     
+			setTimeout( this.loadDadi() , 1000); 
+     	 });
+		this.PScorrenti=this.PScorrenti-1;
+		this.myuser.fulldata['PScorrenti']=this.PScorrenti;
+		this.myuser.fulldata['psvuoti']=1*this.myuser.fulldata['psvuoti']+1;
+		this.auth.setUserInfo(this.myuser);
+		//personaggio.psvuoti=personaggio.psvuoti-1;
+//console.log(this.fdv);
 	}
 
 

@@ -48,6 +48,7 @@ export class PersonaggioPage {
 	potenza:	number;
 	artigli:	number;
 
+	psvuoti:	number;
   
 	constructor(   public navParams: NavParams , public http: Http) {
 		this.requestID = navParams.get("RequestID");
@@ -130,12 +131,38 @@ export class PersonaggioPage {
 				this.forza=this.scheda['forza'];
 				
 				this.note=this.nl2br(this.scheda['note']);
+				
+				
+				this.psvuoti=this.scheda['ps']-this.scheda['PScorrenti'];
 
 			});
 		});
 		
 	}
 
+	piups() {
+		//console.log("aggiungi");
+		//console.log(this.requestID);
+		
+    	var link = 'http://www.roma-by-night.it/ionicPHP/piups.php?id='+this.requestID;   
+		 
+   		this.http.get(link)
+      	.subscribe(res =>  {      
+			this.scheda['PScorrenti']=1+1*this.scheda['PScorrenti'];
+			this.psvuoti=this.psvuoti-1;
+     	 });
+	}
+	
+	menops() {
+		var link = 'http://www.roma-by-night.it/ionicPHP/menops.php?id='+this.requestID;   
+		 
+   		this.http.get(link)
+      	.subscribe(res =>  {      
+			this.scheda['PScorrenti']=-1+1*this.scheda['PScorrenti'];
+			this.psvuoti=this.psvuoti+1;
+     	 });
+		
+	}
 
 	ionViewDidLoad() {
 		//console.log('ionViewDidLoad PersonaggioPage');

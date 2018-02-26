@@ -95,6 +95,8 @@ export class LoginPage {
       .subscribe(res => {
             
         this.currentUser.skill = res;
+        this.currentUser.fulldata['psvuoti'] = this.currentUser.fulldata['ps']-this.currentUser.fulldata['PScorrenti'];
+//console.log(   this.currentUser );     
         this.auth.createUserInfo();
         this.auth.setUserInfo(this.currentUser);
 

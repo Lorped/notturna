@@ -20,11 +20,16 @@ export class PersonaggioPage {
 
 
   scheda: Array<any>;
+  psvuoti: number;
+  
   
   
   constructor( private auth: AuthService , private app: App) {
        
     this.scheda=this.auth.getUserPGInfo();
+
+    
+    
     
     //console.log ( this.currentUser );
     //console.log ( this.currentUser.fulldata );

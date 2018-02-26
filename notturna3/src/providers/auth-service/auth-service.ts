@@ -8,6 +8,7 @@ export class User {
   userid: string;
   fulldata: Array<any>;
   skill: Array<any>;
+  
  
   constructor(username: string, userid: string) {
     this.username = username;
@@ -67,6 +68,8 @@ export class AuthService {
     return(this.currentUser);
     
   } 
+  
+
 
 /*
     public logout() {

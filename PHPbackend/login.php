@@ -92,7 +92,33 @@ if (isset($postdata) && $username != "" && $password !="" ) {
 
 		}// fine controllo fdv
 	  
-		  
+		//inizio test su ps
+		
+		$Mysql="SELECT PScorrenti, ps, lastps FROM personaggio LEFT JOIN generazione ON personaggio.generazione = generazione.generazione WHERE idutente=$idutente";
+		$Result=mysql_query ($Mysql);
+		$res=mysql_fetch_array($Result);
+		
+		$PScorrenti=$res['PScorrenti'];
+		$ps=$res['ps'];
+		$lastps=$res['lastps'];
+		
+		if ( $PScorrenti == $ps ) {  // tutto ok 
+			//
+		} else {
+			$now=time();
+			$qlastps=strtotime($lastps);
+			
+			$diff =  ($now - $qlastps) / (24*60*60);
+			
+			if ( $diff > 1 ) { 
+				$newlastps=date("Y-m-d H:i:s",$now );
+				$Mysql="UPDATE personaggio SET PScorrenti = $ps , lastps = '$newlastps' WHERE idutente=$idutente";
+				$Result=mysql_query ($Mysql);
+			}
+			
+		}
+		
+		//fine test su ps  
 	  
 	  
     

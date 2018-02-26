@@ -30,6 +30,10 @@
 		<form (ngSubmit)="usafdv()" #registerForm="ngForm">
 <button ion-button class="submit-btn3" full type="submit" [disabled]="fdv==0" >Usa Forza di Volontà</button>
 </form>		
+<form (ngSubmit)="menops()" #registerForm="ngForm">
+<button ion-button class="submit-btn2" full type="submit" [disabled]="PScorrenti==0" >Usa un Punto Sangue</button>
+</form>		
+
 		
 	  <ion-list >
     <ion-item *ngFor="let tiri of tiridado"  class="master">
