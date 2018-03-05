@@ -40,14 +40,14 @@ export class MyApp {
 		const pushObject: PushObject = this.push.init(options);
  
 		pushObject.on('notification').subscribe((notification: any) => {
-			if (notification.additionalData.foreground) {
-				let youralert = this.alertCtrl.create({
-					title: 'New Push notification',
-					message: notification.message
-				});
-				youralert.present();
-			}
-			console.log('Received a notification', notification);
+			//	if (notification.additionalData.foreground) {
+			//		let youralert = this.alertCtrl.create({
+			//			title: 'New Push notification',
+			//			message: notification.message
+			//		});
+			//		youralert.present();
+			//	}
+			//	console.log('Received a notification', notification);
 		});
  
 		pushObject.on('registration').subscribe((registration: any) => {

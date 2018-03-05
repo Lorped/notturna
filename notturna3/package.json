@@ -50,12 +50,12 @@
   "cordova": {
     "plugins": {
       "cordova-plugin-inappbrowser": {},
+      "phonegap-plugin-barcodescanner": {},
       "cordova-plugin-whitelist": {},
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
-      "phonegap-plugin-barcodescanner": {},
       "phonegap-plugin-push": {
         "FCM_VERSION": "11.6.2"
       }
