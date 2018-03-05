@@ -38,7 +38,7 @@
 	$lastps=$res['lastps'];
 		
 	if ($PScorrenti > 0 ) {
-		$Mysql="UPDATE personaggio SET PScorrenti = $PScorrenti-1  WHERE idutente=$idutente";
+		$Mysql="UPDATE personaggio SET PScorrenti = $PScorrenti-1 , lastps=NOW() WHERE idutente=$idutente";
 		$Result=mysql_query ($Mysql);
 	}
 	

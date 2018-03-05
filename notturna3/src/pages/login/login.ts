@@ -65,7 +65,7 @@ export class LoginPage {
    
     this.showLoading("Please wait...");
    
-    this.http.post(link, mypost, headers)
+    this.http.post(link, mypost, {headers})
     .map(res => res.json())
     .subscribe(res =>  {    
        

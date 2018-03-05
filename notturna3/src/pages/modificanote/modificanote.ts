@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 
@@ -37,7 +37,7 @@ export class ModificanotePage {
 		
 		headers.append('Content-Type', 'application/json'); 
 		
-		this.http.post(url, mypost, headers)
+		this.http.post(url, mypost, {headers})
     		.subscribe(res =>  {    
 			  
 				this.myuser.fulldata['note']=this.annotazioni;

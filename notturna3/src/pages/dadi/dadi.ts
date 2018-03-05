@@ -54,7 +54,7 @@ export class DadiPage {
     	var link = 'http://www.roma-by-night.it/ionicPHP/lanciadado.php';
    		var mypost = JSON.stringify({userid: this.myuser['userid'] });   
 		 
-   		this.http.post(link, mypost, headers)
+   		this.http.post(link, mypost, {headers})
       	.subscribe(res =>  {     
 			setTimeout( this.loadDadi() , 1000); 
      	 });
@@ -67,7 +67,7 @@ export class DadiPage {
     	var link = 'http://www.roma-by-night.it/ionicPHP/usofdv.php';
    		var mypost = JSON.stringify({userid: this.myuser['userid'] });   
 		 
-   		this.http.post(link, mypost, headers)
+   		this.http.post(link, mypost, {headers})
       	.subscribe(res =>  {     
 			setTimeout( this.loadDadi() , 1000); 
      	 });

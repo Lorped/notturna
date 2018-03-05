@@ -55,7 +55,7 @@ export class ChangecontattoPage {
 		
 		headers.append('Content-Type', 'application/json'); 
 		
-		this.http.post(url, mypost, headers)
+		this.http.post(url, mypost, {headers})
     		.subscribe(res =>  {    
 			  
 				this.navParams.get("parentPage").loadRubrica();

@@ -9,6 +9,8 @@ import { HttpModule } from '@angular/http';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
+import { Push } from '@ionic-native/push';
+
 import { MyApp } from './app.component';
 import { FeedProvider } from '../providers/feed/feed';
 
@@ -32,7 +34,8 @@ import { FeedProvider } from '../providers/feed/feed';
     AuthService,
     FeedProvider,
     InAppBrowser,
-    BarcodeScanner
+    BarcodeScanner,
+    Push
   ]
 })
 export class AppModule {}
