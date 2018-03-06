@@ -5,6 +5,8 @@ import 'rxjs/add/operator/map';
 
 import { AuthService } from '../../providers/auth-service/auth-service';
 
+import { Push, PushObject, PushOptions } from '@ionic-native/push';
+
 
 export class User {
   username: string;
@@ -34,45 +36,45 @@ export class User {
 })
 export class LoginPage {
   
-  username = '';
-  userid = '';
-  currentUser: User;
+	username = '';
+	userid = '';
+	currentUser: User;
 	saveme= {
 		checked: false 
 	};
   
-  loading: Loading;
-  registerCredentials = { username: '', email: '' , password: '' };
+	loading: Loading;
+	registerCredentials = { username: '', email: '' , password: '' };
 
-  // constructor(public navCtrl: NavController) {
-  constructor(private nav: NavController, private auth: AuthService,  private loadingCtrl: LoadingController, public http: Http) {
+	// constructor(public navCtrl: NavController) {
+	constructor(private nav: NavController, private auth: AuthService,  private loadingCtrl: LoadingController, public http: Http, public push: Push) {
 		this.registerCredentials.username=window.localStorage.getItem( "notturnauserid" );
 		this.registerCredentials.password=window.localStorage.getItem( "notturnapasswd" );
 		if (this.registerCredentials.username != '' )  { this.saveme.checked = true; }
-  }
+	}
 
-  public createAccount() {
-    this.nav.push('RegisterPage');
-  }
+	public createAccount() {
+		this.nav.push('RegisterPage');
+	}
 
-  public login() {
+	public login() {
    
-    this.currentUser = new User(this.registerCredentials.username , "0"); 
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json'); 
-    var link = 'http://www.roma-by-night.it/ionicPHP/login.php';
-    var mypost = JSON.stringify({username: this.registerCredentials.username , password: this.registerCredentials.password });
+		this.currentUser = new User(this.registerCredentials.username , "0"); 
+		let headers = new Headers();
+		headers.append('Content-Type', 'application/json'); 
+		var link = 'http://www.roma-by-night.it/ionicPHP/login.php';
+		var mypost = JSON.stringify({username: this.registerCredentials.username , password: this.registerCredentials.password });
    
-    this.showLoading("Please wait...");
+		this.showLoading("Please wait...");
    
-    this.http.post(link, mypost, {headers})
-    .map(res => res.json())
-    .subscribe(res =>  {    
+		this.http.post(link, mypost, {headers})
+		.map(res => res.json())
+		.subscribe(res =>  {    
        
-      this.currentUser['userid'] = res["idutente"];
-      this.currentUser.fulldata = res;
+			this.currentUser['userid'] = res["idutente"];
+			this.currentUser.fulldata = res;
         
-      this.loading.dismiss();
+			this.loading.dismiss();
 			
 			//save if required
 			
@@ -83,53 +85,101 @@ export class LoginPage {
 				window.localStorage.removeItem( "notturnauserid" );
 				window.localStorage.removeItem( "notturnapasswd" );
 			}
-        
-      // do other stuff
-      var link = 'http://www.roma-by-night.it/ionicPHP/skill.php';
-      var mypost = JSON.stringify({userid: this.currentUser['userid'] });   
       
-      this.showLoading("Loading data...");
+			// register for notification
+			this.pushsetup();
+			// do other stuff
+			
+			var link = 'http://www.roma-by-night.it/ionicPHP/skill.php';
+			var mypost = JSON.stringify({userid: this.currentUser['userid'] });   
       
-      this.http.post(link, mypost)
-      .map(res => res.json())
-      .subscribe(res => {
+			this.showLoading("Loading data...");
+      
+			this.http.post(link, mypost)
+			.map(res => res.json())
+			.subscribe(res => {
             
-        this.currentUser.skill = res;
-        this.currentUser.fulldata['psvuoti'] = this.currentUser.fulldata['ps']-this.currentUser.fulldata['PScorrenti'];
-//console.log(   this.currentUser );     
-        this.auth.createUserInfo();
-        this.auth.setUserInfo(this.currentUser);
+				this.currentUser.skill = res;
+				this.currentUser.fulldata['psvuoti'] = this.currentUser.fulldata['ps']-this.currentUser.fulldata['PScorrenti'];
+//console.log( this.currentUser );     
+				this.auth.createUserInfo();
+				this.auth.setUserInfo(this.currentUser);
 
-        this.loading.dismiss();     
-        this.nav.push('TabsPage'); 
-          
-          
-      }, (err) => {
-        this.loading.dismiss();
-        alert ('Error loading data2');  
-      });                           
-    }, (err) => {
-      this.loading.dismiss();
-      switch ( err['statusText'] ) {
-        case "Unauthorized":
-          alert("Non autorizzato");
-          break;
-        case "Not Found":
-          alert("Scheda non trovata");
-          break;
-        default:
-          alert("Server error");
-      }
-    });  
-  }
+				this.loading.dismiss();     
+				this.nav.push('TabsPage'); 
+    
+			}, (err) => {
+				this.loading.dismiss();
+				alert ('Error loading data2');  
+			});                           
+		}, (err) => {
+			this.loading.dismiss();
+			switch ( err['statusText'] ) {
+				case "Unauthorized":
+					alert("Non autorizzato");
+				break;
+				case "Not Found":
+					alert("Scheda non trovata");
+				break;
+				default:
+					alert("Server error");
+			}
+		});  
+	}
 
-  showLoading(text) {
-    this.loading = this.loadingCtrl.create({
-      content: text,
-      dismissOnPageChange: true
-    });
-    this.loading.present();
-  }
+	showLoading(text) {
+		this.loading = this.loadingCtrl.create({
+			content: text,
+			dismissOnPageChange: true
+		});
+		this.loading.present();
+	}
+
+	pushsetup() {
+		const options: PushOptions = {
+			android: {
+				senderID: '842960782494',
+				sound: 'true',
+				forceShow: true
+			},
+			ios: {
+				alert: 'true',
+				badge: true,
+				sound: 'true'
+			},
+			windows: {}
+		};
+ 
+		const pushObject: PushObject = this.push.init(options);
+ 
+		pushObject.on('notification').subscribe((notification: any) => {
+			//	if (notification.additionalData.foreground) {
+			//		let youralert = this.alertCtrl.create({
+			//			title: 'New Push notification',
+			//			message: notification.message
+			//		});
+			//		youralert.present();
+			//	}
+			//	console.log('Received a notification', notification);
+		});
+ 
+		pushObject.on('registration').subscribe((registration: any) => {
+			//do whatever you want with the registration ID
+			
+			//console.log('Device registered', registration);
+			//alert('Device registered '+registration);
+			
+			let topic = "userid" + this.currentUser['userid'];
+			pushObject.subscribe(topic).then((res:any) => {
+				//console.log("subscribed to topic: ", res);
+				//alert("subscribed to topic: " + res);
+			});
+			
+		});
+ 
+		pushObject.on('error').subscribe(error => alert('Error with Push plugin ' + error));
+	}
+
 
 }
 
