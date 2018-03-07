@@ -29,21 +29,71 @@
 	
  	$idutente=$_GET['id'];
  	
- 	$Mysql="SELECT PScorrenti, ps, lastps FROM personaggio LEFT JOIN generazione ON personaggio.generazione = generazione.generazione WHERE idutente=$idutente";
+ 	$Mysql="SELECT PScorrenti, ps, lastps, nomepg FROM personaggio LEFT JOIN generazione ON personaggio.generazione = generazione.generazione WHERE idutente=$idutente";
 	$Result=mysql_query ($Mysql);
 	$res=mysql_fetch_array($Result);
 		
 	$PScorrenti=$res['PScorrenti'];
 	$ps=$res['ps'];
 	$lastps=$res['lastps'];
+	$nomepg=$res['nomepg'];
 		
 	if ($PScorrenti > 0 ) {
 		$Mysql="UPDATE personaggio SET PScorrenti = $PScorrenti-1 , lastps=NOW() WHERE idutente=$idutente";
 		$Result=mysql_query ($Mysql);
-	}
+		
+		
+		$testo=$nomepg." ha perso 1 PS";
+		$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( 0, 'NARRAZIONE', NOW(), '$testo' , $idutente ) ";
+		mysql_query($Mysql);
+		
+		// set post fields
+	
+		$fields= array(
+			'to'=>'/topics/userid'.$idutente,
+			'data'=> [
+				'message'=> $testo ,
+				'title'=> 'NARRAZIONE',
+				'image'=> 'icon'
+			]
+		);
+    
+
+		$api_key="AAAAxERgxJ4:APA91bGb0CqFmwPOIV1tN9BSOG7yucKmCpymJf0Pp1YRXlX3wIn8RlbYqMYjnDavyLP4-j9uSzVAlLwB0e7oYzwsaJa2H_yTE3LjzXL1UoOaf-EO00MewK9VyHbOeyvezg-2CTyRulba";
+		$ch = curl_init('https://fcm.googleapis.com/fcm/send');
+	
+		$headers = array (
+			'Authorization: key=' . $api_key,
+			'Content-Type: application/json'
+		);
+	
+		//die( print_r($headers));
+		
+		$post=json_encode($fields, JSON_UNESCAPED_SLASHES);
+		
+		//die (print_r($post));
+	
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $post );	
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+		// Disabling SSL Certificate support temporarly
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 	
 
-  
-    
+		// execute!
+		$response = curl_exec($ch);
+
+		// close the connection, release resources used
+		curl_close($ch);
+
+		// do anything you want with your response
+	
+		//die(print_r($response));
+		
+	}	
+	
 
 ?>
