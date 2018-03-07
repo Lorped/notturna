@@ -140,7 +140,8 @@ export class LoginPage {
 			android: {
 				senderID: '842960782494',
 				sound: 'true',
-				forceShow: true
+				forceShow: true,
+				icon: 'notification'
 			},
 			ios: {
 				alert: 'true',

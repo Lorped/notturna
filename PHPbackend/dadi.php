@@ -30,6 +30,9 @@ header('Content-Type: text/html; charset=utf-8');
 
 	$last=$_GET['last'];
 	
+	$userid=$_GET['userid'];
+	
+	
 	if ($last=="") $last=0;
 
 // inizio output XML
@@ -59,15 +62,22 @@ header('Content-Type: text/html; charset=utf-8');
 
 			$output.= '<status>-1</status>';	//gestione reverse
 			
-			$MySql = "SELECT * FROM dadi  ";
-			$MySql .= " ORDER BY ID DESC LIMIT 0, 20 ";
+			$MySql = "SELECT * FROM dadi  WHERE destinatario=-1 ORDER BY ID DESC LIMIT 0, 20 ";
+			
+			if ( $userid!="") {
+				$MySql = "SELECT * FROM dadi WHERE destinatario=-1 OR destinatario=$userid  ORDER BY ID DESC LIMIT 0, 20 ";
+			}
+			
 			$Result = mysql_query($MySql);
 			
 		} else {
 	
 			$output.= '<status>1</status>';	//gestione normale
 
-			$MySql = "SELECT * FROM dadi WHERE ID > '$last' ORDER BY ID ASC";
+			$MySql = "SELECT * FROM dadi WHERE ID > '$last' WHERE  destinatario=-1 ORDER BY ID ASC";
+			if ( $userid!="") {
+				$MySql = "SELECT * FROM dadi WHERE ID > '$last' AND ( destinatario=-1 OR destinatario=$userid ) ORDER BY ID DESC LIMIT 0, 20 ";
+			}
 			$Result = mysql_query($MySql);
 			
 		}
