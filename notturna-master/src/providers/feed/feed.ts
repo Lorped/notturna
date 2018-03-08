@@ -9,12 +9,14 @@ export class FeedItem {
 	data: string;
 	ora: string;
 	testo: string;
+	dest: string;
  
-	constructor(pg: string, data: string, ora: string, testo: string) {
+	constructor(pg: string, data: string, ora: string, testo: string, dest: string) {
     this.pg = pg;
 	this.data = data;
     this.ora = ora;
     this.testo = testo;
+    this.dest = dest;
   }
 }
 
@@ -35,7 +37,7 @@ export class FeedProvider {
 
 
 	public getDadi() {
-    	var url = 'http://www.roma-by-night.it/ionicPHP/dadi.php?last=0';
+    	var url = 'http://www.roma-by-night.it/ionicPHP/dadi.php?last=0&userid=-1';
 	
 		var tirididado = [];
 		
@@ -47,12 +49,12 @@ export class FeedProvider {
 				let objects = res['post'];
 				var num =objects.length;
 				if (objects!=null && objects.length==null) {
-					let newFeedItem = new FeedItem(objects.pg, objects.data, objects.ora, objects.testo);
+					let newFeedItem = new FeedItem(objects.pg, objects.data, objects.ora, objects.testo, objects.dest);
 					tirididado.push(newFeedItem);
 				} else { //array 	
       				for (let i = 0; i < num; i++) {
        					let item = objects[i];
-       					let newFeedItem = new FeedItem(item.pg, item.data, item.ora, item.testo);
+       					let newFeedItem = new FeedItem(item.pg, item.data, item.ora, item.testo, item.dest);
        					tirididado.push(newFeedItem);
 		   			}	
 				}
@@ -60,6 +62,7 @@ export class FeedProvider {
 			}
     	})
   	}
+  	
 }
 	
 	

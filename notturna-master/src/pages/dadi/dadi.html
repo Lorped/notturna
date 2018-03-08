@@ -30,7 +30,9 @@
 		
 	  <ion-list >
     <ion-item *ngFor="let tiri of tiridado"  class="master">
-		<p>{{tiri.data}} {{tiri.ora}}</p><div>{{tiri.pg}} {{tiri.testo}} </div> 
+		<p>{{tiri.data}} {{tiri.ora}}</p>
+		<div *ngIf="tiri.dest =='+' ">{{tiri.pg}} {{tiri.testo}} </div> 
+		<div *ngIf="tiri.dest !='+' ">{{tiri.pg}} {{tiri.dest}} <br>{{tiri.testo}} </div> 
     </ion-item>
   </ion-list>
 

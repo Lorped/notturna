@@ -23,29 +23,27 @@ export class OggettoPage {
 	
 	userid: number;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
+	constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
 	  
-	this.barcode = this.navParams.get("parentPage").oggetto;
-	this.userid = this.navParams.get("parentPage").myuser['userid'];
+		this.barcode = this.navParams.get("parentPage").oggetto;
+		this.userid = this.navParams.get("parentPage").myuser['userid'];
 	
 	
-	var url = 'http://www.roma-by-night.it/ionicPHP/barcode.php?id='+this.userid+'&barcode='+this.barcode;
+		var url = 'http://www.roma-by-night.it/ionicPHP/barcode.php?id='+this.userid+'&barcode='+this.barcode;
 	
-	this.http.get(url)
+		this.http.get(url)
 		.map(data => data.json())
 		.subscribe( data => {
 			this.nomeoggetto=data[0];
 			this.descrizione=data[1];
-//			console.log(this.descrizione);	
-		});		  
-	  
-  
-  }
+			// console.log(this.descrizione);	
+		});		    
+	}
   
 
 
-  ionViewDidLoad() {
-//	console.log('ionViewDidLoad OggettoPage');
-  }
+	ionViewDidLoad() {
+		//	console.log('ionViewDidLoad OggettoPage');
+	}
 
 }

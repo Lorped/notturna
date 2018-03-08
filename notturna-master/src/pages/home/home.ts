@@ -71,6 +71,12 @@ export class HomePage {
 			this.navCtrl.push('PersonaggioPage', { "RequestID": this.pgscelto });
 		}
 	}
+	
+	inviamessaggio(){
+		if ( this.pgscelto ) {
+			this.navCtrl.push('SendmessaggioPage', { "RequestID": this.pgscelto });
+		}
+	}
 
 	openbarcode() {
 		
@@ -94,7 +100,7 @@ export class HomePage {
     	this.loadUtenti();
 	}
   
-  public logoutx() { 
-    this.app.getRootNav().setRoot('LoginPage');
-  }
+	public logoutx() { 
+		this.app.getRootNav().setRoot('LoginPage');
+	}
 }

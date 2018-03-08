@@ -34,6 +34,7 @@ header('Content-Type: text/html; charset=utf-8');
 	
 	
 	if ($last=="") $last=0;
+	if ($userid=="") $userid=0;
 
 // inizio output XML
 	
@@ -64,10 +65,13 @@ header('Content-Type: text/html; charset=utf-8');
 			
 			$MySql = "SELECT * FROM dadi  WHERE destinatario=-1 ORDER BY ID DESC LIMIT 0, 20 ";
 			
-			if ( $userid!="") {
+			if ( $userid ==  -1 ) {
+				$MySql = "SELECT * FROM dadi  ORDER BY ID DESC LIMIT 0, 20 ";
+				$MySql = "SELECT dadi.ID, dadi.nomepg, Ora, Testo, Destinatario, personaggio.nomepg AS Nomedest FROM dadi LEFT JOIN personaggio ON dadi.destinatario = personaggio.idutente ORDER BY ID DESC LIMIT 0 , 20 ";
+			} elseif ( $userid != 0 ) {
 				$MySql = "SELECT * FROM dadi WHERE destinatario=-1 OR destinatario=$userid  ORDER BY ID DESC LIMIT 0, 20 ";
 			}
-			
+
 			$Result = mysql_query($MySql);
 			
 		} else {
@@ -75,9 +79,13 @@ header('Content-Type: text/html; charset=utf-8');
 			$output.= '<status>1</status>';	//gestione normale
 
 			$MySql = "SELECT * FROM dadi WHERE ID > '$last' WHERE  destinatario=-1 ORDER BY ID ASC";
-			if ( $userid!="") {
+			
+			if ( $userid == -1 ) {
+				$MySql = "SELECT dadi.ID, dadi.nomepg, Ora, Testo, Destinatario, personaggio.nomepg AS Nomedest FROM dadi LEFT JOIN personaggio ON dadi.destinatario = personaggio.idutente WHERE ID > '$last' ORDER BY ID DESC LIMIT 0 , 20 ";
+			} elseif ( $userid != 0) {
 				$MySql = "SELECT * FROM dadi WHERE ID > '$last' AND ( destinatario=-1 OR destinatario=$userid ) ORDER BY ID DESC LIMIT 0, 20 ";
 			}
+			
 			$Result = mysql_query($MySql);
 			
 		}
@@ -88,7 +96,16 @@ header('Content-Type: text/html; charset=utf-8');
 			}
 			$output.= '<post>';
 			$output.= '<pg>'.$rs['nomepg'].'</pg>';
+			
 			$output.= '<testo>'.htmlspecialchars($rs['Testo'],ENT_QUOTES).'</testo>';
+			
+			if ( $rs['Nomedest'] != "" ) {
+				$output.= '<dest> a '.htmlspecialchars($rs['Nomedest'],ENT_QUOTES).'</dest>';
+			} else {
+				$output.= '<dest>+</dest>';
+			}
+			
+			
 			$output.= '<ora>'.strftime("%H:%M", strtotime($rs['Ora'])).'</ora>';
 			$output.= '<data>'.strftime("%d/%m/%Y", strtotime($rs['Ora'])).'</data>';
 			$output.= '</post>';
@@ -98,9 +115,11 @@ header('Content-Type: text/html; charset=utf-8');
 	}
 	$output.= '</chat>';
 
-	//echo $output;
+	
 	$xml = simplexml_load_string($output);
-	$json = json_encode($xml);
+	$json = json_encode($xml,JSON_UNESCAPED_SLASHES);
+	
+	
 	echo $json;
 
 ?>
