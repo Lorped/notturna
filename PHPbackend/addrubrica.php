@@ -50,6 +50,7 @@ $note = mysql_real_escape_string($request->note);
 	
 	$MySql = "INSERT INTO rubrica ( owner , contatto, cell, email, home, note ) VALUES ( $idutente, '$contatto', $cell, $email, $home,'$note')  ";
 	$Result = mysql_query($MySql);
-	if (mysql_errno()) die ( mysql_errno().": ".mysql_error()."+". $MySql );
+	if (mysql_errno())  die ( mysql_errno().": ".mysql_error()."+". $MySql );
+
 
 ?>

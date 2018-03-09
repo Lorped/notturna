@@ -38,7 +38,7 @@ if (isset($postdata) && $username != "" && $password !="" ) {
 	include ('db.inc.php');
 	
 	// pulizia periodica
-	$MM="DELETE FROM dadi WHERE DATE_ADD( Ora , INTERVAL 4 HOUR )<NOW()";
+	$MM="DELETE FROM dadi WHERE DATE_ADD( Ora , INTERVAL 24 HOUR )<NOW()";
 	mysql_query($MM);	
 	//
  

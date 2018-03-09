@@ -18,8 +18,8 @@
 	
 	<form (ngSubmit)="add()" #addForm="ngForm">
 		<ion-row>
-        	<ion-col style="color:#ff0000; font-size:1.2em;">				
-				<ion-input type="text" placeholder="Nome" name="contatto" [(ngModel)]="nuovoContatto.contatto" required></ion-input>
+        	<ion-col style="color:#ff0000; font-size:1.3em;">				
+				<ion-input type="text" placeholder="Nome" name="contatto" [(ngModel)]="nuovoContatto.contatto" autofocus required></ion-input>
 			</ion-col>
 		</ion-row>			
 		<ion-row>
