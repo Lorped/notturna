@@ -44,8 +44,9 @@ export class FeedProvider {
     	.map((res) => {
 			let status = res['status'];
 			if ( status !=0 ) {
-				let objects = res['post'];
-				var num =objects.length;
+				var num = null ;
+				var objects = res['post'];
+				if (objects != null ) { num=objects.length; }
 				if (objects!=null && objects.length==null) {
 					let newFeedItem = new FeedItem(objects.pg, objects.data, objects.ora, objects.testo);
 					tirididado.push(newFeedItem);

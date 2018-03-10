@@ -80,7 +80,7 @@ export class ConoscenzePage {
     		 	if (this.lancio<0) this.lancio=0;
   			}
   			if ( this.myskill[i].nomeskill=="Armi da tiro")  {
-    		 	this.tiro=this.myskill[i].tiro-2;
+    		 	this.tiro=this.myskill[i].livello-2;
     		 	if (this.tiro<0) this.tiro=0;
   			}
   			if ( this.myskill[i].nomeskill=="Armi da fuoco")  {
