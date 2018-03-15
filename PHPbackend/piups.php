@@ -49,14 +49,33 @@
 		
 		// set post fields
 	
-		$fields= array(
-			'to'=>'/topics/userid'.$idutente,
-			'data'=> [
-				'message'=> $testo ,
-				'title'=> 'NARRAZIONE',
-				'image'=> 'icon'
-			]
-		);
+		$Mysql="SELECT registrationID FROM utente WHERE idutente=$idutente";
+		$Result=mysql_query($Mysql);
+		$res=mysql_fetch_array($Result);
+	
+		if ($res['registrationID'] != "" ) {
+		
+			$fields= array(
+				'to'=>$res['registrationID'],
+				'data'=> [
+					'message'=> $testo ,
+					'title'=> 'NARRAZIONE',
+					'image'=> 'icon'
+				]
+			);
+		
+		} else {
+	
+			$fields= array(
+				'to'=>'/topics/userid'.$idutente,
+				'data'=> [
+					'message'=> $testo ,
+					'title'=> 'NARRAZIONE',
+					'image'=> 'icon'
+				]
+			);
+	
+		}
     
 
 		$api_key="AAAAxERgxJ4:APA91bGb0CqFmwPOIV1tN9BSOG7yucKmCpymJf0Pp1YRXlX3wIn8RlbYqMYjnDavyLP4-j9uSzVAlLwB0e7oYzwsaJa2H_yTE3LjzXL1UoOaf-EO00MewK9VyHbOeyvezg-2CTyRulba";

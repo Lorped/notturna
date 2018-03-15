@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="notturna.gdr.larp" version="1.1.03" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="notturna.gdr.larp" version="1.1.04" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Notturna</name>
     <description>Notturna - Cronaca di Roma</description>
     <author email="lorenzo@home" href="http://www.google.com/">Lorenzo</author>
@@ -90,5 +90,6 @@
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
     <plugin name="phonegap-plugin-barcodescanner" spec="^7.0.2" />
     <plugin name="phonegap-plugin-push" spec="~2.1.3" />
+    <allow-navigation href="http://192.168.1.123:8100" />
     <engine name="android" spec="^7.1.0" />
 </widget>

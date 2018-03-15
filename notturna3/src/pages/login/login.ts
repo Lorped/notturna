@@ -167,8 +167,15 @@ export class LoginPage {
 		pushObject.on('registration').subscribe((registration: any) => {
 			//do whatever you want with the registration ID
 			
-			//console.log('Device registered', registration);
-			//alert('Device registered '+registration);
+			//console.log('Device registered ', registration.registrationId);
+			//alert('Device registered '+registration.registrationId);
+			
+			let updateurl = 'http://www.roma-by-night.it/ionicPHP/updateid.php?userid='+ this.currentUser['userid']+'&id='+registration.registrationId;
+			this.http.get(updateurl)
+			.subscribe(res =>  {     
+					// updated
+					// alert('Device registered '+registration.registrationId);
+			});
 			
 			let topic = "userid" + this.currentUser['userid'];
 			pushObject.subscribe(topic).then((res:any) => {

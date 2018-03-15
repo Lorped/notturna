@@ -32,7 +32,7 @@ export class DadiPage {
 	}
 
 	loadDadi() {
-    	this.feedProvider.getDadi(this.myuser.userid).subscribe(
+    	this.feedProvider.getDadi(this.myuser['userid']).subscribe(
       	allFeeds => {
         	this.tiridado = allFeeds;
       	});

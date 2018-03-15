@@ -44,13 +44,14 @@ export class FeedProvider {
     	.map((res) => {
 			let status = res['status'];
 			if ( status !=0 ) {
-				var num = null ;
-				var objects = res['post'];
-				if (objects != null ) { num=objects.length; }
-				if (objects!=null && objects.length==null) {
+				var objects = res['post'];	
+				if ( status == 1 ) {
 					let newFeedItem = new FeedItem(objects.pg, objects.data, objects.ora, objects.testo);
 					tirididado.push(newFeedItem);
-				} else { //array 	
+				} else {
+					var num=objects.length; 
+					// console.log ("num "+num );
+					// console.log ("status "+status );
       				for (let i = 0; i < num; i++) {
        					let item = objects[i];
        					let newFeedItem = new FeedItem(item.pg, item.data, item.ora, item.testo);
