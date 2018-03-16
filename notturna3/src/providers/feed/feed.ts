@@ -9,7 +9,7 @@ export class FeedItem {
 	data: string;
 	ora: string;
 	testo: string;
- 
+
 	constructor(pg: string, data: string, ora: string, testo: string) {
     this.pg = pg;
 	this.data = data;
@@ -28,40 +28,38 @@ export class FeedItem {
 */
 @Injectable()
 export class FeedProvider {
-	
+
 
 	constructor(public http: Http) {
   	}
 
 
 	public getDadi(userid: string) {
-    	var url = 'http://www.roma-by-night.it/ionicPHP/dadi.php?last=0&userid='+userid;
-	
+    var url = 'http://www.roma-by-night.it/ionicPHP/dadi.php?last=0&userid='+userid;
+
 		var tirididado = [];
-		
+
 		return this.http.get(url)
 		.map(data => data.json())
-    	.map((res) => {
+    .map((res) => {
 			let status = res['status'];
 			if ( status !=0 ) {
-				var objects = res['post'];	
+				var objects = res['post'];
 				if ( status == 1 ) {
 					let newFeedItem = new FeedItem(objects.pg, objects.data, objects.ora, objects.testo);
 					tirididado.push(newFeedItem);
 				} else {
-					var num=objects.length; 
+					var num=objects.length;
 					// console.log ("num "+num );
 					// console.log ("status "+status );
-      				for (let i = 0; i < num; i++) {
-       					let item = objects[i];
-       					let newFeedItem = new FeedItem(item.pg, item.data, item.ora, item.testo);
-       					tirididado.push(newFeedItem);
-		   			}	
+      		for (let i = 0; i < num; i++) {
+       			let item = objects[i];
+       			let newFeedItem = new FeedItem(item.pg, item.data, item.ora, item.testo);
+       			tirididado.push(newFeedItem);
+		   		}
 				}
-      			return tirididado;
+      	return tirididado;
 			}
-    	})
-  	}
+    })
+  }
 }
-	
-	
