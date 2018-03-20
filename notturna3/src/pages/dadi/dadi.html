@@ -15,33 +15,31 @@
 
 
 <ion-content class="master" padding>
-	
-	
+
+
 
   <ion-spinner *ngIf="loading" id="feed-spinner"></ion-spinner>
-	
+
 	<ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-	
+
 		<form (ngSubmit)="tiraildado()" #registerForm="ngForm">
 <button ion-button class="submit-btn2" full type="submit" >Tira un dado</button>
-</form>	
+</form>
 		<form (ngSubmit)="usafdv()" #registerForm="ngForm">
 <button ion-button class="submit-btn3" full type="submit" [disabled]="fdv==0" >Usa Forza di Volontà</button>
-</form>		
+</form>
 <form (ngSubmit)="menops()" #registerForm="ngForm">
 <button ion-button class="submit-btn2" full type="submit" [disabled]="PScorrenti==0" >Usa un Punto Sangue</button>
-</form>		
+</form>
 
-		
+
 	  <ion-list >
-    <ion-item *ngFor="let tiri of tiridado"  class="master">
-		<p>{{tiri.data}} {{tiri.ora}}</p><div>{{tiri.pg}} {{tiri.testo}} </div> 
+    <ion-item *ngFor="let tiri of tiridado"  class="master" text-wrap>
+		<p>{{tiri.data}} {{tiri.ora}}</p><div>{{tiri.pg}} {{tiri.testo}} </div>
     </ion-item>
   </ion-list>
 
 
 </ion-content>
-
-

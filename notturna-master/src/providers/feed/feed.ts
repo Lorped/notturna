@@ -13,7 +13,7 @@ export class FeedItem {
 
 	constructor(pg: string, data: string, ora: string, testo: string, dest: string) {
     this.pg = pg;
-	this.data = data;
+		this.data = data;
     this.ora = ora;
     this.testo = testo;
     this.dest = dest;
@@ -48,7 +48,7 @@ export class FeedProvider {
 			if ( status !=0 ) {
 				var objects = res['post'];
 				if ( status == 1 ) {
-					let newFeedItem = new FeedItem(objects.pg, objects.data, objects.ora, objects.testo);
+					let newFeedItem = new FeedItem(objects.pg, objects.data, objects.ora, objects.testo, objects.dest);
 					tirididado.push(newFeedItem);
 				} else {
 					var num=objects.length;
@@ -56,12 +56,12 @@ export class FeedProvider {
 					// console.log ("status "+status );
 					for (let i = 0; i < num; i++) {
 						let item = objects[i];
-						let newFeedItem = new FeedItem(item.pg, item.data, item.ora, item.testo);
+						let newFeedItem = new FeedItem(item.pg, item.data, item.ora, item.testo, item.dest);
 						tirididado.push(newFeedItem);
 					}
 				}
 				return tirididado;
 			}
 		})
-  }	
+  }
 }

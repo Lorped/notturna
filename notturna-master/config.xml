@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="notturna.gdr.narrazione" version="0.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="notturna.gdr.narrazione" version="0.1.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Notturna Master</name>
     <description>Notturna - Cronaca di Roma - NARRAZIONE</description>
     <author email="lorenzo@home" href="http://www.google.com/">Lorenzo</author>
@@ -81,6 +81,7 @@
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="^1.1.16" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
-    <engine name="android" spec="^7.1.0" />
     <plugin name="phonegap-plugin-barcodescanner" spec="^7.1.0" />
+    <engine name="android" spec="7.1.0" />
+    <engine name="ios" spec="4.5.4" />
 </widget>
