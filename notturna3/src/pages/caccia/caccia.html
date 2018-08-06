@@ -6,16 +6,24 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>caccia</ion-title>
+  <ion-navbar color="moredark">
+    <ion-title>Caccia</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
 
-  <p *ngIf="hidevalue==false"> {{maxTime}}</p>
+<ion-content padding class="master">
 
+  <ion-row style="align-items: center;" *ngIf="hidevalue==false">
+    <ion-col  style="color:#FF0000; text-align: center; font-size: 1.1em;">Tempo di Caccia Restante</ion-col>
+  </ion-row>
+  <ion-row style="align-items: center;" *ngIf="hidevalue==false">
+    <ion-col style="color:#FFFFFF; text-align: center; font-size: 1.1em;">{{minuti}}:{{secondi}}</ion-col>
+  </ion-row>
+  <ion-row style="align-items: center;" *ngIf="hidevalue==true">
+    <ion-col style="color:#FF0000; text-align: center; font-size: 1.1em;">Caccia terminata!</ion-col>
+  </ion-row>
 
 </ion-content>
