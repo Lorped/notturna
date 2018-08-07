@@ -17,4 +17,5 @@ npm-debug.log*
 Thumbs.db
 UserInterfaceState.xcuserstate
 
-GoogleService-Info.plist
+notturna3/GoogleService-Info.plist
+notturna-master/GoogleService-Info.plist
