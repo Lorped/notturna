@@ -9,6 +9,7 @@ import { MyApp } from './app.component';
 import { FeedProvider } from '../providers/feed/feed';
 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { Push } from '@ionic-native/push';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FeedProvider,
-    BarcodeScanner
+    BarcodeScanner,
+    Push
   ]
 })
 export class AppModule {}

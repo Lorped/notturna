@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="notturna.gdr.narrazione" version="0.1.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="notturna.gdr.narrazione" version="0.1.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Notturna Master</name>
     <description>Notturna - Cronaca di Roma - NARRAZIONE</description>
     <author email="lorenzo@home" href="http://www.google.com/">Lorenzo</author>
@@ -19,6 +19,7 @@
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
+    <hook src="package-hooks/copy_google_services_config_files.js" type="after_prepare" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
@@ -39,6 +40,11 @@
         <splash density="port-xhdpi" src="resources/android/splash/drawable-port-xhdpi-screen.png" />
         <splash density="port-xxhdpi" src="resources/android/splash/drawable-port-xxhdpi-screen.png" />
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
+        <resource-file src="resources/android/custom/drawable-xxxhdpi-notification.png" target="app/src/main/res/drawable-xxxhdpi/notification.png" />
+        <resource-file src="resources/android/custom/drawable-xxhdpi-notification.png" target="app/src/main/res/drawable-xxhdpi/notification.png" />
+        <resource-file src="resources/android/custom/drawable-xhdpi-notification.png" target="app/src/main/res/drawable-xhdpi/notification.png" />
+        <resource-file src="resources/android/custom/drawable-hdpi-notification.png" target="app/src/main/res/drawable-hdpi/notification.png" />
+        <resource-file src="resources/android/custom/drawable-mdpi-notification.png" target="app/src/main/res/drawable-mdpi/notification.png" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
@@ -82,6 +88,10 @@
     <plugin name="cordova-plugin-ionic-webview" spec="^1.1.16" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
     <plugin name="phonegap-plugin-barcodescanner" spec="^7.1.0" />
+    <plugin name="phonegap-plugin-push" spec="^2.2.3">
+        <variable name="ANDROID_SUPPORT_V13_VERSION" value="27.+" />
+        <variable name="FCM_VERSION" value="11.6.2" />
+    </plugin>
     <engine name="android" spec="7.1.0" />
     <engine name="ios" spec="4.5.4" />
 </widget>

@@ -51,6 +51,8 @@
 
 	// set post fields
 
+	/*
+
 	$Mysql="SELECT registrationID FROM utente WHERE idutente=$destinatario";
 	$Result=mysql_query($Mysql);
 	$res=mysql_fetch_array($Result);
@@ -80,9 +82,19 @@
 
 	}
 
-	exit;
+*/
 
-	$api_key="AAAAxERgxJ4:APA91bGb0CqFmwPOIV1tN9BSOG7yucKmCpymJf0Pp1YRXlX3wIn8RlbYqMYjnDavyLP4-j9uSzVAlLwB0e7oYzwsaJa2H_yTE3LjzXL1UoOaf-EO00MewK9VyHbOeyvezg-2CTyRulba";
+$fields =  array(
+	'to' => '/topics/master',
+	'data'=> [
+		'message'=> $messaggio ,
+		'title'=> $nomepg,
+		'image'=> 'icon'
+	]
+);
+
+
+	$api_key = "AAAAxERgxJ4:APA91bGb0CqFmwPOIV1tN9BSOG7yucKmCpymJf0Pp1YRXlX3wIn8RlbYqMYjnDavyLP4-j9uSzVAlLwB0e7oYzwsaJa2H_yTE3LjzXL1UoOaf-EO00MewK9VyHbOeyvezg-2CTyRulba";
 	$ch = curl_init('https://fcm.googleapis.com/fcm/send');
 
 	$headers = array (

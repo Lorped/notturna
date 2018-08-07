@@ -21,6 +21,7 @@ export class CacciaPage {
   minuti = 10 ;
   secondi = 0;
   hidevalue = false ;
+  timer: any;
 
 
   myuser: User;
