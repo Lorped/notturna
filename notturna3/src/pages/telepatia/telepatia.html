@@ -1,0 +1,44 @@
+<!--
+  Generated template for the TelepatiaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="moredark">
+    <ion-title>Invia Messaggio</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class=master>
+
+  <form (ngSubmit)="invia()" #modificaForm="ngForm">
+
+    <ion-list>
+      <ion-item style="background-color: #444444">
+        <ion-icon name="contact" item-start color="danger" ></ion-icon>
+        <ion-label>PG</ion-label>
+        <ion-select [(ngModel)]="pgscelto" name="pgscelto" style="max-width:85%;color:#ffffff;" required>
+          <ion-option *ngFor="let pg of listautenti" value="{{pg.id}}" >{{pg.nomepg}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+		<ion-item class=master>
+			<ion-label stacked style="font-size:1.2em;">Messaggio</ion-label>
+			<ion-textarea type="text" rows="12" [(ngModel)]="messaggio" name="newmessaggio" autofocus style="font-size:1.3em;" required></ion-textarea>
+		</ion-item>
+  </ion-list>
+
+	</form>
+
+		<ion-footer >
+			<ion-item class=master>
+				<button ion-button color="mydanger" class="submit-btn" full type="button" [disabled]="!modificaForm.form.valid" (click)="invia()">Invia</button>
+			</ion-item>
+		</ion-footer>
+
+
+</ion-content>

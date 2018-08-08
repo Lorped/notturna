@@ -82,9 +82,11 @@ export class CacciaPage {
       this.recuperati = 1*this.myuser.fulldata['ps'] - 1*this.myuser.fulldata['PScorrenti'] ;
     }
 
+    /* valori ridotti per test
     this.maxTime = 10
     this.minuti = '00';
     this.secondi = '10';
+    */ 
 
     this.msginizio();
     this.StartTimer();
