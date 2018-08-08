@@ -49,12 +49,16 @@
 		$nomepgdest="NARRAZIONE";
 	}
 
-$xmessaggio =' a '.$nomepgdest.' (Telepatia): '.$messaggio;
+	$xmessaggio =' a '.$nomepgdest.' (Telepatia): '.$messaggio;
 
 	$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( $idutente, '$nomepg', NOW(), '$xmessaggio' , $destinatario ) ";
 	mysql_query($Mysql);
 
-	// set post fields
+
+	$Mysql="UPDATE personaggio SET PScorrenti = PScorrenti-1 , lastps=NOW() WHERE idutente=$idutente";
+	$Result=mysql_query ($Mysql);
+
+
 
 	$Mysql="SELECT registrationID FROM utente WHERE idutente=$destinatario";
 	$Result=mysql_query($Mysql);

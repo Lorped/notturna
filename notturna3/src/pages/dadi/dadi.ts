@@ -114,6 +114,12 @@ export class DadiPage {
 		this.navCtrl.push('CacciaPage', { "parentPage": this } );
 	}
 
+  golegami() {
+    //console.log (this.tochange.cell);
+    //console.log (this.tochange.email);
+    this.navCtrl.push('LegamiPage', { "parentPage": this } );
+  }
+
   gotelepatia() {
 		//console.log (this.tochange.cell);
 		//console.log (this.tochange.email);

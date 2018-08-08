@@ -14,8 +14,14 @@ export class Utente {
 
 }
 
+export class Legame {
+	nomepg: string = '';
+	livello: number = 0;
+  dataultima: string = '';
+}
+
 /**
- * Generated class for the TelepatiaPage page.
+ * Generated class for the LegamiPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -23,26 +29,39 @@ export class Utente {
 
 @IonicPage()
 @Component({
-  selector: 'page-telepatia',
-  templateUrl: 'telepatia.html',
+  selector: 'page-legami',
+  templateUrl: 'legami.html',
 })
-export class TelepatiaPage {
+export class LegamiPage {
 
   listautenti: Utente[];
   pgscelto: number;
   selected: string;
 
   myuser: User;
-  messaggio: string;
+
+  listalegami: Legame[];
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private auth: AuthService) {
     this.myuser=this.auth.getUserInfo();
-    console.log(this.myuser);
+    //console.log(this.myuser);
     this.loadUtenti(this.myuser.userid);
+
+    var url = 'http://www.roma-by-night.it/ionicPHP/getlegami.php?id='+this.myuser.userid;
+    this.http.get(url)
+    .map(res => res.json())
+    .subscribe(res =>  {
+
+        this.listalegami = res.target;
+        //console.log (this.listalegami);
+    });
   }
 
   ionViewDidLoad() {
-    //console.log('ionViewDidLoad TelepatiaPage');
+
+
+
   }
 
   loadUtenti(a: string) {
@@ -68,23 +87,20 @@ export class TelepatiaPage {
 	}
 
   invia () {
-		var url = 'http://www.roma-by-night.it/ionicPHP/inviamessaggioutente.php';
-		var mypost = JSON.stringify({idutente: this.myuser.userid , destinatario: this.pgscelto, messaggio: this.messaggio });
+    var url = 'http://www.roma-by-night.it/ionicPHP/legami.php';
+    var mypost = JSON.stringify({target: this.myuser.userid , domitor: this.pgscelto });
 
-		let headers = new Headers();
+    let headers = new Headers();
 
-		headers.append('Content-Type', 'application/json');
+    headers.append('Content-Type', 'application/json');
 
-		this.http.post(url, mypost, {headers})
-		.subscribe(res =>  {
+    this.http.post(url, mypost, {headers})
+    .subscribe(res =>  {
         this.navParams.get("parentPage").loadDadi();
-				this.myuser.fulldata['psvuoti'] = 1*this.myuser.fulldata['psvuoti']+1;
-				this.myuser.fulldata['PScorrenti'] = 1*this.myuser.fulldata['PScorrenti']-1;
-				this.navCtrl.pop();
-		});
+        this.navCtrl.pop();
+    });
 
-		//console.log(mypost);
-	}
-
+    //console.log(mypost);
+  }
 
 }

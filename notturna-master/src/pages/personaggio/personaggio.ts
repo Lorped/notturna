@@ -50,6 +50,8 @@ export class PersonaggioPage {
 
 	psvuoti:	number;
 
+  pf = 0 ;
+
 	constructor(   public navParams: NavParams , public http: Http) {
 		this.requestID = navParams.get("RequestID");
 		this.currentUser = new User("" , this.requestID);
@@ -88,6 +90,22 @@ export class PersonaggioPage {
     					break;
   					}
 				}
+
+
+ //console.log ( this.currentUser );
+
+        this.pf = ( 3 + 1*this.currentUser.fulldata['attutimento'])*2;
+        for (let i = 0 ; i< this.myskill.length ; i++) {
+          if ( this.myskill[i].nomeskill == 'Schivare' ) {
+            this.pf +=  1*this.myskill[i].livello;
+          }
+          if ( this.myskill[i].nomeskill == 'Robustezza' ) {
+            this.pf +=  1*this.myskill[i].livello;
+          }
+        }
+
+
+
 
 				this.rissa=0;
 				this.mischia=0;
