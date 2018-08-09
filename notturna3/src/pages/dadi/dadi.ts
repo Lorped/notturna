@@ -126,5 +126,11 @@ export class DadiPage {
 		this.navCtrl.push('TelepatiaPage', { "parentPage": this } );
 	}
 
+  gomorte() {
+		//console.log (this.tochange.cell);
+		//console.log (this.tochange.email);
+		this.navCtrl.push('MortePage', { "parentPage": this } );
+	}
+
 
 }
