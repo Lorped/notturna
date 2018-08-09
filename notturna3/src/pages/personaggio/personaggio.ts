@@ -57,7 +57,7 @@ export class PersonaggioPage {
 	  	refresher.complete();
   	}
 
-  	loadPS() {
+  loadPS() {
 		var link = 'http://www.roma-by-night.it/ionicPHP/getps.php?id='+this.scheda['idutente'];
 		this.http.get(link)
 		.map(res => res.json())
@@ -65,7 +65,15 @@ export class PersonaggioPage {
 			this.scheda['PScorrenti']=res['PScorrenti'];
 			this.scheda['psvuoti']=res['psvuoti'];
      	 });
-	}
+
+    link = 'http://www.roma-by-night.it/ionicPHP/getfdv.php?id='+this.scheda['idutente'];
+    this.http.get(link)
+    .map(res => res.json())
+        .subscribe(res =>  {
+      this.scheda['fdvmax']=res['fdvmax'];
+      this.scheda['fdv']=res['fdv'];
+       });
+  }
 
 	ionViewDidLoad() {
 		//console.log('ionViewDidLoad PersonaggioPage');

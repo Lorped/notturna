@@ -153,7 +153,8 @@
 		$Result=mysql_query ($Mysql);
 	}
 
-
+	$Mysql="UPDATE personaggio SET fdv=fdv-1 WHERE idutente= $domitor ";
+	mysql_query($Mysql);
 
 
 
