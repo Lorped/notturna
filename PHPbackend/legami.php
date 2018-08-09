@@ -33,28 +33,126 @@
 	$domitor = $request->domitor;
 	$target = $request->target;
 
+	/***  mando messaggio di accettazione */
+	$Mysql="SELECT nomepg FROM personaggio WHERE idutente=$target";
+	if ( $res=mysql_fetch_array(mysql_query($Mysql)) ) {
+		$nomepg=$res['nomepg'];
+	} else {
+		$nomepg="NARRAZIONE";
+	}
+
+	$Mysql="SELECT nomepg FROM personaggio WHERE idutente=$domitor";
+	if ( $res=mysql_fetch_array(mysql_query($Mysql)) ) {
+		$nomepgdest=$res['nomepg'];
+	} else {
+		$nomepgdest="NARRAZIONE";
+	}
+
+	$messaggio ='ha accettato la vitae di '.$nomepgdest;
+
+
+	$Mysql="SELECT registrationID FROM utente WHERE idutente=$domitor";
+	$Result=mysql_query($Mysql);
+	$res=mysql_fetch_array($Result);
+
+
+	if ($res['registrationID'] != "" ) {
+
+		$fields= array(
+			'to'=>$res['registrationID'],
+			'data'=> [
+				'message'=> $messaggio ,
+				'title'=> $nomepg,
+				'image'=> 'icon'
+			]
+		);
+
+	} else {
+
+		$fields= array(
+			'to'=>'/topics/userid'.$domitor,
+			'data'=> [
+				'message'=> $messaggio ,
+				'title'=> $nomepg,
+				'image'=> 'icon'
+			]
+		);
+
+	}
+
+
+	$api_key = "AAAAxERgxJ4:APA91bGb0CqFmwPOIV1tN9BSOG7yucKmCpymJf0Pp1YRXlX3wIn8RlbYqMYjnDavyLP4-j9uSzVAlLwB0e7oYzwsaJa2H_yTE3LjzXL1UoOaf-EO00MewK9VyHbOeyvezg-2CTyRulba";
+	$ch = curl_init('https://fcm.googleapis.com/fcm/send');
+
+	$headers = array (
+		'Authorization: key=' . $api_key,
+		'Content-Type: application/json'
+	);
+
+	$post=json_encode($fields, JSON_UNESCAPED_SLASHES);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $post );
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	$response = curl_exec($ch);
+	curl_close($ch);
+
+
+
+	$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( $target, '$nomepg', NOW(), '$messaggio' , $domitor ) ";
+	mysql_query($Mysql);
+/**********/
+
+
+
+
+
+	$Mysql="SELECT * from pregidifetti  WHERE idutente=$target and idpregio=121";
+	$Result=mysql_query ($Mysql);
+	if ( $res = mysql_fetch_array($Result) ) {
+		/* invincolabile non faccio nulla*/
+		die();
+	}
+
+
+	$Mysql="SELECT max(livello) as m from legami  WHERE domitor!=$domitor AND target=$target";
+	$Result=mysql_query ($Mysql);
+	if ( $res = mysql_fetch_array($Result) ) {
+		if ( $res['m'] == 3 ) {
+		/* già un legame di livello 3 con qualcuno.. non faccio nulla*/
+			die();
+		}
+	}
+
 
 
 	$Mysql="SELECT * from legami  WHERE domitor=$domitor AND target=$target";
 	$Result=mysql_query ($Mysql);
 	if ($res = mysql_fetch_array($Result)) {
+		/* legame già presente */
 		$oldlivello=$res['livello'];
 		if ($oldlivello==1) {
+			/* porto a 2 */
 			$Mysql="UPDATE legami SET livello=2, dataultima=NOW() WHERE domitor=$domitor AND target=$target";
 			$Result=mysql_query ($Mysql);
 		} elseif ($oldlivello==2)  {
+			/* porto a 3 e cancello gli altri */
 			$Mysql="UPDATE legami SET livello=3, dataultima=NOW() WHERE domitor=$domitor AND target=$target";
 			$Result=mysql_query ($Mysql);
 			$Mysql="DELETE FROM legami  WHERE domitor!=$domitor AND target=$target";
 			$Result=mysql_query ($Mysql);
 		} else {
+			/* già a 3: aggiorno la data */
 			$Mysql="UPDATE legami SET  dataultima=NOW() WHERE domitor=$domitor AND target=$target";
 			$Result=mysql_query ($Mysql);
 		}
 	} else {
+		/* inserisco a 1  */
 		$Mysql="INSERT INTO legami ( domitor, target, dataultima, livello) VALUES ($domitor, $target, NOW(), 1 )";
 		$Result=mysql_query ($Mysql);
 	}
+
 
 
 

@@ -81,8 +81,8 @@
 		$fields= array(
 			'to'=>'/topics/userid'.$destinatario,
 			'data'=> [
-				'message'=> $messaggio ,
-				'title'=> 'NARRAZIONE',
+				'message'=> 'TELEPATIA: '.$messaggio  ,
+				'title'=> $nomepg,
 				'image'=> 'icon'
 			]
 		);

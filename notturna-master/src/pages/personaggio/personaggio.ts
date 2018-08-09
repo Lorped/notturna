@@ -16,6 +16,12 @@ export class User {
   }
 }
 
+export class Legame {
+	nomepg: string = '';
+	livello: number = 0;
+  dataultima: string = '';
+}
+
 /**
  * Generated class for the PersonaggioPage page.
  *
@@ -52,12 +58,25 @@ export class PersonaggioPage {
 
   pf = 0 ;
 
+  listalegami: Legame[];
+  listalegamidomitor: Legame[];
+
 	constructor(   public navParams: NavParams , public http: Http) {
 		this.requestID = navParams.get("RequestID");
 		this.currentUser = new User("" , this.requestID);
 		this.scheda=[];
 		this.myskill=[];
 		this.loadPG();
+
+    var url = 'http://www.roma-by-night.it/ionicPHP/getlegami.php?id='+this.requestID;
+    this.http.get(url)
+    .map(res => res.json())
+    .subscribe(res =>  {
+
+        this.listalegami = res.target;
+        this.listalegamidomitor = res.domitor;
+        //console.log (this.listalegami);
+    });
 
 	}
 

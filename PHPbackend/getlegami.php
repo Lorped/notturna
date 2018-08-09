@@ -34,14 +34,14 @@
 	while ( $res=mysql_fetch_array($Result,MYSQL_ASSOC)  ) {
 		$out_t[] = $res;
 	}
-	$Mysql="SELECT nomepg, livello, dataultima from legami LEFT JOIN personaggio ON idutente=target  WHERE domitor=$idutente";
+	$Mysql="SELECT nomepg, livello, DATE_FORMAT(dataultima,'%d-%m-%Y') as dataultima from legami LEFT JOIN personaggio ON idutente=target  WHERE domitor=$idutente";
 	$Result=mysql_query ($Mysql);
 	while ( $res=mysql_fetch_array($Result,MYSQL_ASSOC)  ) {
 		$out_d[] = $res;
 	}
 
 	$out = array (
-		/* 'domitor' => $out_d , */
+		'domitor' => $out_d ,
 		'target' => $out_t
 	);
 
