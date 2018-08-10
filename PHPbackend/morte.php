@@ -30,61 +30,85 @@
 
  	$idutente = $_GET['id'];
 
-	die();
 
 	$Mysql="SELECT nomepg FROM personaggio WHERE idutente=$idutente";
-	if ( $res=mysql_fetch_array(mysql_query($Mysql)) ) {
-		$nomepg=$res['nomepg'];
-	} else {
-		$nomepg="NARRAZIONE";
-	}
-
-	$Mysql="SELECT nomepg FROM personaggio WHERE idutente=$destinatario";
-	if ( $res=mysql_fetch_array(mysql_query($Mysql)) ) {
-		$nomepgdest=$res['nomepg'];
-	} else {
-		$nomepgdest="NARRAZIONE";
-	}
-
-	$xmessaggio =' a '.$nomepgdest.' (Telepatia): '.$messaggio;
-
-	$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( $idutente, '$nomepg', NOW(), '$xmessaggio' , $destinatario ) ";
-	mysql_query($Mysql);
-
-
-	$Mysql="UPDATE personaggio SET PScorrenti = PScorrenti-1 , lastps=NOW() WHERE idutente=$idutente";
-	$Result=mysql_query ($Mysql);
-
-
-
-	$Mysql="SELECT registrationID FROM utente WHERE idutente=$destinatario";
 	$Result=mysql_query($Mysql);
 	$res=mysql_fetch_array($Result);
+	$nomepg=$res['nomepg'];
 
-	if ($res['registrationID'] != "" ) {
 
-		$fields= array(
-			'to'=>$res['registrationID'],
-			'data'=> [
-				'message'=> 'TELEPATIA: '.$messaggio ,
-				'title'=> $nomepg,
-				'image'=> 'icon'
-			]
+	$Mysql="SELECT target FROM legami WHERE domitor=$idutente";
+	$Result=mysql_query($Mysql);
+
+	$messaggio ="ha raggiunto la Morte Ultima";
+
+	while ( $res=mysql_fetch_array($Result)) {
+		$target=$res['target'];
+
+		$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( $idutente, '$nomepg', NOW(), '$messaggio' , $target ) ";
+		mysql_query($Mysql);
+
+		$Mysql="SELECT registrationID FROM utente WHERE idutente=$target";
+		$Result=mysql_query($Mysql);
+		$res=mysql_fetch_array($Result);
+
+		if ($res['registrationID'] != "" ) {
+
+			$fields= array(
+				'to'=>$res['registrationID'],
+				'data'=> [
+					'message'=> $messaggio ,
+					'title'=> $nomepg,
+					'image'=> 'icon'
+				]
+			);
+
+
+		} else {
+
+			$fields= array(
+				'to'=>'/topics/userid'.$destinatario,
+				'data'=> [
+					'message'=> $messaggio  ,
+					'title'=> $nomepg,
+					'image'=> 'icon'
+				]
+			);
+
+		}
+		$api_key="AAAAxERgxJ4:APA91bGb0CqFmwPOIV1tN9BSOG7yucKmCpymJf0Pp1YRXlX3wIn8RlbYqMYjnDavyLP4-j9uSzVAlLwB0e7oYzwsaJa2H_yTE3LjzXL1UoOaf-EO00MewK9VyHbOeyvezg-2CTyRulba";
+		$ch = curl_init('https://fcm.googleapis.com/fcm/send');
+
+		$headers = array (
+			'Authorization: key=' . $api_key,
+			'Content-Type: application/json'
 		);
 
 
-	} else {
-
-		$fields= array(
-			'to'=>'/topics/userid'.$destinatario,
-			'data'=> [
-				'message'=> 'TELEPATIA: '.$messaggio  ,
-				'title'=> $nomepg,
-				'image'=> 'icon'
-			]
-		);
+		$post=json_encode($fields, JSON_UNESCAPED_SLASHES);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $post );
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		$response = curl_exec($ch);
+		curl_close($ch);
 
 	}
+
+
+	/* mando lo stesso messaggio ai master */
+
+
+		$fields= array(
+			'to'=> '/topics/master',
+			'data'=> [
+				'message'=> $messaggio ,
+				'title'=> $nomepg,
+				'image'=> 'icon'
+			]
+		);
+
 
 
 	$api_key="AAAAxERgxJ4:APA91bGb0CqFmwPOIV1tN9BSOG7yucKmCpymJf0Pp1YRXlX3wIn8RlbYqMYjnDavyLP4-j9uSzVAlLwB0e7oYzwsaJa2H_yTE3LjzXL1UoOaf-EO00MewK9VyHbOeyvezg-2CTyRulba";
@@ -95,33 +119,23 @@
 		'Content-Type: application/json'
 	);
 
-	//die( print_r($headers));
 
 	$post=json_encode($fields, JSON_UNESCAPED_SLASHES);
-
-	//die (print_r($post));
-
 	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $post );
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
 	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-	// Disabling SSL Certificate support temporarly
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
-
-	// execute!
 	$response = curl_exec($ch);
-
-	// close the connection, release resources used
 	curl_close($ch);
 
-	// do anything you want with your response
 
-	//die(print_r($response));
+/* do other stuff */
+$Mysql="UPDATE personaggio set PScorrenti = 0 , fdv=0 WHERE idutente=$idutente";
+$Result=mysql_query($Mysql);
 
-
+$Mysql="DELETE from legami WHERE target=$idutente  or domitor=$idutente";
+$Result=mysql_query($Mysql);
 
 
 ?>
