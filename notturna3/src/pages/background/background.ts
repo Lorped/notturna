@@ -17,24 +17,25 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
   templateUrl: 'background.html',
 })
 export class BackgroundPage {
-  
+
   myskill: Array<any>;
   fulldata: Array<any>;
   note: string;
-  
+  rifugio: string;
+
   link: string;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthService , private iab: InAppBrowser) {
 		this.myskill=this.auth.getUserSKILLInfo();
 		this.fulldata=this.auth.getUserPGInfo();
-		this.note=this.nl2br(this.fulldata['note']);
-	
+		this.rifugio=this.fulldata['rifugio'];
+
 		// console.log(this.fulldata['idclan']);
 		switch (this.fulldata['idclan']) {
-		   
+
 			case "1":   //  Toreador
 				this.link = "https://drive.google.com/file/d/0BwbyMyT-GT-UZ2pKb0RzRlZoaVU/view";
-			break;			
+			break;
 			case "2":   //  Ventrue
 				this.link = "https://drive.google.com/file/d/0BwbyMyT-GT-UTTRodGZXdzdCVXM/view";
 			break;
@@ -49,7 +50,7 @@ export class BackgroundPage {
 			break;
 			case "6":		// Malkavian
 				this.link = "https://drive.google.com/file/d/0BwbyMyT-GT-UZ2dRSW1VOGFWNDQ/view";
-			break;  
+			break;
 			case "7":		// Tremere
 				this.link = "https://drive.google.com/file/d/0BwbyMyT-GT-US3d3OEpnbV9Ccjg/view";
 			break;
@@ -73,7 +74,7 @@ export class BackgroundPage {
 			break;
 			case "20":	// vili
 				this.link = "https://drive.google.com/file/d/0BwbyMyT-GT-UOWhsMExKd2YzTVU/view";
-			break;   
+			break;
 		}
 	}
 
@@ -90,7 +91,7 @@ export class BackgroundPage {
     		return '';
 		}
 		// Adjust comment to avoid issue on locutus.io display
-  		var breakTag =  '<br>'   ; 
+  		var breakTag =  '<br>'   ;
   		return (str + '')
     		.replace(/(\r\n|\n\r|\r|\n)/g, breakTag + '$1')
 	}
@@ -98,16 +99,16 @@ export class BackgroundPage {
 	reloadnote(){
 		this.note=this.nl2br(this.fulldata['note']);
 	}
-	
+
 	openUrl() {
 
 		//const browser = this.iab.create(this.link);
 		this.iab.create(this.link,'_system');
 
-	}    
- 
+	}
+
 	 //filterItemsLOTzero(){
 	 //   return this.myskill.filter(x => x.tipologia == 8).filter(x => x.livello <0);
 	 //}
- 
+
 }

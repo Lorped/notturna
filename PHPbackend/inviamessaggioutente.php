@@ -50,10 +50,11 @@
 	}
 
 	$xmessaggio =' a '.$nomepgdest.' (Telepatia): '.$messaggio;
+	$xmessaggio=mysql_real_escape_string($xmessaggio);
 
 	$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( $idutente, '$nomepg', NOW(), '$xmessaggio' , $destinatario ) ";
 	mysql_query($Mysql);
-
+if (mysql_errno())  die ( mysql_errno().": ".mysql_error()."+". $MySql );
 
 	$Mysql="UPDATE personaggio SET PScorrenti = PScorrenti-1 , lastps=NOW() WHERE idutente=$idutente";
 	$Result=mysql_query ($Mysql);

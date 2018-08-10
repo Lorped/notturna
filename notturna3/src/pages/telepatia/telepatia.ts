@@ -37,7 +37,7 @@ export class TelepatiaPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private auth: AuthService) {
     this.myuser=this.auth.getUserInfo();
-    console.log(this.myuser);
+    //console.log(this.myuser);
     this.loadUtenti(this.myuser.userid);
   }
 
