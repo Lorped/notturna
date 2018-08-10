@@ -60,6 +60,8 @@ export class PersonaggioPage {
 
   listalegami: Legame[];
   listalegamidomitor: Legame[];
+  rifugio: string = '';
+  zona: string = '';
 
 	constructor(   public navParams: NavParams , public http: Http) {
 		this.requestID = navParams.get("RequestID");
@@ -123,7 +125,8 @@ export class PersonaggioPage {
           }
         }
 
-
+        this.rifugio=this.currentUser.fulldata['rifugio'];
+        this.zona=this.currentUser.fulldata['zona'];
 
 
 				this.rissa=0;
