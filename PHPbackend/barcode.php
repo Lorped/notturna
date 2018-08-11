@@ -36,11 +36,13 @@
 	if (mysql_errno()) die ( mysql_errno().": ".mysql_error() ."+".$Mysql);
 
 	$extra="";
+	$esterno=$res['fissomobile'];
 
 	$ok = 0;
 	while ( $res=mysql_fetch_array($Result)) {
 
-
+		$esterno=$res['fissomobile'];
+		$nome=$res['nomeoggetto'];
 
 		if ($res['tipocond'] == 'A' ){
 			switch ( $res['tabcond'] ) {
@@ -110,6 +112,19 @@
 
 	}
 
+
+
+	if ( $esterno == 'E') {
+		$Mysql="SELECT notemaster from personaggio WHERE idutente=$idutente";
+		$Result=mysql_query($Mysql);
+		$resx=mysql_fetch_array($Result);
+		$testo=$resx['notemaster'];
+		$testo=mysql_real_escape_string($testo.date('d-m-Y H:i')." Visionato oggetto ".$nome).'\\n';
+		$Mysql="UPDATE personaggio set notemaster = '$testo' WHERE idutente=$idutente";
+		mysql_query($Mysql);
+
+
+	}
 
 	$output = json_encode ($esito, JSON_UNESCAPED_UNICODE);
     echo $output;

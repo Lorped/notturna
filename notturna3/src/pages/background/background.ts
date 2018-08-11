@@ -21,6 +21,7 @@ export class BackgroundPage {
   myskill: Array<any>;
   fulldata: Array<any>;
   note: string;
+  notemaster: string;
   rifugio: string;
 
   link: string;
@@ -29,6 +30,9 @@ export class BackgroundPage {
 		this.myskill=this.auth.getUserSKILLInfo();
 		this.fulldata=this.auth.getUserPGInfo();
 		this.rifugio=this.fulldata['rifugio'];
+
+    this.note=this.nl2br(this.fulldata['note']);
+    this.notemaster=this.nl2br(this.fulldata['notemaster']);
 
 		// console.log(this.fulldata['idclan']);
 		switch (this.fulldata['idclan']) {
@@ -98,6 +102,7 @@ export class BackgroundPage {
 
 	reloadnote(){
 		this.note=this.nl2br(this.fulldata['note']);
+    this.notemaster=this.nl2br(this.fulldata['notemaster']);
 	}
 
 	openUrl() {

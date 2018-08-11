@@ -343,6 +343,15 @@
 			<!-- <ion-col style="color:#FFFFFF; text-align: justify; font-size: 1.1em;">{{ scheda.note}}</ion-col> -->
 			<ion-col style="color:#FFFFFF; text-align: justify; font-size: 1.1em;"><span [innerHTML]="note"></span></ion-col>
 		</ion-row>
+    <ion-row style="align-items: center;" *ngIf="scheda.notemaster!= ''">
+			<ion-col ><hr/></ion-col>
+			<ion-col col-6 style="color:#FFFFFF; text-align: center; font-size: 1.1em;">Annotazioni oggetti</ion-col>
+			<ion-col ><hr/></ion-col>
+		</ion-row>
+		<ion-row >
+			<!-- <ion-col style="color:#FFFFFF; text-align: justify; font-size: 1.1em;">{{ scheda.note}}</ion-col> -->
+			<ion-col style="color:#FFFFFF; text-align: justify; font-size: 1.1em;"><span [innerHTML]="notemaster"></span></ion-col>
+		</ion-row>
 
 	</ion-grid>
 

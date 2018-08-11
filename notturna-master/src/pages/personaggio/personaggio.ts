@@ -42,6 +42,7 @@ export class PersonaggioPage {
 	myskill:	Array<any>;
 
 	note:	string;
+  notemaster:	string;
 
 	rituali:	number;
 	forza:		number;
@@ -171,6 +172,7 @@ export class PersonaggioPage {
 				this.forza=this.scheda['forza'];
 
 				this.note=this.nl2br(this.scheda['note']);
+        this.notemaster=this.nl2br(this.scheda['notemaster']);
 
 
 				this.psvuoti=this.scheda['ps']-this.scheda['PScorrenti'];
