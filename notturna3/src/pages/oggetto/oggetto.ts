@@ -17,29 +17,33 @@ import { Http } from '@angular/http';
 export class OggettoPage {
 
 	barcode: string;
-	
+
 	nomeoggetto: string;
 	descrizione: string;
-	
+
 	userid: number;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
-	  
+
 		this.barcode = this.navParams.get("parentPage").oggetto;
 		this.userid = this.navParams.get("parentPage").myuser['userid'];
-	
-	
+
+    if ( this.barcode.length > 12 ) {
+      let newbarcode = this.barcode.substr(-12);
+      this.barcode = newbarcode;
+    }
+
 		var url = 'http://www.roma-by-night.it/ionicPHP/barcode.php?id='+this.userid+'&barcode='+this.barcode;
-	
+
 		this.http.get(url)
 		.map(data => data.json())
 		.subscribe( data => {
 			this.nomeoggetto=data[0];
 			this.descrizione=data[1];
-			// console.log(this.descrizione);	
-		});		    
+			// console.log(this.descrizione);
+		});
 	}
-  
+
 
 
 	ionViewDidLoad() {

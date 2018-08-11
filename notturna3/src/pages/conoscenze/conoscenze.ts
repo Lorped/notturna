@@ -111,7 +111,7 @@ export class ConoscenzePage {
 
 		this.barcodeScanner.scan( {"showTorchButton": true} ).then((barcodeData) => {
 			// Success! Barcode data is here
-			console.log(barcodeData.text);
+			//console.log(barcodeData.text);
 
 			this.oggetto=barcodeData.text;
 			this.navCtrl.push('OggettoPage', { "parentPage": this });
