@@ -38,6 +38,12 @@ export class ConoscenzePage {
   potenza:	number;
   artigli:	number;
 
+  fomipot2 = 0;
+  foripot2 = 0;
+  folapot2 = 0;
+  treti2 = 0;
+  trefuoco2 = 0;
+
   constructor(public navCtrl: NavController, private auth: AuthService, public navParams: NavParams , private barcodeScanner: BarcodeScanner) {
 
   this.myskill=this.auth.getUserSKILLInfo();
@@ -62,31 +68,24 @@ export class ConoscenzePage {
 		this.lancio=0;
 		this.tiro=0;
 		this.fuoco=0;
-		this.Bfuoco=0;
 		this.potenza=0;
 		this.artigli=0;
 
 		for (var i = 0; i < this.myskill.length; i++) {
   			if ( this.myskill[i].nomeskill=="Rissa")  {
-    		 	this.rissa=this.myskill[i].livello-2;
-    		 	if (this.rissa<0) this.rissa=0;
+    		 	this.rissa=this.myskill[i].livello;
   			}
  			if ( this.myskill[i].nomeskill=="Mischia")  {
-    		 	this.mischia=this.myskill[i].livello-2;
-    		 	if (this.mischia<0) this.mischia=0;
+    		 	this.mischia=this.myskill[i].livello;
   			}
   			if ( this.myskill[i].nomeskill=="Armi da lancio")  {
-    		 	this.lancio=this.myskill[i].livello-2;
-    		 	if (this.lancio<0) this.lancio=0;
+    		 	this.lancio=this.myskill[i].livello;
   			}
   			if ( this.myskill[i].nomeskill=="Armi da tiro")  {
-    		 	this.tiro=this.myskill[i].livello-2;
-    		 	if (this.tiro<0) this.tiro=0;
+    		 	this.tiro=this.myskill[i].livello;
   			}
   			if ( this.myskill[i].nomeskill=="Armi da fuoco")  {
     		 	this.fuoco=this.myskill[i].livello;
-    		 	this.Bfuoco=this.myskill[i].livello-2;
-    		 	if (this.Bfuoco<0) this.Bfuoco=0;
   			}
   			if ( this.myskill[i].nomeskill=="Potenza")  {
     		 	this.potenza=this.myskill[i].livello;
@@ -96,7 +95,15 @@ export class ConoscenzePage {
   			}
 		}
 
-		this.forza=this.scheda['forza'];
+
+		this.forza = this.scheda['forza'];
+    this.fomipot2 = Math.ceil((1*this.forza + 1*this.mischia +1*this.potenza)/2);
+    this.foripot2 = Math.ceil((1*this.forza + 1*this.rissa +1*this.potenza)/2);
+    this.folapot2 = Math.ceil((1*this.forza + 1*this.lancio +1*this.potenza)/2);
+    this.treti2 = Math.ceil((3 + 1*this.tiro )/2);
+
+    this.trefuoco2 = Math.ceil((3+1*this.fuoco)/2);
+
 
   // this.rituali= this.myskill.export.filter(function(elem) {
   //  return elem.tipologia===11 ;
