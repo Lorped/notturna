@@ -41,6 +41,7 @@
     "phonegap-plugin-barcodescanner": "^7.1.0",
     "phonegap-plugin-push": "^2.2.2",
     "rxjs": "5.5.2",
+    "sshpk": "^1.14.2",
     "sw-toolbox": "3.6.0",
     "zone.js": "0.8.18"
   },
