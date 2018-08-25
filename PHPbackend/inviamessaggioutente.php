@@ -33,7 +33,9 @@
 
  	$idutente=$request->idutente;
  	$destinatario=$request->destinatario;
- 	$messaggio=mysql_real_escape_string( $request->messaggio );
+	$messaggio=$request->messaggio;
+ 	//$messaggio=mysql_real_escape_string( $request->messaggio );
+
 
 	$Mysql="SELECT nomepg FROM personaggio WHERE idutente=$idutente";
 	if ( $res=mysql_fetch_array(mysql_query($Mysql)) ) {
@@ -52,9 +54,11 @@
 	$xmessaggio =' a '.$nomepgdest.' (Telepatia): '.$messaggio;
 	$xmessaggio=mysql_real_escape_string($xmessaggio);
 
-	$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( $idutente, '$nomepg', NOW(), '$xmessaggio' , $destinatario ) ";
+	$xnomepg=mysql_real_escape_string($nomepg);
+
+	$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( $idutente, '$xnomepg', NOW(), '$xmessaggio' , $destinatario ) ";
 	mysql_query($Mysql);
-if (mysql_errno())  die ( mysql_errno().": ".mysql_error()."+". $MySql );
+if (mysql_errno())  die ( mysql_errno().": ".mysql_error()."+". $Mysql );
 
 	$Mysql="UPDATE personaggio SET PScorrenti = PScorrenti-1 , lastps=NOW() WHERE idutente=$idutente";
 	$Result=mysql_query ($Mysql);
