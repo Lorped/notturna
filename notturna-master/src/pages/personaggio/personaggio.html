@@ -145,7 +145,7 @@
 		</ion-row>
 
 		<ion-row *ngFor="let desc of myskill">
-			<ion-col col-7 *ngIf="desc.tipologia == 3 "><span stype="color:#FF0000;">&nbsp;&nbsp;- </span> {{ desc.nomeskill }}</ion-col>
+			<ion-col col-7 *ngIf="desc.tipologia == 3 "><span style="color:#FF0000;">&nbsp;&nbsp;- </span> {{ desc.nomeskill }}</ion-col>
 			<ion-col *ngIf="desc.tipologia == 3 "><img src="assets/img/5/{{ desc.livello }}.png"></ion-col>
 		</ion-row>
 
@@ -156,8 +156,20 @@
 		</ion-row>
 
 		<ion-row *ngFor="let desc of myskill">
-			<ion-col *ngIf="desc.tipologia == 11 "><span stype="color:#FF0000;"></span> {{ desc.nomeskill }}</ion-col>
+			<ion-col *ngIf="desc.tipologia == 11 "> {{ desc.nomeskill }}</ion-col>
 		</ion-row>
+
+    <ion-row style="align-items: center;">
+			<ion-col ><hr/></ion-col>
+			<ion-col col-6 style="text-align: center; font-size: 1em;">Poteri</ion-col>
+			<ion-col ><hr/></ion-col>
+		</ion-row>
+
+    <ion-row *ngFor="let pot of poteri">
+      <ion-col col-12 *ngIf="pot.livellopot==1"><span style="color:#FF0000;">{{ pot.nomedisc }}</span> </ion-col>
+      <ion-col >{{ pot.livellopot }} -  {{ pot.nomepotere }}</ion-col>
+      <ion-col col-1> {{ pot.attivo }}</ion-col>
+    </ion-row>
 
 		<ion-row style="align-items: center;">
 			<ion-col ><hr/></ion-col>

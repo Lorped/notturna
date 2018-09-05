@@ -40,6 +40,7 @@ export class PersonaggioPage {
 	currentUser:	User;
 	scheda:		Array<any>;
 	myskill:	Array<any>;
+  poteri:	Array<any>;
 
 	note:	string;
   notemaster:	string;
@@ -84,6 +85,15 @@ export class PersonaggioPage {
         this.listalegami = res.target;
         this.listalegamidomitor = res.domitor;
         //console.log (this.listalegami);
+    });
+
+    url = 'http://www.roma-by-night.it/ionicPHP/poteri.php?id='+this.requestID;
+    this.http.get(url)
+    .map(res => res.json())
+    .subscribe(res =>  {
+
+        this.poteri = res;
+        //console.log (this.poteri);
     });
 
 	}
