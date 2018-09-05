@@ -13,7 +13,8 @@ export class User {
   userid: string;
   fulldata: Array<any>;
   skill: Array<any>;
- 
+  poteri: Array<any>;
+
   constructor(username: string, userid: string) {
     this.username = username;
     this.userid = userid;
@@ -35,14 +36,14 @@ export class User {
   templateUrl: 'login.html',
 })
 export class LoginPage {
-  
+
 	username = '';
 	userid = '';
 	currentUser: User;
 	saveme= {
-		checked: false 
+		checked: false
 	};
-  
+
 	loading: Loading;
 	registerCredentials = { username: '', email: '' , password: '' };
 
@@ -58,26 +59,26 @@ export class LoginPage {
 	}
 
 	public login() {
-   
-		this.currentUser = new User(this.registerCredentials.username , "0"); 
+
+		this.currentUser = new User(this.registerCredentials.username , "0");
 		let headers = new Headers();
-		headers.append('Content-Type', 'application/json'); 
+		headers.append('Content-Type', 'application/json');
 		var link = 'http://www.roma-by-night.it/ionicPHP/login.php';
 		var mypost = JSON.stringify({username: this.registerCredentials.username , password: this.registerCredentials.password });
-   
+
 		this.showLoading("Please wait...");
-   
+
 		this.http.post(link, mypost, {headers})
 		.map(res => res.json())
-		.subscribe(res =>  {    
-       
+		.subscribe(res =>  {
+
 			this.currentUser['userid'] = res["idutente"];
 			this.currentUser.fulldata = res;
-        
+
 			this.loading.dismiss();
-			
+
 			//save if required
-			
+
 			if ( this.saveme.checked == true ) {
 				window.localStorage.setItem( "notturnauserid" , this.registerCredentials.username );
 				window.localStorage.setItem( "notturnapasswd" , this.registerCredentials.password );
@@ -85,33 +86,42 @@ export class LoginPage {
 				window.localStorage.removeItem( "notturnauserid" );
 				window.localStorage.removeItem( "notturnapasswd" );
 			}
-      
+
 			// register for notification
 			this.pushsetup();
 			// do other stuff
-			
+
 			var link = 'http://www.roma-by-night.it/ionicPHP/skill.php';
-			var mypost = JSON.stringify({userid: this.currentUser['userid'] });   
-      
+			var mypost = JSON.stringify({userid: this.currentUser['userid'] });
+
 			this.showLoading("Loading data...");
-      
+
 			this.http.post(link, mypost)
 			.map(res => res.json())
 			.subscribe(res => {
-            
+
 				this.currentUser.skill = res;
 				this.currentUser.fulldata['psvuoti'] = this.currentUser.fulldata['ps']-this.currentUser.fulldata['PScorrenti'];
-//console.log( this.currentUser );     
-				this.auth.createUserInfo();
-				this.auth.setUserInfo(this.currentUser);
+//console.log( this.currentUser );
 
-				this.loading.dismiss();     
-				this.nav.push('TabsPage'); 
-    
+          link = 'http://www.roma-by-night.it/ionicPHP/listpoteri.php?id='+this.currentUser['userid'];
+          this.http.get(link)
+          .map(res => res.json())
+          .subscribe( res => {
+            this.currentUser.poteri=res;
+            this.auth.createUserInfo();
+    				this.auth.setUserInfo(this.currentUser);
+//console.log(this.currentUser);
+    				this.loading.dismiss();
+    				this.nav.push('TabsPage');
+          });
+
+
+
 			}, (err) => {
 				this.loading.dismiss();
-				alert ('Error loading data2');  
-			});                           
+				alert ('Error loading data2');
+			});
 		}, (err) => {
 			this.loading.dismiss();
 			switch ( err['statusText'] ) {
@@ -124,7 +134,7 @@ export class LoginPage {
 				default:
 					alert("Server error");
 			}
-		});  
+		});
 	}
 
 	showLoading(text) {
@@ -150,9 +160,9 @@ export class LoginPage {
 			},
 			windows: {}
 		};
- 
+
 		const pushObject: PushObject = this.push.init(options);
- 
+
 		pushObject.on('notification').subscribe((notification: any) => {
 			//	if (notification.additionalData.foreground) {
 			//		let youralert = this.alertCtrl.create({
@@ -163,31 +173,30 @@ export class LoginPage {
 			//	}
 			//	console.log('Received a notification', notification);
 		});
- 
+
 		pushObject.on('registration').subscribe((registration: any) => {
 			//do whatever you want with the registration ID
-			
+
 			//console.log('Device registered ', registration.registrationId);
 			//alert('Device registered '+registration.registrationId);
-			
+
 			let updateurl = 'http://www.roma-by-night.it/ionicPHP/updateid.php?userid='+ this.currentUser['userid']+'&id='+registration.registrationId;
 			this.http.get(updateurl)
-			.subscribe(res =>  {     
+			.subscribe(res =>  {
 					// updated
 					// alert('Device registered '+registration.registrationId);
 			});
-			
+
 			let topic = "userid" + this.currentUser['userid'];
 			pushObject.subscribe(topic).then((res:any) => {
 				//console.log("subscribed to topic: ", res);
 				//alert("subscribed to topic: " + res);
 			});
-			
+
 		});
- 
+
 		pushObject.on('error').subscribe(error => alert('Error with Push plugin ' + error));
 	}
 
 
 }
-

@@ -8,8 +8,9 @@ export class User {
   userid: string;
   fulldata: Array<any>;
   skill: Array<any>;
-  
- 
+  poteri: Array<any>;
+
+
   constructor(username: string, userid: string) {
     this.username = username;
     this.userid = userid;
@@ -29,7 +30,7 @@ export class AuthService {
   scheda = new Array();
 
   constructor(public http: Http   ) { }
-   
+
 /*
  public register(credentials) {
     if (credentials.username === null || credentials.email === null || credentials.password === null) {
@@ -43,7 +44,7 @@ export class AuthService {
     }
   }
  */
- 
+
   public getUserInfo() : User {
     return this.currentUser;
   }
@@ -51,7 +52,7 @@ export class AuthService {
   public  getUserPGInfo() : Array<any> {
     return this.currentUser.fulldata;
   }
-  
+
   public  getUserSKILLInfo() : Array<any> {
     return this.currentUser.skill;
   }
@@ -60,15 +61,15 @@ export class AuthService {
     this.currentUser = new User("" , "0");
     this.currentUser=auser;
     return(this.currentUser);
-    
-  } 
+
+  }
 
   public createUserInfo() : User {
     this.currentUser = new User("" , "0");
     return(this.currentUser);
-    
-  } 
-  
+
+  }
+
 
 
 /*
@@ -79,9 +80,9 @@ export class AuthService {
       observer.complete();
     });
   }
-  
+
   */
 
-   
-    
+
+
 }

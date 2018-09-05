@@ -22,79 +22,57 @@
 	}
 
 
-
-
-
 	include ('db.inc.php');
 
-
 	$postdata = file_get_contents("php://input");
-	$request = json_decode($postdata);
+  $request = json_decode($postdata);
 
- 	$idutente=$request->idutente;
- 	//$destinatario=$request->destinatario;
- 	$messaggio=mysql_real_escape_string( $request->messaggio );
+  $idutente = $request->idutente;
+	$pot = $request->potere;
+	$livellopot = $request->livello;
+	$aDisciplina = $request->aDisciplina;
 
-	$Mysql="SELECT nomepg FROM personaggio WHERE idutente=$idutente";
-	if ( $res=mysql_fetch_array(mysql_query($Mysql)) ) {
-	$nomepg=$res['nomepg'];
-	} else {
-		$nomepg="NARRAZIONE";
-	}
-
-
-
-	$xnomepg=mysql_real_escape_string($nomepg);
-
-	$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo) VALUES ( $idutente, '$xnomepg', NOW(), '$messaggio' ) ";
-	mysql_query($Mysql);
-
-	// set post fields
-
-	/*
-
-	$Mysql="SELECT registrationID FROM utente WHERE idutente=$destinatario";
-	$Result=mysql_query($Mysql);
+ 	$Mysql="SELECT  nomepg FROM personaggio WHERE idutente=$idutente";
+	$Result=mysql_query ($Mysql);
 	$res=mysql_fetch_array($Result);
 
-	if ($res['registrationID'] != "" ) {
+	$nomepg=$res['nomepg'];
+	$xnomepg=mysql_real_escape_string($nomepg);
 
-		$fields= array(
-			'to'=>$res['registrationID'],
-			'data'=> [
-				'message'=> $messaggio ,
-				'title'=> 'NARRAZIONE',
-				'image'=> 'icon'
-			]
-		);
+	$Mysql="SELECT  nomedisc FROM discipline_main WHERE iddisciplina=$aDisciplina";
+	$Result=mysql_query ($Mysql);
+	$res=mysql_fetch_array($Result);
+
+	$nomedisc=$res['nomedisc'];
 
 
+
+	if ( $livellopot == 5) {
+		$Mysql="UPDATE personaggio SET PScorrenti = PScorrenti-2 , lastps=NOW() WHERE idutente=$idutente";
 	} else {
-
-		$fields= array(
-			'to'=>'/topics/userid'.$destinatario,
-			'data'=> [
-				'message'=> $messaggio ,
-				'title'=> 'NARRAZIONE',
-				'image'=> 'icon'
-			]
-		);
-
+		$Mysql="UPDATE personaggio SET PScorrenti = PScorrenti-1 , lastps=NOW() WHERE idutente=$idutente";
 	}
 
-*/
 
-$fields =  array(
-	'to' => '/topics/master',
-	'data'=> [
-		'message'=> $messaggio ,
-		'title'=> $nomepg,
-		'image'=> 'icon'
-	]
-);
+	$Result=mysql_query ($Mysql);
+
+	$testo="Ha utilizzato ".$nomedisc.".".$livellopot." ".$pot;
+	$xtesto=mysql_real_escape_string($testo);
+	$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( $idutente, '$xnomepg', NOW(), '$xtesto' , $idutente ) ";
+	mysql_query($Mysql);
 
 
-	$api_key = "AAAAxERgxJ4:APA91bGb0CqFmwPOIV1tN9BSOG7yucKmCpymJf0Pp1YRXlX3wIn8RlbYqMYjnDavyLP4-j9uSzVAlLwB0e7oYzwsaJa2H_yTE3LjzXL1UoOaf-EO00MewK9VyHbOeyvezg-2CTyRulba";
+	$fields =  array(
+		'to' => '/topics/master',
+		'data'=> [
+			'message'=> $testo ,
+			'title'=> $nomepg,
+			'image'=> 'icon'
+		]
+	);
+
+
+	$api_key="AAAAxERgxJ4:APA91bGb0CqFmwPOIV1tN9BSOG7yucKmCpymJf0Pp1YRXlX3wIn8RlbYqMYjnDavyLP4-j9uSzVAlLwB0e7oYzwsaJa2H_yTE3LjzXL1UoOaf-EO00MewK9VyHbOeyvezg-2CTyRulba";
 	$ch = curl_init('https://fcm.googleapis.com/fcm/send');
 
 	$headers = array (
@@ -102,7 +80,7 @@ $fields =  array(
 		'Content-Type: application/json'
 	);
 
-	//die( print_r($headers));
+		//die( print_r($headers));
 
 	$post=json_encode($fields, JSON_UNESCAPED_SLASHES);
 
@@ -114,9 +92,8 @@ $fields =  array(
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-	// Disabling SSL Certificate support temporarly
+		// Disabling SSL Certificate support temporarly
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
 
 	// execute!
 	$response = curl_exec($ch);
@@ -129,6 +106,14 @@ $fields =  array(
 	//die(print_r($response));
 
 
-
+	// Imposto PS
+	if ($livellopot == 5 ) {
+		$out1=array('ps' => 2);
+	} else {
+		$out1=array('ps' => 1);
+	}
+	$output = json_encode ($out1, JSON_UNESCAPED_UNICODE);
+	echo $output;
+	die();
 
 ?>

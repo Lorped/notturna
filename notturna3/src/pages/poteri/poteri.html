@@ -1,0 +1,25 @@
+<!--
+  Generated template for the PoteriPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="moredark">
+    <ion-title>Poteri di Sangue</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class="master" padding>
+
+<ion-row *ngFor="let p of aPoteri">
+  <ion-col *ngIf="p.attivo=='N'" >
+  <button  (click)="gopotere(p.nomepotere,p.livellopot)" ion-button class="submit-btn2" full type="submit" >{{p.livellopot}} - {{p.nomepotere}}</button>
+  </ion-col>
+  <ion-col *ngIf="p.attivo=='S'" text-center>
+   - {{p.livellopot}}.{{p.nomepotere}} (attivo) -
+  </ion-col>
+</ion-row>
+</ion-content>

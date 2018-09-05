@@ -56,7 +56,8 @@
 
 
 	$testo=$nomepg." ha recuperato ".$recuperati ." PS";
-	$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( 0, 'NARRAZIONE', NOW(), '$testo' , $idutente ) ";
+	$xtesto=mysql_real_escape_string($testo);
+	$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( 0, 'NARRAZIONE', NOW(), '$xtesto' , $idutente ) ";
 	mysql_query($Mysql);
 
 		// set post fields

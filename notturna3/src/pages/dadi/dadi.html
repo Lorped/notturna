@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color="moredark">
-    <ion-title>Fattore aleatorio e Messaggi</ion-title>
+    <ion-title>Poteri e Messaggi</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -36,9 +36,11 @@
 <form (ngSubmit)="gocaccia()" #registerForm="ngForm">
 <button ion-button class="submit-btn3" full type="submit" [disabled]="psvuoti==0" >Vai a caccia</button>
 </form>
+<!--
 <form (ngSubmit)="gotelepatia()" #registerForm="ngForm" *ngIf="telepatia==true">
 <button ion-button class="submit-btn2" full type="submit" [disabled]="PScorrenti==0" >Telepatia</button>
 </form>
+-->
 <form (ngSubmit)="golegami()" #registerForm="ngForm" >
 <button ion-button class="submit-btn3" full type="submit" >Legame di Sangue</button>
 </form>
@@ -46,6 +48,11 @@
 <button ion-button class="submit-btn2" full type="submit" >Morte Ultima</button>
 </form>
 
+<ion-row >
+<ion-col col-6 *ngFor="let pot of poteri">
+  <button  (click)="godisciplina(pot.iddisciplina)" ion-button class="submit-btn2" full type="submit" >{{pot.nomedisc}}</button>
+</ion-col>
+</ion-row>
 
 	  <ion-list >
     <ion-item *ngFor="let tiri of tiridado"  class="master" text-wrap>

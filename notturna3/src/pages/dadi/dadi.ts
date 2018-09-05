@@ -25,6 +25,9 @@ export class DadiPage {
   psvuoti: number;
   telepatia = false;
 
+  skills: Array<any>;
+  poteri: Array<any>;
+
 	constructor(public navCtrl: NavController, public navParams: NavParams, private feedProvider: FeedProvider , private http: Http , private auth: AuthService) {
 
 		this.myuser=this.auth.getUserInfo();
@@ -32,6 +35,9 @@ export class DadiPage {
 		this.PScorrenti=this.myuser.fulldata['PScorrenti'];
     this.psvuoti=this.myuser.fulldata['psvuoti'];
 
+    this.skills=this.myuser.skill;
+    this.poteri=this.myuser.poteri;
+//console.log(this.myuser);
 
     for (let i = 0 ; i< this.myuser.skill.length ; i++) {
       if ( this.myuser.skill[i].nomeskill == 'Auspex' ) {
@@ -120,16 +126,18 @@ export class DadiPage {
     this.navCtrl.push('LegamiPage', { "parentPage": this } );
   }
 
-  gotelepatia() {
-		//console.log (this.tochange.cell);
-		//console.log (this.tochange.email);
-		this.navCtrl.push('TelepatiaPage', { "parentPage": this } );
-	}
+
 
   gomorte() {
 		//console.log (this.tochange.cell);
 		//console.log (this.tochange.email);
 		this.navCtrl.push('MortePage', { "parentPage": this } );
+	}
+
+  godisciplina(disc: number) {
+		//console.log (this.tochange.cell);
+		//console.log (this.tochange.email);
+		this.navCtrl.push('PoteriPage', { "parentPage": this ,  "aDisciplina": disc } );
 	}
 
 

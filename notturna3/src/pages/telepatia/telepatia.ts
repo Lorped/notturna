@@ -77,7 +77,7 @@ export class TelepatiaPage {
 
 		this.http.post(url, mypost, {headers})
 		.subscribe(res =>  {
-        this.navParams.get("parentPage").loadDadi();
+        //this.navParams.get("parentPage").loadDadi();
 				this.myuser.fulldata['psvuoti'] = 1*this.myuser.fulldata['psvuoti']+1;
 				this.myuser.fulldata['PScorrenti'] = 1*this.myuser.fulldata['PScorrenti']-1;
 				this.navCtrl.pop();
