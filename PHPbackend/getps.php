@@ -29,7 +29,10 @@
 
  	$idutente=$_GET['id'];
 
- 	$Mysql="SELECT PScorrenti, sete-PScorrenti as 'psvuoti' FROM personaggio LEFT JOIN statuscama ON personaggio.idstatus = statuscama.idstatus WHERE idutente=$idutente";
+ 	$Mysql="SELECT PScorrenti, sete+addsete-PScorrenti as 'psvuoti' FROM personaggio 
+		LEFT JOIN statuscama ON personaggio.idstatus = statuscama.idstatus
+		LEFT JOIN blood ON personaggio.bloodp = blood.bloodp
+		WHERE idutente=$idutente";
 	$Result=mysql_query ($Mysql);
 	$res=mysql_fetch_array($Result,MYSQL_ASSOC);
 	$output = json_encode($res);
