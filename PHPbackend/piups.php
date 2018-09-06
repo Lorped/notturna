@@ -43,7 +43,7 @@
 		$Result=mysql_query ($Mysql);
 
 
-		$testo=$nomepg." ha guadagnato 1 PS";
+		$testo=$nomepg." ha saziato 1 livello di sete";
 		$xtesto=mysql_real_escape_string($testo);
 		$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( 0, 'NARRAZIONE', NOW(), '$xtesto' , $idutente ) ";
 		mysql_query($Mysql);

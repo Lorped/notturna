@@ -39,7 +39,7 @@
         <ion-row>
           <ion-col col-3 style="color:#FF0000;">Status</ion-col>
           <ion-col col-4 >{{scheda['status']}}</ion-col>
-          <ion-col col-5 style="color:#FF0000;">Punti Sangue &nbsp;<span style="color:#ffffff;">{{scheda['ps']}}</span> /<span style="color:#ffffff;">{{scheda['psturno']}}</span></ion-col>
+          <ion-col col-5 style="color:#FF0000;">Potenza del Sangue &nbsp;<span style="color:#ffffff;">{{1*scheda['attivazione']+1*scheda['psturno']}}</span> </ion-col>
         </ion-row>
         <ion-row>
           <ion-col col-3 style="color:#FF0000;">Sentiero</ion-col>
@@ -64,7 +64,7 @@
           <ion-col><img src="assets/img/5b/{{scheda['fama3']}}.png"></ion-col>
         </ion-row>
         <ion-row>
-          <ion-col col-4 style="color:#FF0000;" >PS Correnti</ion-col>
+          <ion-col col-4 style="color:#FF0000;" >Livello Sete</ion-col>
           <ion-col><img src="assets/img/ps/{{scheda['PScorrenti']}}.png"><img src="assets/img/psx/{{scheda['psvuoti']}}.png"></ion-col>
         </ion-row>
         <ion-row>
