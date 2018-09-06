@@ -101,7 +101,8 @@ export class LoginPage {
 			.subscribe(res => {
 
 				this.currentUser.skill = res;
-				this.currentUser.fulldata['psvuoti'] = this.currentUser.fulldata['ps']-this.currentUser.fulldata['PScorrenti'];
+				this.currentUser.fulldata['psvuoti'] = 1*this.currentUser.fulldata['sete']+1*this.currentUser.fulldata['addsete']-this.currentUser.fulldata['PScorrenti'];
+        this.currentUser.fulldata['setetot'] = 1*this.currentUser.fulldata['sete']+1*this.currentUser.fulldata['addsete'];
 //console.log( this.currentUser );
 
           link = 'http://www.roma-by-night.it/ionicPHP/listpoteri.php?id='+this.currentUser['userid'];

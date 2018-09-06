@@ -30,9 +30,10 @@ export class PersonaggioPage {
 
 		this.scheda=this.auth.getUserPGInfo();
     this.myskill=this.auth.getUserSKILLInfo();
+    console.log ( this.scheda );
 
     this.pf = ( 3 + 1*this.scheda['attutimento'])*2;
-    // console.log ( this.scheda );
+
 
     for (let i = 0 ; i< this.myskill.length ; i++) {
       if ( this.myskill[i].nomeskill == 'Schivare' ) {

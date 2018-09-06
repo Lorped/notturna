@@ -78,7 +78,7 @@ export class CacciaPage {
       }
     };
 
-    if ( 1*this.myuser.fulldata['ps'] - 1*this.myuser.fulldata['PScorrenti'] < this.recuperati ) {
+    if ( 1*this.myuser.fulldata['sete'] - 1*this.myuser.fulldata['PScorrenti'] < this.recuperati ) {
       this.recuperati = 1*this.myuser.fulldata['ps'] - 1*this.myuser.fulldata['PScorrenti'] ;
     }
 
@@ -86,7 +86,7 @@ export class CacciaPage {
     this.maxTime = 10
     this.minuti = '00';
     this.secondi = '10';
-    */ 
+    */
 
     this.msginizio();
     this.StartTimer();

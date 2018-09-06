@@ -94,15 +94,18 @@ if (isset($postdata) && $username != "" && $password !="" ) {
 
 		//inizio test su ps
 
-		$Mysql="SELECT PScorrenti, ps, lastps FROM personaggio LEFT JOIN generazione ON personaggio.generazione = generazione.generazione WHERE idutente=$idutente";
+		$Mysql="SELECT PScorrenti, sete, addsete, lastps FROM personaggio
+      LEFT JOIN statuscama ON personaggio.idstatus = statuscama.idstatus
+      LEFT JOIN blood ON personaggio.bloodp = blood.bloodp
+    WHERE idutente=$idutente";
 		$Result=mysql_query ($Mysql);
 		$res=mysql_fetch_array($Result);
 
 		$PScorrenti=$res['PScorrenti'];
-		$ps=$res['ps'];
+		$setetot=$res['sete']+$res['addsete'];
 		$lastps=$res['lastps'];
 
-		if ( $PScorrenti == $ps ) {  // tutto ok
+		if ( $PScorrenti == $setetot ) {  // tutto ok
 			//
 		} else {
 			$now=time();
@@ -112,7 +115,7 @@ if (isset($postdata) && $username != "" && $password !="" ) {
 
 			if ( $diff > 1 ) {
 				$newlastps=date("Y-m-d H:i:s",$now );
-				$Mysql="UPDATE personaggio SET PScorrenti = $ps , lastps = '$newlastps' WHERE idutente=$idutente";
+				$Mysql="UPDATE personaggio SET PScorrenti = $setetot , lastps = '$newlastps' WHERE idutente=$idutente";
 				$Result=mysql_query ($Mysql);
 			}
 
@@ -132,6 +135,7 @@ if (isset($postdata) && $username != "" && $password !="" ) {
           LEFT JOIN statuscama ON personaggio.idstatus=statuscama.idstatus
           LEFT JOIN sentieri ON personaggio.idsentiero=sentieri.idsentiero
           LEFT JOIN generazione ON personaggio.generazione=generazione.generazione
+          LEFT JOIN blood ON personaggio.bloodp=blood.bloodp
           WHERE idutente = '$idutente' ";
 
     $Result = mysql_query($MySql);

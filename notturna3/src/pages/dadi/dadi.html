@@ -31,7 +31,7 @@
 <button ion-button class="submit-btn3" full type="submit" [disabled]="fdv==0" >Usa Forza di Volontà</button>
 </form>
 <form (ngSubmit)="menops()" #registerForm="ngForm">
-<button ion-button class="submit-btn2" full type="submit" [disabled]="PScorrenti==0" >Usa un Punto Sangue</button>
+<button ion-button class="submit-btn2" full type="submit" [disabled]="PScorrenti==0" >Cura Ferite</button>
 </form>
 <form (ngSubmit)="gocaccia()" #registerForm="ngForm">
 <button ion-button class="submit-btn3" full type="submit" [disabled]="psvuoti==0" >Vai a caccia</button>
@@ -42,15 +42,15 @@
 </form>
 -->
 <form (ngSubmit)="golegami()" #registerForm="ngForm" >
-<button ion-button class="submit-btn3" full type="submit" >Legame di Sangue</button>
+<button ion-button class="submit-btn2" full type="submit" >Legame di Sangue</button>
 </form>
 <form (ngSubmit)="gomorte()" #registerForm="ngForm" >
-<button ion-button class="submit-btn2" full type="submit" >Morte Ultima</button>
+<button ion-button class="submit-btn" full type="submit" >Morte Ultima</button>
 </form>
 
 <ion-row >
 <ion-col col-6 *ngFor="let pot of poteri">
-  <button  (click)="godisciplina(pot.iddisciplina)" ion-button class="submit-btn2" full type="submit" >{{pot.nomedisc}}</button>
+  <button  (click)="godisciplina(pot.iddisciplina)" ion-button class="submit-btn2" full type="submit" [disabled]="PScorrenti==0" >{{pot.nomedisc}}</button>
 </ion-col>
 </ion-row>
 

@@ -56,7 +56,7 @@
 
 	$Result=mysql_query ($Mysql);
 
-	$testo="Ha utilizzato ".$nomedisc.".".$livellopot." ".$pot;
+	$testo="ha utilizzato ".$nomedisc.".".$livellopot." ".$pot;
 	$xtesto=mysql_real_escape_string($testo);
 	$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( $idutente, '$xnomepg', NOW(), '$xtesto' , $idutente ) ";
 	mysql_query($Mysql);

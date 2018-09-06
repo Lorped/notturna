@@ -39,13 +39,7 @@ export class DadiPage {
     this.poteri=this.myuser.poteri;
 //console.log(this.myuser);
 
-    for (let i = 0 ; i< this.myuser.skill.length ; i++) {
-      if ( this.myuser.skill[i].nomeskill == 'Auspex' ) {
-        if ( this.myuser.skill[i].livello > 2 ) {
-          this.telepatia = true;
-        };
-      }
-    }
+
 
 		this.loadDadi();
 	}
@@ -140,5 +134,10 @@ export class DadiPage {
 		this.navCtrl.push('PoteriPage', { "parentPage": this ,  "aDisciplina": disc } );
 	}
 
+  loadpscorrenti() {
 
+    this.PScorrenti=this.myuser.fulldata['PScorrenti'];
+    this.psvuoti=this.myuser.fulldata['psvuoti'];
+    //console.log('here dadi'+this.PScorrenti);
+  }
 }

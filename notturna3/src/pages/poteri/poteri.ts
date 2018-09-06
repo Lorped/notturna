@@ -24,9 +24,12 @@ export class PoteriPage {
   aNomedisc = '';
   aPoteri: Array<any>;
 
+  PScorrenti: number;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthService, private http: Http) {
 
     this.myuser=this.auth.getUserInfo();
+    this.PScorrenti=this.myuser.fulldata['PScorrenti'];
     this.poteri=this.myuser.poteri;
 
     this.aDisciplina = navParams.get("aDisciplina");
@@ -72,6 +75,7 @@ export class PoteriPage {
           this.myuser.fulldata['PScorrenti'] = 1*this.myuser.fulldata['PScorrenti']-ps;
 
           this.navParams.get("parentPage").loadDadi();
+          this.navParams.get("parentPage").loadpscorrenti();
           if (this.myuser.fulldata['PScorrenti']==0) {
             this.navCtrl.pop();
           }
