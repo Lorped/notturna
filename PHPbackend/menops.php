@@ -29,12 +29,15 @@
 
  	$idutente=$_GET['id'];
 
- 	$Mysql="SELECT PScorrenti, ps, lastps, nomepg FROM personaggio LEFT JOIN generazione ON personaggio.generazione = generazione.generazione WHERE idutente=$idutente";
+	$Mysql="SELECT PScorrenti, sete, lastps, nomepg FROM personaggio
+		LEFT JOIN statuscama ON personaggio.idstatus = statuscama.idstatus
+		LEFT JOIN blood ON personaggio.bloodp = blood.bloodp
+		WHERE idutente=$idutente";
 	$Result=mysql_query ($Mysql);
 	$res=mysql_fetch_array($Result);
 
 	$PScorrenti=$res['PScorrenti'];
-	$ps=$res['ps'];
+	$setetot=$res['sete']+$res['addsete'];
 	$lastps=$res['lastps'];
 	$nomepg=$res['nomepg'];
 

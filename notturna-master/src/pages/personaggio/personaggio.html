@@ -28,7 +28,8 @@
 			<ion-row>
 				<ion-col col-3 style="color:#FF0000;">Status</ion-col>
 				<ion-col col-4 >{{scheda['status']}}</ion-col>
-				<ion-col col-5 style="color:#FF0000;">Punti Sangue &nbsp;<span style="color:#ffffff;">{{scheda['ps']}}</span> /<span style="color:#ffffff;">{{scheda['psturno']}}</span></ion-col>
+				<ion-col col-4 style="color:#FF0000;">Blood Potency &nbsp;</ion-col>
+        <ion-col col-1 >{{scheda['bloodp']}}</ion-col>
 			</ion-row>
 			<ion-row>
 				<ion-col col-3 style="color:#FF0000;">Sentiero</ion-col>
@@ -57,12 +58,12 @@
         <ion-col>{{pf}}</ion-col>
       </ion-row>
 			<ion-row>
-				<ion-col style="color:#FF0000;" style="text-align: center;" >PS Correnti ({{scheda['PScorrenti']}})</ion-col>
+				<ion-col style="color:#FF0000;" style="text-align: center;" >Sete ({{scheda['PScorrenti']}})</ion-col>
 			</ion-row>
 			<ion-row>
 				<ion-col style="text-align: center;"><button (click)="menops()" [disabled]="scheda['PScorrenti']<=0" ><ion-icon name="arrow-dropleft" color="#0505ff"></ion-icon></button></ion-col>
 				<ion-col col-8 style="text-align: center;"><img src="assets/img/ps/{{scheda['PScorrenti']}}.png"><img src="assets/img/psx/{{psvuoti}}.png"></ion-col>
-				<ion-col style="text-align: center;"><button (click)="piups()" [disabled]="scheda['PScorrenti']==scheda['ps']"><ion-icon name="arrow-dropright" color="#0505ff"></ion-icon></button></ion-col>
+				<ion-col style="text-align: center;"><button (click)="piups()" [disabled]="psvuoti==0"><ion-icon name="arrow-dropright" color="#0505ff"></ion-icon></button></ion-col>
 
 			</ion-row>
 		</ion-grid>

@@ -190,7 +190,7 @@ export class PersonaggioPage {
         this.notemaster=this.nl2br(this.scheda['notemaster']);
 
 
-				this.psvuoti=this.scheda['ps']-this.scheda['PScorrenti'];
+				this.psvuoti=1*this.scheda['sete']+1*this.scheda['addsete']-this.scheda['PScorrenti'];
 
 			});
 		});
