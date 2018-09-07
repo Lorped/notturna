@@ -7,6 +7,7 @@ import { HttpModule } from '@angular/http';
 
 import { MyApp } from './app.component';
 import { FeedProvider } from '../providers/feed/feed';
+import { PipesModule } from '../pipes/pipes.module';
 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Push } from '@ionic-native/push';
@@ -19,6 +20,7 @@ import { Push } from '@ionic-native/push';
   imports: [
     BrowserModule,
 	HttpModule,
+  PipesModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

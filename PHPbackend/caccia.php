@@ -31,21 +31,24 @@
 	$recuperati=$_GET['recuperati'];
 	$anim=$_GET['anim'];
 
- 	$Mysql="SELECT PScorrenti, ps, lastps, nomepg FROM personaggio LEFT JOIN generazione ON personaggio.generazione = generazione.generazione WHERE idutente=$idutente";
+ 	$Mysql="SELECT * FROM personaggio
+		LEFT JOIN statuscama ON personaggio.idstatus = statuscama.idstatus
+		LEFT JOIN blood ON personaggio.bloodp = blood.bloodp
+		WHERE idutente=$idutente";
 	$Result=mysql_query ($Mysql);
 	$res=mysql_fetch_array($Result);
 
 	$PScorrenti=$res['PScorrenti'];
-	$ps=$res['ps'];
+	$setetot=$res['sete']+$res['addsete'];
 	$lastps=$res['lastps'];
 	$nomepg=$res['nomepg'];
 
 	$PScorrenti=$PScorrenti+$recuperati;
-	if ($PScorrenti > $ps) {
-		$PScorrenti = $ps;
+	if ($PScorrenti > $setetot) {
+		$PScorrenti = $setetot;
 	}
 
-	if ( $anim == 'false') {
+	if ( $anim == 0) {
 		$Mysql="UPDATE personaggio SET PScorrenti = $PScorrenti , lastps=NOW() WHERE idutente=$idutente";
 	} else {
 		$Mysql="UPDATE personaggio SET PScorrenti = $PScorrenti , lastps=NOW() , lastcaccia=NOW() WHERE idutente=$idutente";
@@ -125,6 +128,10 @@
 	//die(print_r($response));
 
 
-
-
+	if ( $anim == 1) {
+		$out= [
+			'lastcaccia' => date("Y-m-d H:i:s")
+		];
+			echo json_encode($out, JSON_UNESCAPED_UNICODE); 
+	}
 ?>

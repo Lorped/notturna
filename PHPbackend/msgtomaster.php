@@ -46,7 +46,7 @@
 
 	$xnomepg=mysql_real_escape_string($nomepg);
 
-	$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo) VALUES ( $idutente, '$xnomepg', NOW(), '$messaggio' ) ";
+	$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( $idutente, '$xnomepg', NOW(), '$messaggio' , $idutente) ";
 	mysql_query($Mysql);
 
 	// set post fields

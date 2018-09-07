@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {  IonicPage, NavParams,   } from 'ionic-angular';
 import { Http } from '@angular/http';
 
+
+
 export class User {
   username: string;
   userid: string;

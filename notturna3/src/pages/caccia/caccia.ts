@@ -26,24 +26,22 @@ export class CacciaPage {
 
   myuser: User;
   myskill: Array<any>;
-  animalita = false;
+  fulldata: Array<any>;
   gregge = 0 ;
   recuperati = 0 ;
+
+  addcaccia = 0 ;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http , private auth: AuthService ) {
   }
 
   ionViewDidLoad() {
     this.myuser=this.auth.getUserInfo();
+    this.addcaccia = this.myuser.fulldata['addcaccia'];
     this.myskill=this.auth.getUserSKILLInfo();
-    //console.log(this.myskill);
+    console.log(this.myuser.fulldata);
 
     for (let i = 0 ; i< this.myskill.length ; i++) {
-      if ( this.myskill[i].nomeskill == 'Animalità' ) {
-        if ( this.myskill[i].livello > 0 ) {
-          this.animalita = true;
-        };
-      }
       if ( this.myskill[i].nomeskill == 'Gregge' ) {
         if ( this.myskill[i].livello > 0 ) {
           this.gregge = this.myskill[i].livello;
@@ -51,32 +49,23 @@ export class CacciaPage {
       }
     }
 
-    // console.log ( this.myuser );
-    // console.log ( this.myuser.fulldata['lastcaccia'] );
-    let tt = new Date ( this.myuser.fulldata['lastcaccia'] );
-    let tn = new Date ( );
 
-    let diff = tn.getTime() - tt.getTime();
 
-    //console.log (tt);
-    //console.log (tn);
-    //console.log (diff);
-    if ( this.animalita == true && diff > 60*60*1000 ) {
-      this.maxTime = 180;
-      this.minuti = '03';
-      this.recuperati = 3 ;
-    } else {
-      this.animalita = false;
       this.recuperati = 5 ;
       if ( this.gregge > 0 ) {
-        this.maxTime = 600 - 60*this.gregge;
+        this.maxTime = 600 - 60*this.gregge + 60*this.addcaccia;
         if (this.gregge == 5 ) { this.maxTime -= 60; }
-        this.minuti = '0' + this.maxTime/60;
+        this.minuti =  this.maxTime/60;
+
       } else {
-        this.maxTime = 600;
-        this.minuti = 10;
+        this.maxTime = 600 + 60*this.addcaccia;
       }
-    };
+
+
+
+      this.minuti =  this.maxTime/60;
+
+      if (this.minuti < 10 ) { this.minuti= '0' + this.minuti }
 
     if ( 1*this.myuser.fulldata['sete'] - 1*this.myuser.fulldata['PScorrenti'] < this.recuperati ) {
       this.recuperati = 1*this.myuser.fulldata['ps'] - 1*this.myuser.fulldata['PScorrenti'] ;
@@ -115,6 +104,7 @@ export class CacciaPage {
 
             this.msgfine();
             this.navParams.get("parentPage").loadDadi();
+            this.navParams.get("parentPage").loadpscorrenti();
           }
 
       }, 1000);
@@ -137,11 +127,11 @@ export class CacciaPage {
 
     this.myuser.fulldata['PScorrenti'] = 1*this.myuser.fulldata['PScorrenti'] + this.recuperati;
 
-    if ( this.myuser.fulldata['PScorrenti'] > this.myuser.fulldata['ps'] ) {
+    if ( this.myuser.fulldata['PScorrenti'] > this.myuser.fulldata['setetot'] ) {
 
-      this.myuser.fulldata['PScorrenti'] = 1*this.myuser.fulldata['ps'] ;
+      this.myuser.fulldata['PScorrenti'] = 1*this.myuser.fulldata['setetot'] ;
     }
-    this.myuser.fulldata['psvuoti'] = 1*this.myuser.fulldata['ps'] - 1*this.myuser.fulldata['PScorrenti'];
+    this.myuser.fulldata['psvuoti'] = 1*this.myuser.fulldata['setetot'] - 1*this.myuser.fulldata['PScorrenti'];
 
 //console.log(this.myuser.fulldata);
 
@@ -155,7 +145,7 @@ export class CacciaPage {
 
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
-      var link = 'http://www.roma-by-night.it/ionicPHP/caccia.php?id=' + this.myuser['userid']+  '&recuperati=' + this.recuperati + '&anim=' + this.animalita ;
+      var link = 'http://www.roma-by-night.it/ionicPHP/caccia.php?id=' + this.myuser['userid']+  '&recuperati=' + this.recuperati + '&anim=0' ;
 
       this.http.get(link)
       .subscribe( res => {

@@ -21,6 +21,9 @@
   <ion-col *ngIf="p.attivo=='N' && p.livellopot==5 " >
   <button  (click)="gopotere(p.nomepotere,p.livellopot)" ion-button class="submit-btn2" full type="submit" [disabled]="PScorrenti<2" >{{p.livellopot}} - {{p.nomepotere}}</button>
   </ion-col>
+  <ion-col *ngIf="p.attivo=='X'  " >
+  <button  (click)="gopotere(p.nomepotere,p.livellopot)" ion-button class="submit-btn2" full type="submit" [disabled]="PSvuoti==0 || CacciaAnimalita == 0" >{{p.livellopot}} - {{p.nomepotere}}</button>
+  </ion-col>
   <ion-col *ngIf="p.attivo=='S'" text-center>
    - {{p.livellopot}}.{{p.nomepotere}} (attivo) -
   </ion-col>

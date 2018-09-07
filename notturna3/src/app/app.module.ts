@@ -14,6 +14,8 @@ import { Push } from '@ionic-native/push';
 import { MyApp } from './app.component';
 import { FeedProvider } from '../providers/feed/feed';
 
+import { PipesModule } from '../pipes/pipes.module';
+
 @NgModule({
   declarations: [
     MyApp
@@ -21,6 +23,7 @@ import { FeedProvider } from '../providers/feed/feed';
   imports: [
     BrowserModule,
     HttpModule,
+      PipesModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
