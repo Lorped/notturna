@@ -32,14 +32,17 @@ export class CacciaPage {
 
   addcaccia = 0 ;
 
+  BS = 0 ;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http , private auth: AuthService ) {
+    this.BS = navParams.get("BS");
   }
 
   ionViewDidLoad() {
     this.myuser=this.auth.getUserInfo();
     this.addcaccia = this.myuser.fulldata['addcaccia'];
     this.myskill=this.auth.getUserSKILLInfo();
-    console.log(this.myuser.fulldata);
+    //console.log(this.myuser.fulldata);
 
     for (let i = 0 ; i< this.myskill.length ; i++) {
       if ( this.myskill[i].nomeskill == 'Gregge' ) {
@@ -61,14 +64,19 @@ export class CacciaPage {
         this.maxTime = 600 + 60*this.addcaccia;
       }
 
+      if ( this.BS == 1 ) {
+        this.maxTime = this.maxTime / 2;
+      }
 
 
       this.minuti =  this.maxTime/60;
+      this.secondi = this.maxTime - 60*Math.floor(this.maxTime/60);
 
       if (this.minuti < 10 ) { this.minuti= '0' + this.minuti }
+      if (this.secondi < 10 ) { this.secondi= '0' + this.secondi }
 
-    if ( 1*this.myuser.fulldata['sete'] - 1*this.myuser.fulldata['PScorrenti'] < this.recuperati ) {
-      this.recuperati = 1*this.myuser.fulldata['ps'] - 1*this.myuser.fulldata['PScorrenti'] ;
+    if ( 1*this.myuser.fulldata['setetot'] - 1*this.myuser.fulldata['PScorrenti'] < this.recuperati ) {
+      this.recuperati = 1*this.myuser.fulldata['setetot'] - 1*this.myuser.fulldata['PScorrenti'] ;
     }
 
     /* valori ridotti per test
@@ -103,8 +111,10 @@ export class CacciaPage {
             //console.log("FINE");
 
             this.msgfine();
-            this.navParams.get("parentPage").loadDadi();
-            this.navParams.get("parentPage").loadpscorrenti();
+            if ( this.BS != 1) {
+              this.navParams.get("parentPage").loadDadi();
+              this.navParams.get("parentPage").loadpscorrenti();
+            }
           }
 
       }, 1000);
@@ -145,11 +155,13 @@ export class CacciaPage {
 
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
-      var link = 'http://www.roma-by-night.it/ionicPHP/caccia.php?id=' + this.myuser['userid']+  '&recuperati=' + this.recuperati + '&anim=0' ;
+      var link = 'http://www.roma-by-night.it/ionicPHP/caccia.php?id=' + this.myuser['userid']+  '&recuperati=' + this.recuperati + '&anim=0' + '&BS=' + this.BS ;
 
       this.http.get(link)
       .subscribe( res => {
-        this.navParams.get("parentPage").loadDadi();
+        if ( this.BS != 1) {
+          this.navParams.get("parentPage").loadDadi();
+        }
       });
 
     } );

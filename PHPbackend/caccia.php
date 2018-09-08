@@ -30,6 +30,7 @@
  	$idutente=$_GET['id'];
 	$recuperati=$_GET['recuperati'];
 	$anim=$_GET['anim'];
+	$BS=$_GET['BS'];
 
  	$Mysql="SELECT * FROM personaggio
 		LEFT JOIN statuscama ON personaggio.idstatus = statuscama.idstatus
@@ -102,36 +103,52 @@
 		'Content-Type: application/json'
 	);
 
-		//die( print_r($headers));
-
 	$post=json_encode($fields, JSON_UNESCAPED_SLASHES);
 
-	//die (print_r($post));
-
 	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $post );
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
 	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-		// Disabling SSL Certificate support temporarly
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
-	// execute!
 	$response = curl_exec($ch);
-
-	// close the connection, release resources used
 	curl_close($ch);
 
 	// do anything you want with your response
 
 	//die(print_r($response));
 
+	if ( $BS == 1) {
+		$tiro=rand(1,100);
+		if ($tiro < 99)  {
+			$testo="VIOLAZIONE della MASQUERADE per ".$nomepg;
+			$xtesto=mysql_real_escape_string($testo);
+			$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( 0, 'NARRAZIONE', NOW(), '$xtesto' , 0 ) ";
+			mysql_query($Mysql);
+
+			$fields= array(
+				'to' => '/topics/master',
+				'data'=> [
+					'message'=> $testo ,
+					'title'=> 'NARRAZIONE',
+					'image'=> 'icon'
+				]
+			);
+			$post=json_encode($fields, JSON_UNESCAPED_SLASHES);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $post );
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+			$response = curl_exec($ch);
+			curl_close($ch);
+
+		}
+	}
 
 	if ( $anim == 1) {
 		$out= [
 			'lastcaccia' => date("Y-m-d H:i:s")
 		];
-			echo json_encode($out, JSON_UNESCAPED_UNICODE); 
+			echo json_encode($out, JSON_UNESCAPED_UNICODE);
 	}
 ?>

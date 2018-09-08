@@ -72,8 +72,10 @@ export class PoteriPage {
     if (pot == "Telepatia") {
       this.navCtrl.push('TelepatiaPage', { "parentPage": this } );
     } else if (pot =="Richiamo" && livellopot==3)  {  //non è il richiamo di Ascendente 4
-       //this.navCtrl.push('Caccia2Page', { "parentPage": this } );
+
        this.cacciaanim();
+    } else if ( pot =="Bacio Selvaggio") {
+      this.navCtrl.push('CacciaPage', { "parentPage": this, "BS": 1 } );
     } else {
       let headers = new Headers();
   		headers.append('Content-Type', 'application/json');
