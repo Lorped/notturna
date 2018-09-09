@@ -29,7 +29,10 @@
 
  	$idutente=$_GET['id'];
 
- 	$Mysql="SELECT PScorrenti, ps, lastps , nomepg FROM personaggio LEFT JOIN generazione ON personaggio.generazione = generazione.generazione WHERE idutente=$idutente";
+ 	$Mysql="SELECT * FROM personaggio
+		LEFT JOIN generazione ON personaggio.generazione = generazione.generazione
+		LEFT JOIN blood ON personaggio.bloodp = blood.bloodp
+		WHERE idutente=$idutente";
 	$Result=mysql_query ($Mysql);
 	$res=mysql_fetch_array($Result);
 
@@ -43,7 +46,7 @@
 		$Mysql="UPDATE personaggio SET PScorrenti = $PScorrenti-1, lastps=NOW()  WHERE idutente=$idutente";
 		$Result=mysql_query ($Mysql);
 
-		$testo="consuma un livello di sete";
+		$testo="consuma un livello di sete per rigenerare ".$res['rigen']." danni";
 		$xtesto=mysql_real_escape_string($testo);
 		$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo) VALUES ( $idutente, '$xnomepg', NOW(), '$xtesto' ) ";
 		mysql_query($Mysql);

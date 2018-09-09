@@ -28,6 +28,8 @@ export class DadiPage {
   skills: Array<any>;
   poteri: Array<any>;
 
+  cura = 0 ;
+
 	constructor(public navCtrl: NavController, public navParams: NavParams, private feedProvider: FeedProvider , private http: Http , private auth: AuthService) {
 
 		this.myuser=this.auth.getUserInfo();
@@ -39,7 +41,7 @@ export class DadiPage {
     this.poteri=this.myuser.poteri;
 //console.log(this.myuser);
 
-
+    this.cura = this.myuser.fulldata['rigen'];
 
 		this.loadDadi();
 	}

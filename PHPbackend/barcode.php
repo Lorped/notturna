@@ -103,8 +103,13 @@
 
 		$esito=[];
 		if ( $ok == 0 ) {
-		$esito[] = $res['nomeoggetto'];
-		$esito[] = "- Nulla di speciale -";
+			if ( $res['descrizione']!="") {
+				$esito[] = $res['nomeoggetto'];
+				$esito[] = $res['descrizione'] ;
+			} else {
+				$esito[] = $res['nomeoggetto'];
+				$esito[] = "- Nulla di speciale -";
+			}
 		} else {
 		$esito[] = $res['nomeoggetto'];
 		$esito[] = $res['descrizione'].$extra;
