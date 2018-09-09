@@ -1,4 +1,5 @@
 <?php
+	include ('messaggi.inc.php');
 
 	header("Access-Control-Allow-Origin: *");
 
@@ -32,8 +33,9 @@
 	$request = json_decode($postdata);
 
  	$idutente=$request->idutente;
+	$messaggio= $request->messaggio ;
  	//$destinatario=$request->destinatario;
- 	$messaggio=mysql_real_escape_string( $request->messaggio );
+
 
 	$Mysql="SELECT nomepg FROM personaggio WHERE idutente=$idutente";
 	if ( $res=mysql_fetch_array(mysql_query($Mysql)) ) {
@@ -45,88 +47,14 @@
 
 
 	$xnomepg=mysql_real_escape_string($nomepg);
+	$xmessaggio=mysql_real_escape_string( $messaggio );
 
-	$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( $idutente, '$xnomepg', NOW(), '$messaggio' , $idutente) ";
+	$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( $idutente, '$xnomepg', NOW(), '$xmessaggio' , $idutente) ";
 	mysql_query($Mysql);
 
-	// set post fields
-
-	/*
-
-	$Mysql="SELECT registrationID FROM utente WHERE idutente=$destinatario";
-	$Result=mysql_query($Mysql);
-	$res=mysql_fetch_array($Result);
-
-	if ($res['registrationID'] != "" ) {
-
-		$fields= array(
-			'to'=>$res['registrationID'],
-			'data'=> [
-				'message'=> $messaggio ,
-				'title'=> 'NARRAZIONE',
-				'image'=> 'icon'
-			]
-		);
+	user2master($idutente,$messaggio );
 
 
-	} else {
-
-		$fields= array(
-			'to'=>'/topics/userid'.$destinatario,
-			'data'=> [
-				'message'=> $messaggio ,
-				'title'=> 'NARRAZIONE',
-				'image'=> 'icon'
-			]
-		);
-
-	}
-
-*/
-
-$fields =  array(
-	'to' => '/topics/master',
-	'data'=> [
-		'message'=> $messaggio ,
-		'title'=> $nomepg,
-		'image'=> 'icon'
-	]
-);
-
-
-	$api_key = "AAAAxERgxJ4:APA91bGb0CqFmwPOIV1tN9BSOG7yucKmCpymJf0Pp1YRXlX3wIn8RlbYqMYjnDavyLP4-j9uSzVAlLwB0e7oYzwsaJa2H_yTE3LjzXL1UoOaf-EO00MewK9VyHbOeyvezg-2CTyRulba";
-	$ch = curl_init('https://fcm.googleapis.com/fcm/send');
-
-	$headers = array (
-		'Authorization: key=' . $api_key,
-		'Content-Type: application/json'
-	);
-
-	//die( print_r($headers));
-
-	$post=json_encode($fields, JSON_UNESCAPED_SLASHES);
-
-	//die (print_r($post));
-
-	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $post );
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-	// Disabling SSL Certificate support temporarly
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
-
-	// execute!
-	$response = curl_exec($ch);
-
-	// close the connection, release resources used
-	curl_close($ch);
-
-	// do anything you want with your response
-
-	//die(print_r($response));
 
 
 

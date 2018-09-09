@@ -119,7 +119,16 @@ export class PoteriPage {
       this.navParams.get("parentPage").loadpscorrenti();
       this.navCtrl.pop();
     });
+  }
 
+  loadpscorrenti(){
 
+		var link = 'http://www.roma-by-night.it/ionicPHP/getps.php?id='+this.myuser['userid'];
+		this.http.get(link)
+		.map(res => res.json())
+      	.subscribe(res =>  {
+			this.PScorrenti=res['PScorrenti'];
+			this.PSvuoti=res['psvuoti'];
+   	});
   }
 }

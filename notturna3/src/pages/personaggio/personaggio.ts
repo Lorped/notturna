@@ -24,13 +24,16 @@ export class PersonaggioPage {
   myskill: Array<any>;
 
   pf = 0 ;
+
 	//psvuoti: number;
 
 	constructor( private auth: AuthService , private app: App , private http: Http ) {
 
 		this.scheda=this.auth.getUserPGInfo();
     this.myskill=this.auth.getUserSKILLInfo();
-    console.log ( this.scheda );
+    //console.log ( this.scheda );
+    this.scheda['rd']=Math.floor((1*this.scheda['carisma']+1*this.scheda['intelligenza']+1*this.scheda['prontezza']+1*this.scheda['percezione']+1*this.scheda['fdv'])/5);
+
 
     this.pf = ( 3 + 1*this.scheda['attutimento'])*2;
 
@@ -73,6 +76,7 @@ export class PersonaggioPage {
         .subscribe(res =>  {
       this.scheda['fdvmax']=res['fdvmax'];
       this.scheda['fdv']=res['fdv'];
+      this.scheda['rd']=Math.floor((1*this.scheda['carisma']+1*this.scheda['intelligenza']+1*this.scheda['prontezza']+1*this.scheda['percezione']+1*this.scheda['fdv'])/5);
        });
   }
 

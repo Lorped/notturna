@@ -1,4 +1,5 @@
 <?php
+	include ('messaggi.inc.php');
 
 	header("Access-Control-Allow-Origin: *");
 
@@ -66,52 +67,10 @@
 
 		// set post fields
 
-	$Mysql="SELECT registrationID FROM utente WHERE idutente=$idutente";
-	$Result=mysql_query($Mysql);
-	$res=mysql_fetch_array($Result);
-
-	if ($res['registrationID'] != "" ) {
-
-		$fields= array(
-			'to'=>$res['registrationID'],
-			'data'=> [
-				'message'=> $testo ,
-				'title'=> 'NARRAZIONE',
-				'image'=> 'icon'
-			]
-		);
-
-	} else {
-
-		$fields= array(
-			'to'=>'/topics/userid'.$idutente,
-			'data'=> [
-				'message'=> $testo ,
-				'title'=> 'NARRAZIONE',
-				'image'=> 'icon'
-			]
-		);
-
-	}
+	master2user($idutente,$testo);
 
 
-	$api_key="AAAAxERgxJ4:APA91bGb0CqFmwPOIV1tN9BSOG7yucKmCpymJf0Pp1YRXlX3wIn8RlbYqMYjnDavyLP4-j9uSzVAlLwB0e7oYzwsaJa2H_yTE3LjzXL1UoOaf-EO00MewK9VyHbOeyvezg-2CTyRulba";
-	$ch = curl_init('https://fcm.googleapis.com/fcm/send');
 
-	$headers = array (
-		'Authorization: key=' . $api_key,
-		'Content-Type: application/json'
-	);
-
-	$post=json_encode($fields, JSON_UNESCAPED_SLASHES);
-
-	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $post );
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	$response = curl_exec($ch);
-	curl_close($ch);
 
 	// do anything you want with your response
 
@@ -125,22 +84,7 @@
 			$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( 0, 'NARRAZIONE', NOW(), '$xtesto' , 0 ) ";
 			mysql_query($Mysql);
 
-			$fields= array(
-				'to' => '/topics/master',
-				'data'=> [
-					'message'=> $testo ,
-					'title'=> 'NARRAZIONE',
-					'image'=> 'icon'
-				]
-			);
-			$post=json_encode($fields, JSON_UNESCAPED_SLASHES);
-			curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-			curl_setopt($ch, CURLOPT_POSTFIELDS, $post );
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-			$response = curl_exec($ch);
-			curl_close($ch);
+			master2master($testo);
 
 		}
 	}

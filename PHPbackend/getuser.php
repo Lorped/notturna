@@ -102,7 +102,7 @@ $idutente=$_GET['id'];
 
     //fine test su ps
 
-    $MySql = "SELECT *  FROM personaggio
+    $MySql = "SELECT *, 0 as rd  FROM personaggio
           LEFT JOIN clan ON personaggio.idclan=clan.idclan
           LEFT JOIN statuscama ON personaggio.idstatus=statuscama.idstatus
           LEFT JOIN sentieri ON personaggio.idsentiero=sentieri.idsentiero

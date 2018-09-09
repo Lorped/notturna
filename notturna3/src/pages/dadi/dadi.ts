@@ -86,6 +86,7 @@ export class DadiPage {
      	 });
 		this.fdv=this.fdv-1;
 		this.myuser.fulldata['fdv']=this.fdv;
+    this.myuser.fulldata['rd']=Math.floor((1*this.fdv+1*this.myuser.fulldata['carisma']+1*this.myuser.fulldata['intelligenza']+1*this.myuser.fulldata['percezione']+1*this.myuser.fulldata['prontezza'])/5);
 		this.auth.setUserInfo(this.myuser);
 //console.log(this.fdv);
 	}

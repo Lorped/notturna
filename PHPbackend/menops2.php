@@ -43,7 +43,7 @@
 		$Mysql="UPDATE personaggio SET PScorrenti = $PScorrenti-1, lastps=NOW()  WHERE idutente=$idutente";
 		$Result=mysql_query ($Mysql);
 
-		$testo="usa un Punto Sangue";
+		$testo="consuma un livello di sete";
 		$xtesto=mysql_real_escape_string($testo);
 		$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo) VALUES ( $idutente, '$xnomepg', NOW(), '$xtesto' ) ";
 		mysql_query($Mysql);

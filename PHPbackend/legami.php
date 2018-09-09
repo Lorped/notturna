@@ -37,15 +37,11 @@
 	$Mysql="SELECT nomepg FROM personaggio WHERE idutente=$target";
 	if ( $res=mysql_fetch_array(mysql_query($Mysql)) ) {
 		$nomepg=$res['nomepg'];
-	} else {
-		$nomepg="NARRAZIONE";
 	}
 
 	$Mysql="SELECT nomepg FROM personaggio WHERE idutente=$domitor";
 	if ( $res=mysql_fetch_array(mysql_query($Mysql)) ) {
 		$nomepgdest=$res['nomepg'];
-	} else {
-		$nomepgdest="NARRAZIONE";
 	}
 
 	$messaggio ='ha accettato la vitae di '.$nomepgdest;
@@ -99,14 +95,23 @@
 	curl_close($ch);
 
 
-
-	$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( $target, '$nomepg', NOW(), '$messaggio' , $domitor ) ";
+	$xnomepg=mysql_real_escape_string($nomepg);
+	$xmessaggio=mysql_real_escape_string($messaggio);
+	$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( $target, '$xnomepg', NOW(), '$xmessaggio' , $domitor ) ";
 	mysql_query($Mysql);
 /**********/
 
 
+	$Mysql="UPDATE personaggio SET fdv=fdv-1 WHERE idutente= $domitor ";
+	mysql_query($Mysql);
 
-
+	$Mysql="SELECT * from personaggio  WHERE idutente=$domitor ";
+	$Result=mysql_query ($Mysql);
+	$res = mysql_fetch_array($Result);
+	if ($res['idclan'] == 7) {
+		/* domitor tremere:  non faccio nulla*/
+		die();
+	}
 
 	$Mysql="SELECT * from pregidifetti  WHERE idutente=$target and idpregio=121";
 	$Result=mysql_query ($Mysql);
@@ -130,6 +135,18 @@
 	$Mysql="SELECT * from legami  WHERE domitor=$domitor AND target=$target";
 	$Result=mysql_query ($Mysql);
 	if ($res = mysql_fetch_array($Result)) {
+
+		$dataultima=$res['dataultima'];
+
+		$tdataultima=strtotime($dataultima);
+		$now=time();
+
+		if ( $now-$tdataultima < 60*60*24 ) {
+			/*troppo presto.. */
+			die();
+		}
+
+
 		/* legame già presente */
 		$oldlivello=$res['livello'];
 		if ($oldlivello==1) {
@@ -153,8 +170,7 @@
 		$Result=mysql_query ($Mysql);
 	}
 
-	$Mysql="UPDATE personaggio SET fdv=fdv-1 WHERE idutente= $domitor ";
-	mysql_query($Mysql);
+
 
 
 
