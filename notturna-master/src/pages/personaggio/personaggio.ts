@@ -79,6 +79,8 @@ export class PersonaggioPage {
 		this.myskill=[];
 		this.loadPG();
 
+
+
     var url = 'http://www.roma-by-night.it/ionicPHP/getlegami.php?id='+this.requestID;
     this.http.get(url)
     .map(res => res.json())
@@ -110,6 +112,7 @@ export class PersonaggioPage {
     	.subscribe(res =>  {
 			this.currentUser.fulldata = res;
 			this.scheda = res;
+      this.scheda['rd']=Math.floor((1*this.scheda['carisma']+1*this.scheda['intelligenza']+1*this.scheda['prontezza']+1*this.scheda['percezione']+1*this.scheda['fdv'])/5);
 
 			var link = 'http://www.roma-by-night.it/ionicPHP/skill.php'
 			var mypost = JSON.stringify({userid: this.currentUser['userid'] });
