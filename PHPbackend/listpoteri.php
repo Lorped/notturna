@@ -47,8 +47,8 @@
         WHERE idutente=$idutente and iddisciplina = $curdisc";
 
       $Result2 = mysql_query($MySql2);
-      while ($res=mysql_fetch_array($Result2, MYSQL_ASSOC)) {
-        $out2 [] = $res;
+      while ($res2=mysql_fetch_array($Result2, MYSQL_ASSOC)) {
+        $out2 [] = $res2;
       }
 
       $out1 [] = [

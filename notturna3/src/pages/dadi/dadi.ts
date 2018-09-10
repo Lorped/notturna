@@ -134,7 +134,11 @@ export class DadiPage {
   godisciplina(disc: number) {
 		//console.log (this.tochange.cell);
 		//console.log (this.tochange.email);
-		this.navCtrl.push('PoteriPage', { "parentPage": this ,  "aDisciplina": disc } );
+    if (disc == 98) {
+      this.navCtrl.push('TaumPage', { "parentPage": this  } );
+    } else {
+      this.navCtrl.push('PoteriPage', { "parentPage": this ,  "aDisciplina": disc } );
+  	}
 	}
 
   loadpscorrenti() {

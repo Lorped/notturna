@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { Caccia2Page } from './caccia2';
+import { TaumPage } from './taum';
 
 @NgModule({
   declarations: [
-    Caccia2Page,
+    TaumPage,
   ],
   imports: [
-    IonicPageModule.forChild(Caccia2Page),
+    IonicPageModule.forChild(TaumPage),
   ],
 })
-export class Caccia2PageModule {}
+export class TaumPageModule {}
