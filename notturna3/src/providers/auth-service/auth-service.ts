@@ -9,6 +9,8 @@ export class User {
   fulldata: Array<any>;
   skill: Array<any>;
   poteri: Array<any>;
+  taum: Array<any>;
+  necro: Array<any>;
 
 
   constructor(username: string, userid: string) {

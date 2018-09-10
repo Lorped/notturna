@@ -26,82 +26,113 @@
   $idutente=$_GET['id'];
 
 
-    include ('db.inc.php');
+  include ('db.inc.php');
 
-    $out1 = [];
+  $outtaum = [];
 
-    $MySql = "SELECT * FROM taumaturgie
-      left join taumaturgie_main on taumaturgie_main.idtaum=taumaturgie.idtaum
-          WHERE idutente = '$idutente'
-      ORDER BY principale ASC";
+  $MySql = "SELECT * FROM taumaturgie
+    left join taumaturgie_main on taumaturgie_main.idtaum=taumaturgie.idtaum
+    WHERE idutente = '$idutente'
+    ORDER BY principale ASC";
 
-    $Result = mysql_query($MySql);
-    while ( $res = mysql_fetch_array($Result)   ) {
+  $Result = mysql_query($MySql);
+  while ( $res = mysql_fetch_array($Result)   ) {
 
-      $curtaum= $res['idtaum'];
-      $nometaum= $res['nometaum'];
-      $livello= $res['livello'];
-      $out2 = [];
+    $curtaum= $res['idtaum'];
+    $nometaum= $res['nometaum'];
+    $livello= $res['livello'];
+    $out2 = [];
 
-      $MySql2 = "SELECT * from taumaturgie2
-        WHERE idtaum=$curtaum and livello=0";
-      $Result2 = mysql_query($MySql2);
+    $MySql2 = "SELECT * from taumaturgie2
+      WHERE idtaum=$curtaum and livello=0";
+    $Result2 = mysql_query($MySql2);
 
-      if ( ! $res2=mysql_fetch_array($Result2) ) {
+    if ( ! $res2=mysql_fetch_array($Result2) ) {
 
-        $MySql3 = "SELECT * from taumaturgie2
-          WHERE idtaum=$curtaum and livello <= $livello";
+      $MySql3 = "SELECT * from taumaturgie2
+        WHERE idtaum=$curtaum and livello <= $livello";
 
-        $Result3 = mysql_query($MySql3);
-        while ($res3=mysql_fetch_array($Result3, MYSQL_ASSOC)) {
-          $out2 [] = $res3;
-        }
-
-      } else {
-
-        if ( $livello == 1 ) {
-          $out2 [] = [
-            'idtaum2' => $res2['idtaum2'],
-            'idtaum' => $res2['idtaum'],
-            'livello' => 1,
-            'nomnometaum2' => $res2['nometaum2']." 1"
-          ];
-        }
-        if ( $livello > 1 && $livello <5) {
-          $out2 [] = [
-            'idtaum2' => $res2['idtaum2'],
-            'idtaum' => $res2['idtaum'],
-            'livello' => 1,
-            'nomnometaum2' => $res2['nometaum2']." 1-".$livello
-          ];
-        }
-        if ( $livello == 5) {
-          $out2 [] = [
-            'idtaum2' => $res2['idtaum2'],
-            'idtaum' => $res2['idtaum'],
-            'livello' => 1,
-            'nomnometaum2' => $res2['nometaum2']." 1-4"
-          ];
-          $out2 [] = [
-            'idtaum2' => $res2['idtaum2'],
-            'idtaum' => $res2['idtaum'],
-            'livello' => 5,
-            'nomnometaum2' => $res2['nometaum2']." 5"
-          ];
-        }
-
+      $Result3 = mysql_query($MySql3);
+      while ($res3=mysql_fetch_array($Result3, MYSQL_ASSOC)) {
+        $out2 [] = $res3;
       }
 
+    } else {
 
-      $out1 [] = [
-        'nometaum' => $nometaum,
-        'xlivello' => $livello ,
-        'poteri'  => $out2
-      ];
-
+      if (  $livello <5) {
+        $out2 [] = [
+          'idtaum2' => $res2['idtaum2'],
+          'idtaum' => $res2['idtaum'],
+          'livello' => $livello,
+          'nometaum2' => $res2['nometaum2']
+        ];
+      }
+      if ( $livello == 5) {
+        $out2 [] = [
+          'idtaum2' => $res2['idtaum2'],
+          'idtaum' => $res2['idtaum'],
+          'livello' => 4,
+          'nometaum2' => $res2['nometaum2']
+        ];
+        $out2 [] = [
+          'idtaum2' => $res2['idtaum2'],
+          'idtaum' => $res2['idtaum'],
+          'livello' => 5,
+          'nometaum2' => $res2['nometaum2']
+        ];
+      }
     }
 
-    $output = json_encode ($out1, JSON_UNESCAPED_UNICODE);
+    $outtaum [] = [
+      'nometaum' => $nometaum,
+      'xlivello' => $livello ,
+      'poteri'  => $out2
+    ];
+
+  }
+
+  $outnecro = [];
+
+  $MySql = "SELECT * FROM necromanzie
+    left join necromanzie_main on necromanzie_main.idnecro=necromanzie.idnecro
+    WHERE idutente = '$idutente'
+    ORDER BY principale ASC";
+
+  $Result = mysql_query($MySql);
+  while ( $res = mysql_fetch_array($Result)   ) {
+
+    $curnecro= $res['idnecro'];
+    $nomenecro= $res['nomenecro'];
+    $livello= $res['livello'];
+    $out2 = [];
+
+
+    $MySql3 = "SELECT * from necromanzie2
+        WHERE idnecro=$curnecro and livello <= $livello";
+
+    $Result3 = mysql_query($MySql3);
+    while ($res3=mysql_fetch_array($Result3, MYSQL_ASSOC)) {
+      $out2 [] = $res3;
+    }
+
+
+
+    $outnecro [] = [
+      'nomenecro' => $nomenecro,
+      'xlivello' => $livello ,
+      'poteri'  => $out2
+    ];
+
+  }
+
+  $outx [] = [
+    'taum' => $outtaum,
+    'necro' => $outnecro
+  ];
+
+
+
+    $output = json_encode ($outx, JSON_UNESCAPED_UNICODE);
     echo $output;
 
 ?>

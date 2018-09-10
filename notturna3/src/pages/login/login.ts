@@ -14,6 +14,8 @@ export class User {
   fulldata: Array<any>;
   skill: Array<any>;
   poteri: Array<any>;
+  taum: Array<any>;
+  necro: Array<any>;
 
   constructor(username: string, userid: string) {
     this.username = username;
@@ -105,20 +107,26 @@ export class LoginPage {
         this.currentUser.fulldata['setetot'] = 1*this.currentUser.fulldata['sete']+1*this.currentUser.fulldata['addsete'];
 //console.log( this.currentUser );
 
-          link = 'http://www.roma-by-night.it/ionicPHP/listpoteri.php?id='+this.currentUser['userid'];
+        link = 'http://www.roma-by-night.it/ionicPHP/listpoteri.php?id='+this.currentUser['userid'];
+        this.http.get(link)
+        .map(res => res.json())
+        .subscribe( res => {
+          this.currentUser.poteri=res;
+          link = 'http://www.roma-by-night.it/ionicPHP/listtaum.php?id='+this.currentUser['userid'];
           this.http.get(link)
           .map(res => res.json())
           .subscribe( res => {
-            this.currentUser.poteri=res;
+//console.log(res);
+            this.currentUser.taum=res[0].taum;
+            this.currentUser.necro=res[0].necro;
+//console.log(this.currentUser)   ;
             this.auth.createUserInfo();
-    				this.auth.setUserInfo(this.currentUser);
+    			  this.auth.setUserInfo(this.currentUser);
 //console.log(this.currentUser);
-    				this.loading.dismiss();
-    				this.nav.push('TabsPage');
+    			  this.loading.dismiss();
+    		     this.nav.push('TabsPage');
           });
-
-
-
+        });
 			}, (err) => {
 				this.loading.dismiss();
 				alert ('Error loading data2');

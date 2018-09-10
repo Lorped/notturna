@@ -32,6 +32,7 @@
 	$pot = $request->potere;
 	$livellopot = $request->livello;
 	$aDisciplina = $request->aDisciplina;
+	$aTAUMNECRO = $request->aTAUMNECRO;
 
  	$Mysql="SELECT  nomepg FROM personaggio WHERE idutente=$idutente";
 	$Result=mysql_query ($Mysql);
@@ -40,11 +41,15 @@
 	$nomepg=$res['nomepg'];
 	$xnomepg=mysql_real_escape_string($nomepg);
 
+	if ($aDisciplina != "") {
 	$Mysql="SELECT  nomedisc FROM discipline_main WHERE iddisciplina=$aDisciplina";
 	$Result=mysql_query ($Mysql);
 	$res=mysql_fetch_array($Result);
-
 	$nomedisc=$res['nomedisc'];
+	} else {
+		$nomedisc=$aTAUMNECRO;
+	}
+
 
 
 

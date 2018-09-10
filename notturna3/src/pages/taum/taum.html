@@ -13,6 +13,15 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="master" padding>
+  <ion-row *ngFor="let p of taum">
+    <ion-col col-2><hr/></ion-col>
+    <ion-col col-8 style="color:#FFFFFF; text-align: center; font-size: 1.1em;">{{p.nometaum}}</ion-col>
+    <ion-col col-2><hr/></ion-col>
 
+    <ion-col col-12 *ngFor="let pp of p.poteri">
+      <button  (click)="gotaum(pp.livello, pp.nometaum2, p.nometaum)" ion-button class="submit-btn2" full type="submit" [disabled]="(PScorrenti==0)||(PScorrenti==1 && pp.livello==5 )" >{{pp.livello}} - {{pp.nometaum2}}</button>
+    </ion-col>
+
+  </ion-row>
 </ion-content>

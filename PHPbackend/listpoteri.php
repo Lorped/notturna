@@ -32,7 +32,7 @@
 
     $MySql = "SELECT discipline.iddisciplina, nomedisc FROM discipline
       left join discipline_main on discipline_main.iddisciplina=discipline.iddisciplina
-          WHERE idutente = '$idutente'
+          WHERE idutente = '$idutente'  AND livello >0
       ORDER BY nomedisc ASC";
 
     $Result = mysql_query($MySql);

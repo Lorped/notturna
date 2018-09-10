@@ -32,7 +32,7 @@ export class PoteriPage {
 
     this.myuser=this.auth.getUserInfo();
     this.PScorrenti=this.myuser.fulldata['PScorrenti'];
-    this.PSvuoti=this.myuser.fulldata['psvuoti']
+    this.PSvuoti=this.myuser.fulldata['psvuoti'];
     this.poteri=this.myuser.poteri;
 
     let tt = new Date ( this.myuser.fulldata['lastcaccia'] );
