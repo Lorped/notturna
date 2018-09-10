@@ -48,7 +48,7 @@
 
 		$testo="consuma un livello di sete per rigenerare ".$res['rigen']." danni";
 		$xtesto=mysql_real_escape_string($testo);
-		$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo) VALUES ( $idutente, '$xnomepg', NOW(), '$xtesto' ) ";
+		$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( $idutente, '$xnomepg', NOW(), '$xtesto' , 0) ";
 		mysql_query($Mysql);
 	}
 
