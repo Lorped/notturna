@@ -50,7 +50,7 @@
 
 <ion-row >
 <ion-col col-6 *ngFor="let pot of poteri">
-  <button  (click)="godisciplina(pot.iddisciplina)" ion-button class="submit-btn2" full type="submit" [disabled]="PScorrenti==0" >{{pot.nomedisc}}</button>
+  <button  (click)="godisciplina(pot.iddisciplina,pot.nomedisc )" ion-button class="submit-btn2" full type="submit" [disabled]="PScorrenti==0" >{{pot.nomedisc}}</button>
 </ion-col>
 </ion-row>
 

@@ -18,6 +18,7 @@ import { Http, Headers } from '@angular/http';
 export class PoteriPage {
 
   public		aDisciplina;
+  public		nomed;
   myuser: User;
   poteri: Array<any>;
 
@@ -46,9 +47,10 @@ export class PoteriPage {
 
 
     this.aDisciplina = navParams.get("aDisciplina");
+    this.nomed = navParams.get("nomed");
     //console.log(this.poteri.length );
     //console.log(this.poteri );
-    //console.log(this.aDisciplina );
+    //console.log(this.nomed );
 
     for (let i=0 ; i< this.poteri.length ; i++) {
       if (this.poteri[i].iddisciplina == this.aDisciplina) {

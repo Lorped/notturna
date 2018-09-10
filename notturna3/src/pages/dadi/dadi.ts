@@ -131,13 +131,13 @@ export class DadiPage {
 		this.navCtrl.push('MortePage', { "parentPage": this } );
 	}
 
-  godisciplina(disc: number) {
+  godisciplina(disc: number, nomed: string) {
 		//console.log (this.tochange.cell);
 		//console.log (this.tochange.email);
     if (disc == 98) {
       this.navCtrl.push('TaumPage', { "parentPage": this  } );
     } else {
-      this.navCtrl.push('PoteriPage', { "parentPage": this ,  "aDisciplina": disc } );
+      this.navCtrl.push('PoteriPage', { "parentPage": this ,  "aDisciplina": disc , "nomed": nomed} );
   	}
 	}
 
