@@ -112,6 +112,14 @@ export class BackgroundPage {
 
 	}
 
+  openUrl2() {
+
+    const link = 'https://drive.google.com/file/d/0BwbyMyT-GT-UZFBwNmp4SHZ6SFk/view';
+		//const browser = this.iab.create(this.link);
+		this.iab.create(link,'_system');
+
+	}
+
 	 //filterItemsLOTzero(){
 	 //   return this.myskill.filter(x => x.tipologia == 8).filter(x => x.livello <0);
 	 //}

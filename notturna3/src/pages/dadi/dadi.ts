@@ -136,6 +136,8 @@ export class DadiPage {
 		//console.log (this.tochange.email);
     if (disc == 98) {
       this.navCtrl.push('TaumPage', { "parentPage": this  } );
+    } else if (disc == 99) {
+      this.navCtrl.push('NecroPage', { "parentPage": this  } );
     } else {
       this.navCtrl.push('PoteriPage', { "parentPage": this ,  "aDisciplina": disc , "nomed": nomed} );
   	}
