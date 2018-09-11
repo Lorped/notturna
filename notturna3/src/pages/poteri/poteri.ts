@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthService, User } from '../../providers/auth-service/auth-service';
 import { Http, Headers } from '@angular/http';
+import { AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the PoteriPage page.
@@ -29,7 +30,7 @@ export class PoteriPage {
   PSvuoti: number;
   CacciaAnimalita = 0;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthService, private http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthService, private http: Http, private alertCtrl: AlertController) {
 
     this.myuser=this.auth.getUserInfo();
     this.PScorrenti=this.myuser.fulldata['PScorrenti'];
@@ -96,6 +97,18 @@ export class PoteriPage {
 
         this.navParams.get("parentPage").loadDadi();
         this.navParams.get("parentPage").loadpscorrenti();
+
+        let alert = this.alertCtrl.create({
+            title: 'Uso '+this.nomed,
+            subTitle: pot,
+            buttons: ['OK']
+          });
+          alert.present();
+
+
+
+
+
         if (this.myuser.fulldata['PScorrenti']==0) {
           this.navCtrl.pop();
         }

@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar color="moredark">
+  <ion-navbar color="moredark" hideBackButton="true">
     <ion-title>Caccia</ion-title>
   </ion-navbar>
 
@@ -34,5 +34,14 @@
   <ion-row style="align-items: center;" *ngIf="hidevalue==true">
     <ion-col style="color:#FF0000; text-align: center; font-size: 1.1em;">Saziati {{recuperati}} livelli di Sete</ion-col>
   </ion-row>
+
+  <ion-row >
+    <ion-col *ngIf="hidevalue==false" >
+      <button  (click)="goback()" ion-button class="submit-btn2" full type="submit"  >Cancella la caccia</button>
+    </ion-col>
+    <ion-col *ngIf="hidevalue==true" >
+      <button  (click)="goback()" ion-button class="submit-btn2" full type="submit"  >Torna</button>
+    </ion-col>
+  </ion-row >
 
 </ion-content>

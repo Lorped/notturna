@@ -168,5 +168,9 @@ export class CacciaPage {
 
   }
 
+  goback() {
+    this.navParams.get("parentPage").loadDadi();
+    this.navCtrl.pop();
+  }
 
 }

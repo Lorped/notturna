@@ -31,6 +31,7 @@
  	$idutente=$_GET['id'];
 	$recuperati=$_GET['recuperati'];
 	$anim=$_GET['anim'];
+	$vitae=$_GET['vitae'];
 	$BS=$_GET['BS'];
 
  	$Mysql="SELECT * FROM personaggio
@@ -44,26 +45,41 @@
 	$setetot=$res['sete']+$res['addsete'];
 	$lastps=$res['lastps'];
 	$nomepg=$res['nomepg'];
+	$xnomepg=mysql_real_escape_string($nomepg);
 
 	$PScorrenti=$PScorrenti+$recuperati;
 	if ($PScorrenti > $setetot) {
 		$PScorrenti = $setetot;
 	}
 
-	if ( $anim == 0) {
-		$Mysql="UPDATE personaggio SET PScorrenti = $PScorrenti , lastps=NOW() WHERE idutente=$idutente";
-	} else {
+	if ( $anim == 1) {
 		$Mysql="UPDATE personaggio SET PScorrenti = $PScorrenti , lastps=NOW() , lastcaccia=NOW() WHERE idutente=$idutente";
+	} else if ( $vitae == 1) {
+		$Mysql="UPDATE personaggio SET PScorrenti = $PScorrenti , lastps=NOW() , lastvitae=NOW() WHERE idutente=$idutente";
+	} else {
+		$Mysql="UPDATE personaggio SET PScorrenti = $PScorrenti , lastps=NOW() WHERE idutente=$idutente";
 	}
 
 
 	$Result=mysql_query ($Mysql);
 
 
-	$testo=$nomepg." ha saziato la sua sete (".$recuperati ." livelli recuperati)";
-	$xtesto=mysql_real_escape_string($testo);
-	$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( 0, 'NARRAZIONE', NOW(), '$xtesto' , $idutente ) ";
-	mysql_query($Mysql);
+
+
+	if ( $vitae == 1) {
+		$testo=$nomepg."ha usato Rigenerazione della Vitae  (".$recuperati ." livelli di sete recuperati)";
+		$xtesto=mysql_real_escape_string($testo);
+		$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( 0, 'NARRAZIONE', NOW(), '$xtesto' , $idutente ) ";
+		mysql_query($Mysql);
+
+	} else {
+		$testo=$nomepg." ha saziato la sua sete (".$recuperati ." livelli recuperati)";
+		$xtesto=mysql_real_escape_string($testo);
+		$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( 0, 'NARRAZIONE', NOW(), '$xtesto' , $idutente ) ";
+		mysql_query($Mysql);
+	}
+
+
 
 		// set post fields
 
@@ -95,4 +111,11 @@
 		];
 			echo json_encode($out, JSON_UNESCAPED_UNICODE);
 	}
+	if ( $vitae == 1) {
+		$out= [
+			'lastvitae' => date("Y-m-d H:i:s")
+		];
+			echo json_encode($out, JSON_UNESCAPED_UNICODE);
+	}
+
 ?>
