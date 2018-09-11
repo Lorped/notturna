@@ -101,6 +101,18 @@
 //echo " disciplina =" .$ids. " valore = ". $res4['livello'] . "vs. " .$res['valcond'] . " OK = ".$ok ;
 		}
 
+		if ($res['tipocond'] == 'P' ){
+			$ids=$res['tabcond'];
+			$Mysql4="SELECT * FROM poteri WHERE idpotere = $ids AND idutente = '$idutente' ";
+			$Result4=mysql_query($Mysql4);
+			if (mysql_errno()) die ( mysql_errno().": ".mysql_error() ."+".$Mysql4);
+
+			if (mysql_num_rows($Result4) !=0  ) {
+				$ok=1;
+				$extra=$extra." ".$res['descrX'];
+			}
+		}
+
 		$esito=[];
 		if ( $ok == 0 ) {
 			if ( $res['descrizione']!="") {
