@@ -67,7 +67,7 @@
 
 
 	if ( $vitae == 1) {
-		$testo=$nomepg."ha usato Rigenerazione della Vitae  (".$recuperati ." livelli di sete recuperati)";
+		$testo=$nomepg." ha usato Rigenerazione della Vitae  (".$recuperati ." livelli di sete recuperati)";
 		$xtesto=mysql_real_escape_string($testo);
 		$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( 0, 'NARRAZIONE', NOW(), '$xtesto' , $idutente ) ";
 		mysql_query($Mysql);

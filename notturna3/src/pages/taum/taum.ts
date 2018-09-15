@@ -59,6 +59,12 @@ export class TaumPage {
     this.http.get(link)
     .map(res => res.json())
     .subscribe( res => {
+      this.myuser.fulldata['PScorrenti'] = 1*this.myuser.fulldata['PScorrenti'] + 3;
+      if ( this.myuser.fulldata['PScorrenti'] > this.myuser.fulldata['setetot'] ) {
+        this.myuser.fulldata['PScorrenti'] = 1*this.myuser.fulldata['setetot'] ;
+      }
+      this.myuser.fulldata['psvuoti'] = 1*this.myuser.fulldata['setetot'] - 1*this.myuser.fulldata['PScorrenti'];
+
       this.myuser.fulldata['lastvitae'] = res.last;
       //console.log(this.myuser);
       this.navParams.get("parentPage").loadDadi();
