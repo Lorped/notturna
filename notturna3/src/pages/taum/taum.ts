@@ -46,11 +46,12 @@ export class TaumPage {
 
 
   gofurto () {
-    this.myuser.fulldata['PScorrenti'] = 1*this.myuser.fulldata['PScorrenti'] + 3;
+    /* this.myuser.fulldata['PScorrenti'] = 1*this.myuser.fulldata['PScorrenti'] + 3;
     if ( this.myuser.fulldata['PScorrenti'] > this.myuser.fulldata['setetot'] ) {
       this.myuser.fulldata['PScorrenti'] = 1*this.myuser.fulldata['setetot'] ;
     }
-    this.myuser.fulldata['psvuoti'] = 1*this.myuser.fulldata['setetot'] - 1*this.myuser.fulldata['PScorrenti'];
+    this.myuser.fulldata['psvuoti'] = 1*this.myuser.fulldata['setetot'] - 1*this.myuser.fulldata['PScorrenti']; */
+    this.FurtoVitae = 0;
 
 
 
@@ -65,12 +66,13 @@ export class TaumPage {
       }
       this.myuser.fulldata['psvuoti'] = 1*this.myuser.fulldata['setetot'] - 1*this.myuser.fulldata['PScorrenti'];
 
-      this.myuser.fulldata['lastvitae'] = res.last;
+      this.myuser.fulldata['lastvitae'] = res.lastvitae;
       //console.log(this.myuser);
       this.navParams.get("parentPage").loadDadi();
       this.navParams.get("parentPage").loadpscorrenti();
 
       this.FurtoVitae = 0;
+//console.log(this.myuser.fulldata['lastvitae'])      ;
 
       let alert = this.alertCtrl.create({
           title: 'Uso Patto della Vitae',
@@ -78,7 +80,8 @@ export class TaumPage {
           buttons: ['OK']
         });
         alert.present();
-
+    }, (err) => {
+      this.FurtoVitae = 1;
     });
   }
 
