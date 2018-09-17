@@ -65,7 +65,8 @@
           <ion-col><img src="assets/img/5b/{{scheda['fama3']}}.png"></ion-col>
         </ion-row>
         <ion-row>
-          <ion-col col-4 style="color:#FF0000;" >Livello Sete: </ion-col>
+          <ion-col col-3 style="color:#FF0000;" >Livello Sete: </ion-col>
+          <ion-col col-2 >{{scheda['PScorrenti']}}/{{scheda['setetot']}}</ion-col>
           <ion-col><img *ngFor="let item of scheda['PScorrenti']|times" src="assets/img/red.png"><img *ngFor="let item of scheda['psvuoti']|times" src="assets/img/white.png"></ion-col>
         </ion-row>
         <ion-row>

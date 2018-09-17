@@ -58,7 +58,7 @@ export class CacciaPage {
 
 
 
-      this.recuperati = 5 ;
+      //this.recuperati = 5 ;
       if ( this.gregge > 0 ) {
         this.maxTime = 600 - 60*this.gregge + 60*this.addcaccia;
         if (this.gregge == 5 ) { this.maxTime -= 60; }
@@ -80,9 +80,12 @@ export class CacciaPage {
       if (this.minuti < 10 ) { this.minuti= '0' + this.minuti }
       if (this.secondi < 10 ) { this.secondi= '0' + this.secondi }
 
+    /*
     if ( 1*this.myuser.fulldata['setetot'] - 1*this.myuser.fulldata['PScorrenti'] < this.recuperati ) {
       this.recuperati = 1*this.myuser.fulldata['setetot'] - 1*this.myuser.fulldata['PScorrenti'] ;
     }
+    */
+    this.recuperati = 1*this.myuser.fulldata['setetot'] - 1*this.myuser.fulldata['PScorrenti'] ;
 
     /* valori ridotti per test
     this.maxTime = 10
@@ -111,12 +114,12 @@ export class CacciaPage {
           let nowt=now.getTime();
 
           if ( Math.round ((nowt - this.timestart)/1000) > (this.fullTime-this.maxTime) ) {
-            console.log ( "nowt "+ nowt);
-            console.log ( "timestart "+ this.timestart);
-            console.log ( "fullTime "+ this.fullTime);
-            console.log ( "maxTime "+ this.maxTime);
-            console.log ( "diff1 "+ Math.round ((nowt - this.timestart)/1000));
-            console.log ( "diff2 "+ (this.fullTime-this.maxTime) );
+            // console.log ( "nowt "+ nowt);
+            // console.log ( "timestart "+ this.timestart);
+            // console.log ( "fullTime "+ this.fullTime);
+            // console.log ( "maxTime "+ this.maxTime);
+            // console.log ( "diff1 "+ Math.round ((nowt - this.timestart)/1000));
+            // console.log ( "diff2 "+ (this.fullTime-this.maxTime) );
 
             this.maxTime =this.fullTime - Math.round ((nowt - this.timestart)/1000) ;
           }
