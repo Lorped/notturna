@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FeedProvider, FeedItem } from '../../providers/feed/feed';
 import { Http, Headers } from '@angular/http';
 import { AuthService, User } from '../../providers/auth-service/auth-service';
+import { AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the DadiPage page.
@@ -30,7 +31,7 @@ export class DadiPage {
 
   cura = 0 ;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, private feedProvider: FeedProvider , private http: Http , private auth: AuthService) {
+	constructor(public navCtrl: NavController, public navParams: NavParams, private feedProvider: FeedProvider , private http: Http , private auth: AuthService, private alertCtrl: AlertController) {
 
 		this.myuser=this.auth.getUserInfo();
 		this.fdv=this.myuser.fulldata['fdv'];
@@ -100,13 +101,22 @@ export class DadiPage {
 
    		this.http.get(link)
       	.subscribe(res =>  {
+
+          this.PScorrenti=this.PScorrenti-1;
+          this.psvuoti=this.psvuoti+1;
+      		this.myuser.fulldata['PScorrenti']=this.PScorrenti;
+      		this.myuser.fulldata['psvuoti']=1*this.myuser.fulldata['psvuoti']+1;
+      		this.auth.setUserInfo(this.myuser);
+          let alert = this.alertCtrl.create({
+              title: 'Cura ferite',
+              subTitle: this.cura+" livelli curati",
+              buttons: ['OK']
+            });
+            alert.present();
+
 			setTimeout( this.loadDadi() , 1000);
      	 });
-		this.PScorrenti=this.PScorrenti-1;
-    this.psvuoti=this.psvuoti+1;
-		this.myuser.fulldata['PScorrenti']=this.PScorrenti;
-		this.myuser.fulldata['psvuoti']=1*this.myuser.fulldata['psvuoti']+1;
-		this.auth.setUserInfo(this.myuser);
+
 		//personaggio.psvuoti=personaggio.psvuoti-1;
 //console.log(this.fdv);
 	}

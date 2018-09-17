@@ -34,6 +34,10 @@ export class CacciaPage {
 
   BS = 0 ;
 
+  timestart=0;
+
+  fullTime = 0 ;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http , private auth: AuthService ) {
     this.BS = navParams.get("BS");
   }
@@ -68,6 +72,7 @@ export class CacciaPage {
         this.maxTime = this.maxTime / 2;
       }
 
+      this.fullTime=this.maxTime;
 
       this.minuti =  this.maxTime/60;
       this.secondi = this.maxTime - 60*Math.floor(this.maxTime/60);
@@ -84,6 +89,10 @@ export class CacciaPage {
     this.minuti = '00';
     this.secondi = '10';
     */
+    let tn = new Date ( );
+
+    this.timestart=tn.getTime();
+
 
     this.msginizio();
     this.StartTimer();
@@ -97,6 +106,24 @@ export class CacciaPage {
       {
           if(this.maxTime <= 0) { }
           this.maxTime -= 1;
+
+          let now=new Date ( );
+          let nowt=now.getTime();
+
+          if ( Math.round ((nowt - this.timestart)/1000) > (this.fullTime-this.maxTime) ) {
+            console.log ( "nowt "+ nowt);
+            console.log ( "timestart "+ this.timestart);
+            console.log ( "fullTime "+ this.fullTime);
+            console.log ( "maxTime "+ this.maxTime);
+            console.log ( "diff1 "+ Math.round ((nowt - this.timestart)/1000));
+            console.log ( "diff2 "+ (this.fullTime-this.maxTime) );
+
+            this.maxTime =this.fullTime - Math.round ((nowt - this.timestart)/1000) ;
+          }
+
+
+
+
           this.minuti = Math.floor(this.maxTime/60);
           this.secondi = this.maxTime - 60*Math.floor(this.maxTime/60);
           if (this.secondi<10) { this.secondi='0'+this.secondi ;}
