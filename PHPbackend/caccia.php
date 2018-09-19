@@ -93,8 +93,13 @@
 	//die(print_r($response));
 
 	if ( $BS == 1) {
+
+		$Mysql="SELECT chance from chanceviolazione";
+		$Result=mysql_query($Mysql);
+		$res=mysql_fetch_array($Result);
+		$chance=$res['chance'];
 		$tiro=rand(1,100);
-		if ($tiro < 99)  {
+		if ($tiro < $chance)  {
 			$testo="VIOLAZIONE della MASQUERADE per ".$nomepg;
 			$xtesto=mysql_real_escape_string($testo);
 			$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( 0, 'NARRAZIONE', NOW(), '$xtesto' , 0 ) ";
