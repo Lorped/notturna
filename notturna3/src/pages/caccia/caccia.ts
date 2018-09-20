@@ -38,6 +38,9 @@ export class CacciaPage {
 
   fullTime = 0 ;
 
+  tossico = 0;
+  toxic = 0;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http , private auth: AuthService ) {
     this.BS = navParams.get("BS");
   }
@@ -53,6 +56,9 @@ export class CacciaPage {
         if ( this.myskill[i].livello > 0 ) {
           this.gregge = this.myskill[i].livello;
         };
+      }
+      if ( this.myskill[i].nomeskill == 'Tossicodipendente' ) {
+          this.tossico=1;
       }
     }
 
@@ -72,6 +78,8 @@ export class CacciaPage {
         this.maxTime = this.maxTime / 2;
       }
 
+
+
       this.fullTime=this.maxTime;
 
       this.minuti =  this.maxTime/60;
@@ -87,6 +95,13 @@ export class CacciaPage {
     */
     this.recuperati = 1*this.myuser.fulldata['setetot'] - 1*this.myuser.fulldata['PScorrenti'] ;
 
+
+    if ( this.tossico == 1 && Math.random()*100 < 30 )  {
+      this.recuperati=Math.ceil ( this.recuperati / 2 ) ;
+      this.toxic=1;
+    } else {
+      this.toxic=0;
+    }
     /* valori ridotti per test
     this.maxTime = 10
     this.minuti = '00';
@@ -185,7 +200,7 @@ export class CacciaPage {
 
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
-      var link = 'http://www.roma-by-night.it/ionicPHP/caccia.php?id=' + this.myuser['userid']+  '&recuperati=' + this.recuperati + '&anim=0' + '&BS=' + this.BS ;
+      var link = 'http://www.roma-by-night.it/ionicPHP/caccia.php?id=' + this.myuser['userid']+  '&recuperati=' + this.recuperati + '&anim=0' + '&BS=' + this.BS + '&toxic=' + this.toxic ;
 
       this.http.get(link)
       .subscribe( res => {

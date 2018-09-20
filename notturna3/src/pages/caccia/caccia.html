@@ -34,6 +34,9 @@
   <ion-row style="align-items: center;" *ngIf="hidevalue==true">
     <ion-col style="color:#FF0000; text-align: center; font-size: 1.1em;">Saziati {{recuperati}} livelli di Sete</ion-col>
   </ion-row>
+  <ion-row style="align-items: center;" *ngIf="hidevalue==true && toxic==1">
+    <ion-col style="color:#FF0000; text-align: center; font-size: 1.1em;">Caccia sfortunata!!</ion-col>
+  </ion-row>
 
   <ion-row >
     <ion-col *ngIf="hidevalue==false" >

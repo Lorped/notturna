@@ -44,6 +44,26 @@ export class DadiPage {
 
     this.cura = this.myuser.fulldata['rigen'];
 
+    //console.log(this.myuser);
+
+    for (let i = 0 ; i< this.myuser.skill.length ; i++) {
+      if ( this.myuser.skill[i].nomeskill == 'Ferita Aperta #2' ) {
+        this.cura -=  1;
+      }
+      if ( this.myuser.skill[i].nomeskill == 'Ferita Aperta #3' ) {
+        this.cura -=  2;
+      }
+      if ( this.myuser.skill[i].nomeskill == 'Ferita Aperta #4' ) {
+        this.cura -=  3;
+      }
+    }
+    for (let i = 0 ; i< this.myuser.skill.length ; i++) {
+      if ( this.myuser.skill[i].nomeskill == 'Guarigione Lenta' ) {
+        this.cura =  Math.ceil(this.cura/2);
+      }
+    }
+
+
 		this.loadDadi();
 	}
 

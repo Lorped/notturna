@@ -34,6 +34,8 @@
 	$vitae=$_GET['vitae'];
 	$BS=$_GET['BS'];
 
+	$toxic=$_GET['toxic'];
+
  	$Mysql="SELECT * FROM personaggio
 		LEFT JOIN statuscama ON personaggio.idstatus = statuscama.idstatus
 		LEFT JOIN blood ON personaggio.bloodp = blood.bloodp
@@ -109,6 +111,20 @@
 
 		}
 	}
+
+
+	if ( $toxic == 1) {
+
+
+		$testo="Caccia sfortunata (Tossicodipendenza) per ".$nomepg;
+		$xtesto=mysql_real_escape_string($testo);
+		$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( 0, 'NARRAZIONE', NOW(), '$xtesto' , 0 ) ";
+		mysql_query($Mysql);
+		master2master($testo);
+
+
+	}
+
 
 	if ( $anim == 1) {
 		$out= [

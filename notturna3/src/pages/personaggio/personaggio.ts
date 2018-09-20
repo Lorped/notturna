@@ -45,8 +45,11 @@ export class PersonaggioPage {
       if ( this.myskill[i].nomeskill == 'Robustezza' ) {
         this.pf +=  1*this.myskill[i].livello;
       }
+      if ( this.myskill[i].nomeskill == 'Ferita Permanente' ) {
+        this.pf -=  3;
+      }
     }
-    //console.log ( this.currentUser );
+    //console.log ( this.myskill );
     //console.log ( 'PF =' + this.pf );
 
 	}
