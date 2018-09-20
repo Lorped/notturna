@@ -41,6 +41,8 @@ export class CacciaPage {
   tossico = 0;
   toxic = 0;
 
+  metab = 0;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http , private auth: AuthService ) {
     this.BS = navParams.get("BS");
   }
@@ -60,6 +62,9 @@ export class CacciaPage {
       if ( this.myskill[i].nomeskill == 'Tossicodipendente' ) {
           this.tossico=1;
       }
+      if ( this.myskill[i].nomeskill == 'Metabolismo Efficiente' ) {
+          this.metab=1;
+      }
     }
 
 
@@ -72,6 +77,10 @@ export class CacciaPage {
 
       } else {
         this.maxTime = 600 + 60*this.addcaccia;
+      }
+
+      if ( this.metab == 1 ) {
+        this.maxTime = 1*this.maxTime - 3*60 ;
       }
 
       if ( this.BS == 1 ) {
@@ -214,7 +223,9 @@ export class CacciaPage {
   }
 
   goback() {
-    this.navParams.get("parentPage").loadDadi();
+    if ( this.BS != 1) {
+      this.navParams.get("parentPage").loadDadi();
+    }
     this.navCtrl.pop();
   }
 
