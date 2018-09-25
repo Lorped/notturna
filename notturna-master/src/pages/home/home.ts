@@ -66,6 +66,10 @@ export class HomePage {
 		this.navCtrl.push('DadiPage', { "parentPage": this });
 	}
 
+	godiablerie(){
+		this.navCtrl.push('DiableriePage', { "parentPage": this });
+	}
+
 	vedischeda(){
 		if ( this.pgscelto ) {
 			this.navCtrl.push('PersonaggioPage', { "RequestID": this.pgscelto });
