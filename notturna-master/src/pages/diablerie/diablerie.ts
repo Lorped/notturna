@@ -80,7 +80,11 @@ export class DiableriePage {
 
           this.http.get(url)
           .subscribe(	res => {
-      			console.log("ok - done");
+      			let alert = this.alertCtrl.create({
+		            title: 'Diablerie terminata',
+		            buttons: ['OK']
+		          });
+		          alert.present();
       		});
 
         }
