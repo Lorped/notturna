@@ -19,19 +19,19 @@
     background-color: #000000;
     color: #FFFFFF;
     font-size: 1em;
-} 
+}
 
-.mysmall {  
+.mysmall {
     color: #999999;
     font-size: 0.8em;
-} 
-.mymed {  
+}
+.mymed {
     color: #CCCCCC;
     font-size: 0.9em;
-} 
-.myred {  
+}
+.myred {
     color: #ff0000;
-} 
+}
 
 .alertCustomCss{
   background-color: #333333;
@@ -49,21 +49,21 @@
        background: #ff1010;
        border-radius: 30px !important;
        border: 1px solid #ffffff;
-  } 
+  }
   .submit-btn2 {
        background: #ff3030;
        border-radius: 30px !important;
        border: 1px solid #ffffff;
-  } 
+  }
  .submit-btn3 {
        background: #3030ff;
        border-radius: 30px !important;
        border: 1px solid #ffffff;
-  } 
+  }
 
 
 
- 
+
   .login-box {
       background: #090909;
       padding: 20px 20px 0px 20px;
@@ -74,7 +74,7 @@
        margin: 0px 16px 0px 16px;
        padding-bottom: 20px;
   }
- 
+
   hr {
     color: #ff0000;
     display: block;
@@ -86,10 +86,16 @@
  }
 
 
+
+.selectable {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+
   //ion-row {
   //     align-items: center;
   //     text-align: center;
   //}
- 
- 
-
