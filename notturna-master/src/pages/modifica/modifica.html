@@ -6,13 +6,54 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="moredark">
     <ion-title>modifica</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="master">
+
+
+  <ion-item class=master>
+      <ion-label stacked>Nome</ion-label>
+      <ion-input type="text" [(ngModel)]="myoggetto.oggetto.nomeoggetto" name="nomeoggetto" autofocus ></ion-input>
+  </ion-item>
+  <ion-item class=master>
+      <ion-label stacked>Descrizione</ion-label>
+      <ion-textarea type="text" row="2" [(ngModel)]="myoggetto.oggetto.descrizione" name="descrizione" ></ion-textarea>
+  </ion-item>
+  <ion-list class="master" >
+    <ion-item-sliding style="background-color:#000000" *ngFor="let x of myoggetto.condizioni">
+      <ion-item class="master">
+      <!--  <ion-label position="stacked">{{x.cc}} {{x.con.valcond}}</ion-label>
+      <ion-textarea type="text" row="2" [(ngModel)]="x.con.descrX" [ngModelOptions]="{standalone: true}" ></ion-textarea> -->
+        <h2 style="color:#ff0000;">{{x.cc}} {{x.con.valcond}}</h2>
+        <p>{{x.con.descrX}}</p>
+      </ion-item>
+      <ion-item-options>
+  			<button ion-button color="moredark" (click)="edit(x)">
+  				<ion-icon name="create"></ion-icon>
+  				Edit
+  			</button>
+  		</ion-item-options>
+  		<ion-item-options side="left">
+  			<button ion-button color="danger" (click)="delete(x)">
+  				<ion-icon name="trash"></ion-icon>
+  				Delete
+  			</button>
+  		</ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-footer >
+  <ion-item class=master>
+    <button ion-button color="mydanger" class="submit-btn" full type="submit" (click)="modifica()" >Modifica</button>
+
+  </ion-item>
+  </ion-footer>
+
+
 
 </ion-content>
