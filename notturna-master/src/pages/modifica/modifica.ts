@@ -67,4 +67,34 @@ export class ModificaPage {
     // console.log('ionViewDidLoad ModificaPage');
   }
 
+  delete (x: Condizione) {
+    // console.log(x);
+    var url = 'http://www.roma-by-night.it/ionicPHP/delcond.php?idcondizione='+x.con.idcondizione;
+
+		this.http.get(url)
+		.map(data => data.json())
+		.subscribe( data => {
+
+			this.loadoggetto();
+
+		});
+  }
+
+  modifica() {
+    var url = 'http://www.roma-by-night.it/ionicPHP/changeogg.php';
+
+		var mypost = JSON.stringify({idoggetto: this.myoggetto.oggetto.idoggetto,  nomeoggetto: this.myoggetto.oggetto.nomeoggetto, descrizione: this.myoggetto.oggetto.descrizione });
+
+		let headers = new Headers();
+
+		headers.append('Content-Type', 'application/json');
+
+		this.http.post(url, mypost, {headers})
+    		.subscribe(res =>  {
+
+        alert("Oggetto modificato");
+				this.loadoggetto();
+		  });
+  }
+
 }

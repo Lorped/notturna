@@ -84,7 +84,7 @@ export class HomePage {
 
 	openbarcode() {
 
-		this.oggetto="799748258944";
+		this.oggetto="451570519804";
 		this.navCtrl.push('OggettoPage', { "parentPage": this });
 
 		this.barcodeScanner.scan( {"showTorchButton": true} ).then((barcodeData) => {
