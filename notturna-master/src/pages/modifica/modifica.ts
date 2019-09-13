@@ -27,7 +27,8 @@ export class ModificaPage {
 
 
   constructor(public http: Http, public navCtrl: NavController, public navParams: NavParams) {
-    this.barcode = this.navParams.get("parentPage").barcode;
+    // this.barcode = this.navParams.get("parentPage").barcode;
+    this.barcode = this.navParams.get("parentPage").oggetto;
 
     // console.log(this.barcode);
 
