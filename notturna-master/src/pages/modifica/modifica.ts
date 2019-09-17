@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 
-import { Oggetto, FullOggetto, Con, Condizione } from '../global.ts';
+import { Oggetto, FullOggetto, Con, Condizione } from '../global';
 
 /**
  * Generated class for the ModificaPage page.
@@ -57,7 +57,7 @@ export class ModificaPage {
 		.map(data => data.json())
 		.subscribe( data => {
 
-			console.log(data);
+			//console.log(data);
 
       this.myoggetto=data;
 		});
@@ -96,6 +96,10 @@ export class ModificaPage {
         alert("Oggetto modificato");
 				this.loadoggetto();
 		  });
+  }
+
+  edit(x: Condizione) {
+    this.navCtrl.push('EditcondPage', { "condizione": x });
   }
 
 }

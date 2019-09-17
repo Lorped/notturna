@@ -22,7 +22,7 @@ export class Con {
 
 @Injectable()
 export class Condizione {
-  cc: sting;
+  cc: string;
   con: Con;
   constructor ( ) {
     this.cc = '';
