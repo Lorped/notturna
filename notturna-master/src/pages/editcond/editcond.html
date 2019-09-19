@@ -16,8 +16,23 @@
 <ion-content padding class="master">
 
   <ion-item class="master">
-    <ion-select [(ngModel)]="pgscelto" name="pgscelto" style="max-width:85%;color:#ffffff;">
+    <ion-select [(ngModel)]="newcondA" name="newcondA" style="max-width:85%;color:#ffffff;">
         <ion-option *ngFor="let x of condA; let i = index" value="{{i}}" [selected]="i+1 == condizione.con.tabcond" >{{x}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item class="master">
+    <ion-select [(ngModel)]="newcondD" name="newcondD" style="max-width:85%;color:#ffffff;">
+        <ion-option *ngFor="let x of condD" value="{{x.iddisciplina}}" >{{x.nomedisc}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item class="master">
+    <ion-select [(ngModel)]="newcondP" name="newcondP" style="max-width:85%;color:#ffffff;">
+        <ion-option *ngFor="let x of condP" value="{{x.idpotere}}" >{{x.nomepotere}}.{{x.livellopot}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item class="master">
+    <ion-select [(ngModel)]="newcondS" name="newcondS" style="max-width:85%;color:#ffffff;">
+        <ion-option *ngFor="let x of condS" value="{{x.idskill}}" >{{x.nomeskill}}</ion-option>
     </ion-select>
   </ion-item>
 
