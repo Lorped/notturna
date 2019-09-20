@@ -85,6 +85,7 @@ export class ModificaPage {
 
         alert("Oggetto modificato");
 				this.loadoggetto();
+        this.navParams.get("parentPage").loadoggetti();
 		  });
   }
 

@@ -70,6 +70,10 @@ export class HomePage {
 		this.navCtrl.push('DiableriePage', { "parentPage": this });
 	}
 
+	golistaoggetti(){
+		this.navCtrl.push('ListaoggettiPage', { "parentPage": this });
+	}
+
 	vedischeda(){
 		if ( this.pgscelto ) {
 			this.navCtrl.push('PersonaggioPage', { "RequestID": this.pgscelto });
@@ -84,16 +88,14 @@ export class HomePage {
 
 	openbarcode() {
 
-		this.oggetto="451570519804";
-		// this.navCtrl.push('OggettoPage', { "parentPage": this });
-		this.navCtrl.push('ModificaPage', { "parentPage": this });
+		// this.oggetto="451570519804";
+		// this.navCtrl.push('ModificaPage', { "parentPage": this });
 
 		this.barcodeScanner.scan( {"showTorchButton": true} ).then((barcodeData) => {
 			// Success! Barcode data is here
 			// console.log(barcodeData.text);
 
 			this.oggetto=barcodeData.text;
-			// this.navCtrl.push('OggettoPage', { "parentPage": this });
 			this.navCtrl.push('ModificaPage', { "parentPage": this });
 
 		}, (err) => {
@@ -104,6 +106,10 @@ export class HomePage {
 
 	ionViewDidLoad() {
     	this.loadUtenti();
+	}
+
+	loadoggetti() {
+		// Dummy!
 	}
 
 	public logoutx() {

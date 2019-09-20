@@ -1,0 +1,27 @@
+<!--
+  Generated template for the ListaoggettiPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="moredark">
+    <ion-title>Lista Oggetti</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="master" padding>
+
+<ion-list class="master" >
+  <ion-item class="master" *ngFor="let item of listaoggetti" (click)="modifica(item);">
+    <h2 [ngClass]="{'fisso': item.fissomobile=='F' , 'mobile': item.fissomobile=='M', 'utente': item.fissomobile=='U'}">{{item.idoggetto}} - {{item.nomeoggetto}}</h2>
+    <p >{{item.descrizione}}</p>
+  </ion-item>
+</ion-list>
+
+
+
+</ion-content>
