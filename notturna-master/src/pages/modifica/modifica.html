@@ -26,7 +26,7 @@
   </ion-item>
   <ion-list class="master" >
     <ion-item-sliding style="background-color:#000000" *ngFor="let x of myoggetto.condizioni">
-      <ion-item class="master">
+      <ion-item class="master" (click)="edit(x)">
       <!--  <ion-label position="stacked">{{x.cc}} {{x.con.valcond}}</ion-label>
       <ion-textarea type="text" row="2" [(ngModel)]="x.con.descrX" [ngModelOptions]="{standalone: true}" ></ion-textarea> -->
         <h2 style="color:#ff0000;" *ngIf="x.con.tipocond != 'P'">{{x.cc}} {{x.con.valcond}}</h2>
