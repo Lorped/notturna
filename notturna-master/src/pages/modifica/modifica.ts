@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http, Headers } from '@angular/http';
 
-import { Oggetto, FullOggetto, Con, Condizione } from '../global';
+import { FullOggetto, Condizione } from '../global';
 
 /**
  * Generated class for the ModificaPage page.
@@ -30,21 +30,11 @@ export class ModificaPage {
     // this.barcode = this.navParams.get("parentPage").barcode;
     this.barcode = this.navParams.get("parentPage").oggetto;
 
-    // console.log(this.barcode);
+    if ( this.barcode.length > 12 ) {
+      let newbarcode = this.barcode.substr(-12);
+      this.barcode = newbarcode;
+    }
 
-    /***
-    var url = 'http://www.roma-by-night.it/ionicPHP/barcode3.php?barcode='+this.barcode;
-
-		this.http.get(url)
-		.map(data => data.json())
-		.subscribe( data => {
-
-			console.log(data);
-
-      this.myoggetto=data;
-		});
-
-    ***/
     this.loadoggetto();
 
 

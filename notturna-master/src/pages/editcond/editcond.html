@@ -15,28 +15,28 @@
 
 <ion-content padding class="master">
 
-  <ion-item class="master">
-    <ion-select [(ngModel)]="newcondA" name="newcondA" style="max-width:85%;color:#ffffff;">
-        <ion-option *ngFor="let x of condA; let i = index" value="{{i}}" [selected]="i+1 == condizione.con.tabcond" >{{x}}</ion-option>
+  <ion-item class="master" *ngIf="condizione.con.tipocond=='A'">
+    <ion-select [(ngModel)]="newcond" name="newcond" style="max-width:85%;color:#ffffff;">
+        <ion-option *ngFor="let x of condA; let i = index" value="{{i+1}}" [selected]="i+1 == condizione.con.tabcond" >{{x}}</ion-option>
     </ion-select>
   </ion-item>
-  <ion-item class="master">
-    <ion-select [(ngModel)]="newcondD" name="newcondD" style="max-width:85%;color:#ffffff;">
-        <ion-option *ngFor="let x of condD" value="{{x.iddisciplina}}" >{{x.nomedisc}}</ion-option>
+  <ion-item class="master" *ngIf="condizione.con.tipocond=='D'">
+    <ion-select [(ngModel)]="newcond" name="newcond" style="max-width:85%;color:#ffffff;">
+        <ion-option *ngFor="let x of condD" value="{{x.iddisciplina}}" [selected]="x.iddisciplina == condizione.con.tabcond" >{{x.nomedisc}}</ion-option>
     </ion-select>
   </ion-item>
-  <ion-item class="master">
-    <ion-select [(ngModel)]="newcondP" name="newcondP" style="max-width:85%;color:#ffffff;">
-        <ion-option *ngFor="let x of condP" value="{{x.idpotere}}" >{{x.nomepotere}}.{{x.livellopot}}</ion-option>
+  <ion-item class="master" *ngIf="condizione.con.tipocond=='P'">
+    <ion-select [(ngModel)]="newcond" name="newcond" style="max-width:85%;color:#ffffff;">
+        <ion-option *ngFor="let x of condP" value="{{x.idpotere}}" [selected]="x.idpotere == condizione.con.tabcond" >{{x.nomepotere}}.{{x.livellopot}}</ion-option>
     </ion-select>
   </ion-item>
-  <ion-item class="master">
-    <ion-select [(ngModel)]="newcondS" name="newcondS" style="max-width:85%;color:#ffffff;">
-        <ion-option *ngFor="let x of condS" value="{{x.idskill}}" >{{x.nomeskill}}</ion-option>
+  <ion-item class="master" *ngIf="condizione.con.tipocond=='S'">
+    <ion-select [(ngModel)]="newcond" name="newcond" style="max-width:85%;color:#ffffff;">
+        <ion-option *ngFor="let x of condS" value="{{x.idskill}}" [selected]="x.idskill == condizione.con.tabcond" >{{x.nomeskill}}</ion-option>
     </ion-select>
   </ion-item>
 
-  <ion-item class="master">
+  <ion-item class="master" *ngIf="condizione.con.tipocond!='P'">
     <ion-label stacked>Valore</ion-label>
     <ion-input type="number" [(ngModel)]="condizione.con.valcond" name="valcond"  min="1" max="9" required ></ion-input>
   </ion-item>
@@ -46,5 +46,8 @@
       <ion-textarea type="text" row="2" [(ngModel)]="condizione.con.descrX" name="descrizione" ></ion-textarea>
   </ion-item>
 
+  <ion-item class="master">
+    <button ion-button color="mydanger" class="submit-btn" full type="submit" (click)="modifica()" >Modifica</button>
+  </ion-item>
 
 </ion-content>

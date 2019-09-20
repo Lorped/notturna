@@ -29,7 +29,8 @@
       <ion-item class="master">
       <!--  <ion-label position="stacked">{{x.cc}} {{x.con.valcond}}</ion-label>
       <ion-textarea type="text" row="2" [(ngModel)]="x.con.descrX" [ngModelOptions]="{standalone: true}" ></ion-textarea> -->
-        <h2 style="color:#ff0000;">{{x.cc}} {{x.con.valcond}}</h2>
+        <h2 style="color:#ff0000;" *ngIf="x.con.tipocond != 'P'">{{x.cc}} {{x.con.valcond}}</h2>
+        <h2 style="color:#ff0000;" *ngIf="x.con.tipocond == 'P'">{{x.cc}}</h2>
         <p>{{x.con.descrX}}</p>
       </ion-item>
       <ion-item-options>

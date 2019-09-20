@@ -40,7 +40,7 @@ export class OggettoPage {
 			this.oggetto=data;
 			this.nomeoggetto=data[0].desc;
 			this.descrizione=data[1].desc;
-			console.log(this.descrizione);
+			// console.log(this.descrizione);
 		});
 
 
