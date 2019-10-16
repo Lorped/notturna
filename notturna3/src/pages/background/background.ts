@@ -59,10 +59,10 @@ export class BackgroundPage {
 				this.link = "https://drive.google.com/file/d/0BwbyMyT-GT-US3d3OEpnbV9Ccjg/view";
 			break;
 			case "8":		// Lasombra
-				this.link = "#";
+				this.link = "https://drive.google.com/file/d/1veEpi_TDGZz-xIFbO1PeVfHrprrDISWF/view";
 			break;
 			case "9":		// Tzimisce
-				this.link = "#";
+				this.link = "https://drive.google.com/file/d/1AyN-Ofnhw-m5LQcNMFEHYOnLclb-3N_0/view";
 			break;
 			case "10":	// Assamiti
 				this.link = "https://drive.google.com/file/d/0BwbyMyT-GT-ULXpGWkxLNWZhaDg/view";
@@ -76,6 +76,9 @@ export class BackgroundPage {
 			case "13":	// Setiti
 				this.link = "https://drive.google.com/file/d/0BwbyMyT-GT-UOUo0dll2NjRDOHc/view";
 			break;
+      case 14:		// Cappadoci
+			   this.link = "https://drive.google.com/file/d/1WqSxecMNGQ0ayh6MLGM-FHCP1LaL0khZ/view";
+		  break;
 			case "20":	// vili
 				this.link = "https://drive.google.com/file/d/0BwbyMyT-GT-UOWhsMExKd2YzTVU/view";
 			break;
