@@ -41,7 +41,7 @@ export class ModificaPage {
   }
 
   loadoggetto() {
-    var url = 'http://www.roma-by-night.it/ionicPHP/barcode3.php?barcode='+this.barcode;
+    var url = 'https://www.roma-by-night.it/ionicPHP/barcode3.php?barcode='+this.barcode;
 
 		this.http.get(url)
 		.map(data => data.json())
@@ -60,7 +60,7 @@ export class ModificaPage {
 
   delete (x: Condizione) {
     // console.log(x);
-    var url = 'http://www.roma-by-night.it/ionicPHP/delcond.php?idcondizione='+x.con.idcondizione;
+    var url = 'https://www.roma-by-night.it/ionicPHP/delcond.php?idcondizione='+x.con.idcondizione;
 
 		this.http.get(url)
 		.map(data => data.json())
@@ -72,7 +72,7 @@ export class ModificaPage {
   }
 
   modifica() {
-    var url = 'http://www.roma-by-night.it/ionicPHP/changeogg.php';
+    var url = 'https://www.roma-by-night.it/ionicPHP/changeogg.php';
 
 		var mypost = JSON.stringify({idoggetto: this.myoggetto.oggetto.idoggetto,  nomeoggetto: this.myoggetto.oggetto.nomeoggetto, descrizione: this.myoggetto.oggetto.descrizione });
 

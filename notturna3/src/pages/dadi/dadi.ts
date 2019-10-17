@@ -87,7 +87,7 @@ export class DadiPage {
 
 		let headers = new Headers();
     	headers.append('Content-Type', 'application/json');
-    	var link = 'http://www.roma-by-night.it/ionicPHP/lanciadado.php';
+    	var link = 'https://www.roma-by-night.it/ionicPHP/lanciadado.php';
    		var mypost = JSON.stringify({userid: this.myuser['userid'] });
 
    		this.http.post(link, mypost, {headers})
@@ -100,7 +100,7 @@ export class DadiPage {
 	usafdv(){
 		let headers = new Headers();
     	headers.append('Content-Type', 'application/json');
-    	var link = 'http://www.roma-by-night.it/ionicPHP/usofdv.php';
+    	var link = 'https://www.roma-by-night.it/ionicPHP/usofdv.php';
    		var mypost = JSON.stringify({userid: this.myuser['userid'] });
 
    		this.http.post(link, mypost, {headers})
@@ -117,7 +117,7 @@ export class DadiPage {
 	menops(){
 
 
-    	var link = 'http://www.roma-by-night.it/ionicPHP/menops2.php?id='+this.myuser['userid']
+    	var link = 'https://www.roma-by-night.it/ionicPHP/menops2.php?id='+this.myuser['userid']
 
    		this.http.get(link)
       	.subscribe(res =>  {

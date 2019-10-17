@@ -29,7 +29,7 @@ export class MortePage {
 
   morte() {
     this.myuser=this.auth.getUserInfo();
-    var link = 'http://www.roma-by-night.it/ionicPHP/morte.php?id='+this.myuser['userid'];
+    var link = 'https://www.roma-by-night.it/ionicPHP/morte.php?id='+this.myuser['userid'];
     this.http.get(link)
     .subscribe( res => {
         this.app.getRootNav().setRoot('LoginPage');

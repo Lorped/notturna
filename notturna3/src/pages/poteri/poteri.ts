@@ -82,7 +82,7 @@ export class PoteriPage {
     } else {
       let headers = new Headers();
   		headers.append('Content-Type', 'application/json');
-      var url = 'http://www.roma-by-night.it/ionicPHP/usopotere.php';
+      var url = 'https://www.roma-by-night.it/ionicPHP/usopotere.php';
   		var mypost = JSON.stringify({idutente: this.myuser.userid , potere: pot, livello: livellopot, aDisciplina: this.aDisciplina});
       this.http.post(url, mypost, {headers})
       .map(res => res.json())
@@ -123,7 +123,7 @@ export class PoteriPage {
     }
     this.myuser.fulldata['psvuoti'] = 1*this.myuser.fulldata['setetot'] - 1*this.myuser.fulldata['PScorrenti'];
 
-    var link = 'http://www.roma-by-night.it/ionicPHP/caccia.php?id=' + this.myuser['userid']+  '&recuperati=3&anim=1' ;
+    var link = 'https://www.roma-by-night.it/ionicPHP/caccia.php?id=' + this.myuser['userid']+  '&recuperati=3&anim=1' ;
 
     this.http.get(link)
     .map(res => res.json())
@@ -138,7 +138,7 @@ export class PoteriPage {
 
   loadpscorrenti(){
 
-		var link = 'http://www.roma-by-night.it/ionicPHP/getps.php?id='+this.myuser['userid'];
+		var link = 'https://www.roma-by-night.it/ionicPHP/getps.php?id='+this.myuser['userid'];
 		this.http.get(link)
 		.map(res => res.json())
       	.subscribe(res =>  {

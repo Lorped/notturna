@@ -41,7 +41,7 @@ export class HomePage {
 	}
 
 	loadUtenti() {
-		var url = 'http://www.roma-by-night.it/ionicPHP/utenti.php';
+		var url = 'https://www.roma-by-night.it/ionicPHP/utenti.php';
 
 			var mialista = [];
 

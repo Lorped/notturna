@@ -30,7 +30,7 @@ export class ModificanotePage {
   }
 
 	modifica () {
-		var url = 'http://www.roma-by-night.it/ionicPHP/modificanote.php';
+		var url = 'https://www.roma-by-night.it/ionicPHP/modificanote.php';
 		var mypost = JSON.stringify({idutente: this.myuser.userid, note: this.annotazioni });
 		
 		let headers = new Headers();

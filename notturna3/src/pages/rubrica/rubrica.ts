@@ -49,7 +49,7 @@ export class RubricaPage {
 
 
 	loadRubrica() {
-    	var url = 'http://www.roma-by-night.it/ionicPHP/rubrica.php?id='+this.myuser['userid'];
+    	var url = 'https://www.roma-by-night.it/ionicPHP/rubrica.php?id='+this.myuser['userid'];
 
 		var miarubrica = [];
 		
@@ -86,7 +86,7 @@ export class RubricaPage {
 	
 	delete(item: RubricaItem) {
 		//console.log("da cancellare "+item.idrubrica);
-		var url = 'http://www.roma-by-night.it/ionicPHP/delrubrica.php?id='+item.idrubrica;
+		var url = 'https://www.roma-by-night.it/ionicPHP/delrubrica.php?id='+item.idrubrica;
 		this.http.get(url)
 		.subscribe( data => {
 			this.loadRubrica();

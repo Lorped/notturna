@@ -179,7 +179,7 @@ export class CacciaPage {
 
     let headers = new Headers();
       headers.append('Content-Type', 'application/json');
-      var link = 'http://www.roma-by-night.it/ionicPHP/msgtomaster.php';
+      var link = 'https://www.roma-by-night.it/ionicPHP/msgtomaster.php';
       var mypost = JSON.stringify({idutente: this.myuser['userid'] , messaggio: 'ha iniziato la caccia'});
 
       this.http.post(link, mypost, {headers})
@@ -201,7 +201,7 @@ export class CacciaPage {
 
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    var link = 'http://www.roma-by-night.it/ionicPHP/msgtomaster.php';
+    var link = 'https://www.roma-by-night.it/ionicPHP/msgtomaster.php';
     var mypost = JSON.stringify({idutente: this.myuser['userid'] , messaggio: 'ha terminato la caccia'});
 
     this.http.post(link, mypost, {headers})
@@ -209,7 +209,7 @@ export class CacciaPage {
 
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
-      var link = 'http://www.roma-by-night.it/ionicPHP/caccia.php?id=' + this.myuser['userid']+  '&recuperati=' + this.recuperati + '&anim=0' + '&BS=' + this.BS + '&toxic=' + this.toxic ;
+      var link = 'https://www.roma-by-night.it/ionicPHP/caccia.php?id=' + this.myuser['userid']+  '&recuperati=' + this.recuperati + '&anim=0' + '&BS=' + this.BS + '&toxic=' + this.toxic ;
 
       this.http.get(link)
       .subscribe( res => {

@@ -42,7 +42,7 @@ export class NecroPage {
 
     let headers = new Headers();
   	headers.append('Content-Type', 'application/json');
-    var url = 'http://www.roma-by-night.it/ionicPHP/usopotere.php';
+    var url = 'https://www.roma-by-night.it/ionicPHP/usopotere.php';
   	var mypost = JSON.stringify({idutente: this.myuser.userid , potere: pot, livello: livellopot, aTAUMNECRO: pot2});
     this.http.post(url, mypost, {headers})
     .map(res => res.json())

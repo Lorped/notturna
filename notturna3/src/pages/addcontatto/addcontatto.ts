@@ -44,7 +44,7 @@ export class AddcontattoPage {
   }
 
 	add () {
-		var url = 'http://www.roma-by-night.it/ionicPHP/addrubrica.php';
+		var url = 'https://www.roma-by-night.it/ionicPHP/addrubrica.php';
 		var mypost = JSON.stringify({idutente: this.myuser.userid, contatto: this.nuovoContatto.contatto, cell: this.nuovoContatto.cell, home: this.nuovoContatto.home, email: this.nuovoContatto.email, note: this.nuovoContatto.note });
 		
 		let headers = new Headers();

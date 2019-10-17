@@ -81,7 +81,7 @@ export class PersonaggioPage {
 
 
 
-    var url = 'http://www.roma-by-night.it/ionicPHP/getlegami.php?id='+this.requestID;
+    var url = 'https://www.roma-by-night.it/ionicPHP/getlegami.php?id='+this.requestID;
     this.http.get(url)
     .map(res => res.json())
     .subscribe(res =>  {
@@ -91,7 +91,7 @@ export class PersonaggioPage {
         //console.log (this.listalegami);
     });
 
-    url = 'http://www.roma-by-night.it/ionicPHP/poteri.php?id='+this.requestID;
+    url = 'https://www.roma-by-night.it/ionicPHP/poteri.php?id='+this.requestID;
     this.http.get(url)
     .map(res => res.json())
     .subscribe(res =>  {
@@ -105,7 +105,7 @@ export class PersonaggioPage {
     loadPG(){
 
 
-		var link = 'http://www.roma-by-night.it/ionicPHP/getuser.php?id='+this.requestID;
+		var link = 'https://www.roma-by-night.it/ionicPHP/getuser.php?id='+this.requestID;
 
 		this.http.get(link)
 		.map(res => res.json())
@@ -114,7 +114,7 @@ export class PersonaggioPage {
 			this.scheda = res;
       this.scheda['rd']=Math.floor((1*this.scheda['carisma']+1*this.scheda['intelligenza']+1*this.scheda['prontezza']+1*this.scheda['percezione']+1*this.scheda['fdv'])/5);
 
-			var link = 'http://www.roma-by-night.it/ionicPHP/skill.php'
+			var link = 'https://www.roma-by-night.it/ionicPHP/skill.php'
 			var mypost = JSON.stringify({userid: this.currentUser['userid'] });
 
 			this.http.post(link, mypost)
@@ -206,7 +206,7 @@ export class PersonaggioPage {
 		//console.log("aggiungi");
 		//console.log(this.requestID);
 
-    	var link = 'http://www.roma-by-night.it/ionicPHP/piups.php?id='+this.requestID;
+    	var link = 'https://www.roma-by-night.it/ionicPHP/piups.php?id='+this.requestID;
 
    		this.http.get(link)
       	.subscribe(res =>  {
@@ -216,7 +216,7 @@ export class PersonaggioPage {
 	}
 
 	menops() {
-		var link = 'http://www.roma-by-night.it/ionicPHP/menops.php?id='+this.requestID;
+		var link = 'https://www.roma-by-night.it/ionicPHP/menops.php?id='+this.requestID;
 
    		this.http.get(link)
       	.subscribe(res =>  {

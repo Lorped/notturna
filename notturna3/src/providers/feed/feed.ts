@@ -35,7 +35,7 @@ export class FeedProvider {
 
 
 	public getDadi(userid: string) {
-    var url = 'http://www.roma-by-night.it/ionicPHP/dadi.php?last=0&userid='+userid;
+    var url = 'https://www.roma-by-night.it/ionicPHP/dadi.php?last=0&userid='+userid;
 
 		var tirididado = [];
 

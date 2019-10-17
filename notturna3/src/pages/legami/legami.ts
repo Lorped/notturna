@@ -48,7 +48,7 @@ export class LegamiPage {
     //console.log(this.myuser);
     this.loadUtenti(this.myuser.userid);
 
-    var url = 'http://www.roma-by-night.it/ionicPHP/getlegami.php?id='+this.myuser.userid;
+    var url = 'https://www.roma-by-night.it/ionicPHP/getlegami.php?id='+this.myuser.userid;
     this.http.get(url)
     .map(res => res.json())
     .subscribe(res =>  {
@@ -65,7 +65,7 @@ export class LegamiPage {
   }
 
   loadUtenti(a: string) {
-		var url = 'http://www.roma-by-night.it/ionicPHP/utenti.php?excl='+a;
+		var url = 'https://www.roma-by-night.it/ionicPHP/utenti.php?excl='+a;
 
 			var mialista = [];
 
@@ -87,7 +87,7 @@ export class LegamiPage {
 	}
 
   invia () {
-    var url = 'http://www.roma-by-night.it/ionicPHP/legami.php';
+    var url = 'https://www.roma-by-night.it/ionicPHP/legami.php';
     var mypost = JSON.stringify({target: this.myuser.userid , domitor: this.pgscelto });
 
     let headers = new Headers();

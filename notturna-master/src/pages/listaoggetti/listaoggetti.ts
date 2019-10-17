@@ -39,7 +39,7 @@ export class ListaoggettiPage {
 	}
 
   loadoggetti () {
-    var url = 'http://www.roma-by-night.it/ionicPHP/listaoggetti.php';
+    var url = 'https://www.roma-by-night.it/ionicPHP/listaoggetti.php';
 
 		this.http.get(url)
 		.map(data => data.json())

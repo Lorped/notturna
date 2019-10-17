@@ -32,7 +32,7 @@ export class SendmessaggioPage {
 	  
 
 	invia () {
-		var url = 'http://www.roma-by-night.it/ionicPHP/inviamessaggio.php';
+		var url = 'https://www.roma-by-night.it/ionicPHP/inviamessaggio.php';
 		var mypost = JSON.stringify({idutente: -1 , destinatario: this.myrequestID, messaggio: this.messaggio });
 		
 		let headers = new Headers();

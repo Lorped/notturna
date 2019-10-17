@@ -33,7 +33,7 @@ export class OggettoPage {
       this.barcode = newbarcode;
     }
 
-		var url = 'http://www.roma-by-night.it/ionicPHP/barcode.php?id='+this.userid+'&barcode='+this.barcode;
+		var url = 'https://www.roma-by-night.it/ionicPHP/barcode.php?id='+this.userid+'&barcode='+this.barcode;
 
 		this.http.get(url)
 		.map(data => data.json())

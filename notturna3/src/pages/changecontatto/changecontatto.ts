@@ -41,7 +41,7 @@ export class ChangecontattoPage {
 
 	change(){
 		//console.log ("Modifica "+this.oldContatto);
-		var url = 'http://www.roma-by-night.it/ionicPHP/changerubrica.php';
+		var url = 'https://www.roma-by-night.it/ionicPHP/changerubrica.php';
 		
 		this.oldContatto.cell=0;
 		this.oldContatto.email=0;

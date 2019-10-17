@@ -62,8 +62,8 @@ export class LoginPage {
     this.currentUser = new User(this.registerCredentials.username , "0");
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    var link = 'http://www.roma-by-night.it/ionicPHP/login-master.php';
-	//var link = 'http://www.roma-by-night.it/ionicPHP/login.php';
+    var link = 'https://www.roma-by-night.it/ionicPHP/login-master.php';
+	//var link = 'https://www.roma-by-night.it/ionicPHP/login.php';
     var mypost = JSON.stringify({username: this.registerCredentials.username , password: this.registerCredentials.password });
 
     this.showLoading("Please wait...");
@@ -147,7 +147,7 @@ export class LoginPage {
       //alert('Device registered '+registration.registrationId);
 
       /*
-      let updateurl = 'http://www.roma-by-night.it/ionicPHP/updateid.php?userid='+ this.currentUser['userid']+'&id='+registration.registrationId;
+      let updateurl = 'https://www.roma-by-night.it/ionicPHP/updateid.php?userid='+ this.currentUser['userid']+'&id='+registration.registrationId;
       this.http.get(updateurl)
       .subscribe(res =>  {
           // updated

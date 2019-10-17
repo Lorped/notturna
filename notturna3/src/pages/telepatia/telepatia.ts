@@ -46,7 +46,7 @@ export class TelepatiaPage {
   }
 
   loadUtenti(a: string) {
-		var url = 'http://www.roma-by-night.it/ionicPHP/utenti.php?excl='+a;
+		var url = 'https://www.roma-by-night.it/ionicPHP/utenti.php?excl='+a;
 
 			var mialista = [];
 
@@ -68,7 +68,7 @@ export class TelepatiaPage {
 	}
 
   invia () {
-		var url = 'http://www.roma-by-night.it/ionicPHP/inviamessaggioutente.php';
+		var url = 'https://www.roma-by-night.it/ionicPHP/inviamessaggioutente.php';
 		var mypost = JSON.stringify({idutente: this.myuser.userid , destinatario: this.pgscelto, messaggio: this.messaggio });
 
 		let headers = new Headers();

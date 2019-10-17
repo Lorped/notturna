@@ -65,7 +65,7 @@ export class PersonaggioPage {
   	}
 
   loadPS() {
-		var link = 'http://www.roma-by-night.it/ionicPHP/getps.php?id='+this.scheda['idutente'];
+		var link = 'https://www.roma-by-night.it/ionicPHP/getps.php?id='+this.scheda['idutente'];
 		this.http.get(link)
 		.map(res => res.json())
       	.subscribe(res =>  {
@@ -73,7 +73,7 @@ export class PersonaggioPage {
 			this.scheda['psvuoti']=res['psvuoti'];
      	 });
 
-    link = 'http://www.roma-by-night.it/ionicPHP/getfdv.php?id='+this.scheda['idutente'];
+    link = 'https://www.roma-by-night.it/ionicPHP/getfdv.php?id='+this.scheda['idutente'];
     this.http.get(link)
     .map(res => res.json())
         .subscribe(res =>  {

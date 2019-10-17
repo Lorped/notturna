@@ -35,7 +35,7 @@ export class DiableriePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, public http: Http) {
 
-    var url = 'http://www.roma-by-night.it/ionicPHP/utenti.php';
+    var url = 'https://www.roma-by-night.it/ionicPHP/utenti.php';
 
 		var mialista = [];
 
@@ -76,7 +76,7 @@ export class DiableriePage {
       {
         text: 'SI',
         handler: () => {
-          var url = 'http://www.roma-by-night.it/ionicPHP/diablerie.php?diabl=' + this.diablerista + '&vittima=' + this.vittima;
+          var url = 'https://www.roma-by-night.it/ionicPHP/diablerie.php?diabl=' + this.diablerista + '&vittima=' + this.vittima;
 
           this.http.get(url)
           .subscribe(	res => {

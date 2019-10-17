@@ -65,7 +65,7 @@ export class LoginPage {
 		this.currentUser = new User(this.registerCredentials.username , "0");
 		let headers = new Headers();
 		headers.append('Content-Type', 'application/json');
-		var link = 'http://www.roma-by-night.it/ionicPHP/login.php';
+		var link = 'https://www.roma-by-night.it/ionicPHP/login.php';
 		var mypost = JSON.stringify({username: this.registerCredentials.username , password: this.registerCredentials.password });
 
 		this.showLoading("Please wait...");
@@ -93,7 +93,7 @@ export class LoginPage {
 			this.pushsetup();
 			// do other stuff
 
-			var link = 'http://www.roma-by-night.it/ionicPHP/skill.php';
+			var link = 'https://www.roma-by-night.it/ionicPHP/skill.php';
 			var mypost = JSON.stringify({userid: this.currentUser['userid'] });
 
 			this.showLoading("Loading data...");
@@ -107,12 +107,12 @@ export class LoginPage {
         this.currentUser.fulldata['setetot'] = 1*this.currentUser.fulldata['sete']+1*this.currentUser.fulldata['addsete'];
 //console.log( this.currentUser );
 
-        link = 'http://www.roma-by-night.it/ionicPHP/listpoteri.php?id='+this.currentUser['userid'];
+        link = 'https://www.roma-by-night.it/ionicPHP/listpoteri.php?id='+this.currentUser['userid'];
         this.http.get(link)
         .map(res => res.json())
         .subscribe( res => {
           this.currentUser.poteri=res;
-          link = 'http://www.roma-by-night.it/ionicPHP/listtaum.php?id='+this.currentUser['userid'];
+          link = 'https://www.roma-by-night.it/ionicPHP/listtaum.php?id='+this.currentUser['userid'];
           this.http.get(link)
           .map(res => res.json())
           .subscribe( res => {
@@ -189,7 +189,7 @@ export class LoginPage {
 			//console.log('Device registered ', registration.registrationId);
 			//alert('Device registered '+registration.registrationId);
 
-			let updateurl = 'http://www.roma-by-night.it/ionicPHP/updateid.php?userid='+ this.currentUser['userid']+'&id='+registration.registrationId;
+			let updateurl = 'https://www.roma-by-night.it/ionicPHP/updateid.php?userid='+ this.currentUser['userid']+'&id='+registration.registrationId;
 			this.http.get(updateurl)
 			.subscribe(res =>  {
 					// updated

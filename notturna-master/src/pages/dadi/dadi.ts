@@ -17,11 +17,11 @@ import { Http, Headers } from '@angular/http';
 })
 export class DadiPage {
 
-	tiridado: FeedItem[];	
+	tiridado: FeedItem[];
 
-	
+
 	constructor(public navCtrl: NavController, public navParams: NavParams, private feedProvider: FeedProvider , private http: Http ) {
-		
+
 		this.loadDadi();
 	}
 
@@ -30,7 +30,7 @@ export class DadiPage {
       	allFeeds => {
         	this.tiridado = allFeeds;
       	});
-      	
+
 		// console.log(this.tiridado)
   	}
 
@@ -38,7 +38,7 @@ export class DadiPage {
 		this.loadDadi();
 	  	refresher.complete();
   	}
-	
+
 	ionViewDidLoad() {
 
   	}
@@ -46,13 +46,13 @@ export class DadiPage {
 	tiraildado(){
 
 		let headers = new Headers();
-    	headers.append('Content-Type', 'application/json'); 
-    	var link = 'http://www.roma-by-night.it/ionicPHP/lanciadado.php';
-   		var mypost = JSON.stringify({userid: 0 });   
-		 
+    	headers.append('Content-Type', 'application/json');
+    	var link = 'https://www.roma-by-night.it/ionicPHP/lanciadado.php';
+   		var mypost = JSON.stringify({userid: 0 });
+
    		this.http.post(link, mypost, {headers} )
-      	.subscribe(res =>  {     
-			setTimeout( this.loadDadi() , 1000); 
+      	.subscribe(res =>  {
+			setTimeout( this.loadDadi() , 1000);
      	 });
 	}
 

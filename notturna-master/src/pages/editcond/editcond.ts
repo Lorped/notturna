@@ -46,7 +46,7 @@ export class EditcondPage {
   }
 
   caricacond () {
-    var url = 'http://www.roma-by-night.it/ionicPHP/listpoteridiscipline.php';
+    var url = 'https://www.roma-by-night.it/ionicPHP/listpoteridiscipline.php';
 
 		this.http.get(url)
       .map(data => data.json())
@@ -93,7 +93,7 @@ export class EditcondPage {
 
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    var link = 'http://www.roma-by-night.it/ionicPHP/changecond.php';
+    var link = 'https://www.roma-by-night.it/ionicPHP/changecond.php';
     var mypost = JSON.stringify({idcondizione: this.condizione.con.idcondizione, tabcond: this.newcond , valcond: this.condizione.con.valcond, descrX: this.condizione.con.descrX });
 
     this.http.post(link, mypost, {headers} )
