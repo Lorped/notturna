@@ -22,6 +22,7 @@ export class PersonaggioPage {
 
 	scheda: Array<any>;
   myskill: Array<any>;
+  myuser: User;
 
   pf = 0 ;
 
@@ -31,7 +32,9 @@ export class PersonaggioPage {
 
 		this.scheda=this.auth.getUserPGInfo();
     this.myskill=this.auth.getUserSKILLInfo();
-    console.log ( this.myskill );
+    this.myuser=this.auth.getUserInfo();
+
+    console.log ( this.myuser );
     this.scheda['rd']=Math.floor((1*this.scheda['carisma']+1*this.scheda['intelligenza']+1*this.scheda['prontezza']+1*this.scheda['percezione']+1*this.scheda['fdv'])/5);
 
 
@@ -44,9 +47,25 @@ export class PersonaggioPage {
       }
       if ( this.myskill[i].nomeskill == 'Robustezza' ) {
         this.pf +=  1*this.myskill[i].livello;
+
+        // vedo se ha poteri attivi
+        for (let j = 0 ; j< this.myuser.poteri.length ; j++) {
+          if (this.myuser.poteri[j].iddisciplina == 12) {
+            for (let k = 0 ; k< this.myuser.poteri[j].poteri.length ; k++) {
+              // console.log(this.myuser.poteri[j].poteri[k]);
+              if (this.myuser.poteri[j].poteri[k].nomepotere=='Resilienza') this.pf += 5 + 1*this.myskill[i].livello;
+              if (this.myuser.poteri[j].poteri[k].nomepotere=='Sconfiggere le Debolezze') this.pf += 5 ; //perchè +5 da liv.1
+            }
+          }
+        }
+
+
       }
       if ( this.myskill[i].nomeskill == 'Ferita Permanente' ) {
         this.pf -=  3;
+      }
+      if ( this.myskill[i].nomeskill == 'Nove Vite' ) {
+        this.pf +=  10;
       }
     }
     //console.log ( this.myskill );
