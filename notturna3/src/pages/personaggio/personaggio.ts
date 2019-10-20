@@ -31,7 +31,7 @@ export class PersonaggioPage {
 
 		this.scheda=this.auth.getUserPGInfo();
     this.myskill=this.auth.getUserSKILLInfo();
-    //console.log ( this.scheda );
+    console.log ( this.myskill );
     this.scheda['rd']=Math.floor((1*this.scheda['carisma']+1*this.scheda['intelligenza']+1*this.scheda['prontezza']+1*this.scheda['percezione']+1*this.scheda['fdv'])/5);
 
 

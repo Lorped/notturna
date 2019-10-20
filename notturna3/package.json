@@ -1,5 +1,5 @@
 {
-  "name": "notturna3",
+  "name": "Notturna3",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "http://ionicframework.com/",
@@ -51,11 +51,15 @@
     "zone.js": "0.8.26"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.10.1",
     "@ionic/app-scripts": "^3.2.2",
     "@ionic/lab": "1.0.9",
     "typescript": "~2.6.2"
   },
   "description": "An Ionic project",
+  "config": {
+    "ionic_copy": "./scripts/copy-custom-libs.js"
+  },
   "cordova": {
     "plugins": {
       "phonegap-plugin-barcodescanner": {},
