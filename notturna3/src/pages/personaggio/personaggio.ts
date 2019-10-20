@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { App, IonicPage } from 'ionic-angular';
-import { AuthService } from '../../providers/auth-service/auth-service';
+import { AuthService, User } from '../../providers/auth-service/auth-service';
 import { Http } from '@angular/http';
 
 
