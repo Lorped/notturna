@@ -68,6 +68,7 @@
           <ion-col col-3 style="color:#FF0000;" >Livello Sete: </ion-col>
           <ion-col col-2 >{{scheda['PScorrenti']}}/{{scheda['setetot']}}</ion-col>
           <ion-col><img *ngFor="let item of scheda['PScorrenti']|times" src="assets/img/red.png"><img *ngFor="let item of scheda['psvuoti']|times" src="assets/img/white.png"></ion-col>
+          <!-- <ion-col><i *ngFor="let item of scheda['PScorrenti']|times ; let ix = index" class="fas fa-circle myred2"></i><i *ngFor="let item of scheda['psvuoti']|times ; let ix = index" class="fas fa-circle mywhite"></i></ion-col> -->
         </ion-row>
         <ion-row>
           <ion-col col-4 style="color:#FF0000;" >Punti Ferita</ion-col>
