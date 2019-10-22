@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { BackgroundPage } from './background';
+import { PipesModule } from '../../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { BackgroundPage } from './background';
   ],
   imports: [
     IonicPageModule.forChild(BackgroundPage),
+    PipesModule,
   ],
 })
 export class BackgroundPageModule {}

@@ -34,7 +34,7 @@ export class PersonaggioPage {
     this.myskill=this.auth.getUserSKILLInfo();
     this.myuser=this.auth.getUserInfo();
 
-    console.log ( this.myuser );
+    // console.log ( this.myuser );
     this.scheda['forza']=Number(this.scheda['forza']);
     this.scheda['destrezza']=Number(this.scheda['destrezza']);
     this.scheda['attutimento']=Number(this.scheda['attutimento']);

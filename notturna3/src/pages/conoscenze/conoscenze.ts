@@ -50,60 +50,59 @@ export class ConoscenzePage {
 	this.scheda=this.auth.getUserPGInfo();
 	this.myuser=this.auth.getUserInfo();
 
-    //console.log("myskill");
-    //console.log(this.myskill);
+  // console.log("myskill");
+  // console.log(this.myskill);
 
-		this.rituali=0;
+	this.rituali=0;
 
-		for (var j = 0; j < this.myskill.length; j++) {
-  			if ( this.myskill[j].tipologia==11)  {
-    		 	this.rituali=1;
-    			break;
-  			}
-		}
-
-
-		this.rissa=0;
-		this.mischia=0;
-		this.lancio=0;
-		this.tiro=0;
-		this.fuoco=0;
-		this.potenza=0;
-		this.artigli=0;
-
-		for (var i = 0; i < this.myskill.length; i++) {
-  			if ( this.myskill[i].nomeskill=="Rissa")  {
-    		 	this.rissa=this.myskill[i].livello;
-  			}
- 			if ( this.myskill[i].nomeskill=="Mischia")  {
-    		 	this.mischia=this.myskill[i].livello;
-  			}
-  			if ( this.myskill[i].nomeskill=="Armi da lancio")  {
-    		 	this.lancio=this.myskill[i].livello;
-  			}
-  			if ( this.myskill[i].nomeskill=="Armi da tiro")  {
-    		 	this.tiro=this.myskill[i].livello;
-  			}
-  			if ( this.myskill[i].nomeskill=="Armi da fuoco")  {
-    		 	this.fuoco=this.myskill[i].livello;
-  			}
-  			if ( this.myskill[i].nomeskill=="Potenza")  {
-    		 	this.potenza=this.myskill[i].livello;
-  			}
-  			if ( this.myskill[i].nomeskill=="Proteide")  {
-    		 	if (this.myskill[i].livello >1 ) this.artigli=1;
-  			}
-		}
+	for (var j = 0; j < this.myskill.length; j++) {
+  	if ( this.myskill[j].tipologia==11)  {
+    	this.rituali=1;
+    	break;
+  	}
+	}
 
 
-		this.forza = this.scheda['forza'];
-    this.fomipot2 = Math.ceil((1*this.forza + 1*this.mischia +1*this.potenza)/2);
-    this.foripot2 = Math.ceil((1*this.forza + 1*this.rissa +1*this.potenza)/2);
-    this.folapot2 = Math.ceil((1*this.forza + 1*this.lancio +1*this.potenza)/2);
-    this.treti2 = Math.ceil((3 + 1*this.tiro )/2);
+	this.rissa=0;
+	this.mischia=0;
+	this.lancio=0;
+	this.tiro=0;
+	this.fuoco=0;
+	this.potenza=0;
+	this.artigli=0;
 
-    this.trefuoco2 = Math.ceil((3+1*this.fuoco)/2);
+	for (var i = 0; i < this.myskill.length; i++) {
+  	if ( this.myskill[i].nomeskill=="Rissa")  {
+    	this.rissa=this.myskill[i].livello;
+  	}
+ 		if ( this.myskill[i].nomeskill=="Mischia")  {
+    	this.mischia=this.myskill[i].livello;
+  	}
+  	if ( this.myskill[i].nomeskill=="Armi da lancio")  {
+    	this.lancio=this.myskill[i].livello;
+  	}
+  	if ( this.myskill[i].nomeskill=="Armi da tiro")  {
+    	this.tiro=this.myskill[i].livello;
+  	}
+  	if ( this.myskill[i].nomeskill=="Armi da fuoco")  {
+    	this.fuoco=this.myskill[i].livello;
+  	}
+  	if ( this.myskill[i].nomeskill=="Potenza")  {
+    	this.potenza=this.myskill[i].livello;
+  	}
+  	if ( this.myskill[i].nomeskill=="Proteide")  {
+    	if (this.myskill[i].livello >1 ) this.artigli=1;
+  	}
+	}
 
+
+	this.forza = this.scheda['forza'];
+  this.fomipot2 = Math.ceil((this.forza + this.mischia + this.potenza)/2);
+  this.foripot2 = Math.ceil((this.forza + this.rissa + this.potenza)/2);
+  this.folapot2 = Math.ceil((this.forza + this.lancio + this.potenza)/2);
+  this.treti2 = Math.ceil((3 + this.tiro )/2);
+
+  this.trefuoco2 = Math.ceil((3 + this.fuoco)/2);
 
   // this.rituali= this.myskill.export.filter(function(elem) {
   //  return elem.tipologia===11 ;

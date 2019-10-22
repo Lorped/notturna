@@ -29,12 +29,19 @@
 
   <ion-row *ngFor="let desc of myskill">
       <ion-col col-7 *ngIf="desc.tipologia == 2 ">{{ desc.nomeskill }}</ion-col>
-      <ion-col *ngIf="desc.tipologia == 2 "><img src="assets/img/10/{{ desc.livello }}.png"></ion-col>
+      <ion-col *ngIf="desc.tipologia == 2 ">
+        <i *ngFor="let item of 5|times ; let ix = index" class="fas fa-circle mysmallicon myred2" [ngClass]="{'mywhite': ix >= desc.livello}"></i><br>
+        <i *ngFor="let item of 5|times ; let ix = index" class="fas fa-circle mysmallicon myred2" [ngClass]="{'mywhite': ix+5 >= desc.livello}"></i>
+        <!-- <img src="assets/img/10/{{ desc.livello }}.png"> -->
+      </ion-col>
  </ion-row>
 
     <ion-row *ngFor="let desc of myskill">
       <ion-col col-7 *ngIf="desc.tipologia == 3 "><span stype="color:#FF0000;">&nbsp;&nbsp;- </span> {{ desc.nomeskill }}</ion-col>
-      <ion-col *ngIf="desc.tipologia == 3 "><img src="assets/img/5/{{ desc.livello }}.png"></ion-col>
+      <ion-col *ngIf="desc.tipologia == 3 ">
+        <i *ngFor="let item of 5|times ; let ix = index" class="fas fa-circle mysmallicon myred2" [ngClass]="{'mywhite': ix >= desc.livello}"></i>
+        <!-- <img src="assets/img/5/{{ desc.livello }}.png"> -->
+      </ion-col>
  </ion-row>
 
 	  <ion-row style="align-items: center;" *ngIf="rituali == 1">
@@ -57,7 +64,10 @@
 
 	<ion-row *ngFor="let desc of myskill">
       <ion-col col-7 *ngIf="desc.tipologia == 0 ">{{ desc.nomeskill }}</ion-col>
-      <ion-col *ngIf="desc.tipologia == 0 "><img src="assets/img/5/{{ desc.livello }}.png"></ion-col>
+      <ion-col *ngIf="desc.tipologia == 0 ">
+        <!-- <img src="assets/img/5/{{ desc.livello }}.png"> -->
+        <i *ngFor="let item of 5|times ; let ix = index" class="fas fa-circle mysmallicon myred2" [ngClass]="{'mywhite': ix >= desc.livello}"></i>
+      </ion-col>
 	</ion-row>
 
 
@@ -69,7 +79,10 @@
 
   <ion-row *ngFor="let desc of myskill">
       <ion-col col-7 *ngIf="desc.tipologia == 1 ">{{ desc.nomeskill }}</ion-col>
-      <ion-col *ngIf="desc.tipologia == 1 "><img src="assets/img/5/{{ desc.livello }}.png"></ion-col>
+      <ion-col *ngIf="desc.tipologia == 1 ">
+        <!-- <img src="assets/img/5/{{ desc.livello }}.png"> -->
+        <i *ngFor="let item of 5|times ; let ix = index" class="fas fa-circle mysmallicon myred2" [ngClass]="{'mywhite': ix >= desc.livello}"></i>
+      </ion-col>
  </ion-row>
 
  	<ion-row style="align-items: center;">
