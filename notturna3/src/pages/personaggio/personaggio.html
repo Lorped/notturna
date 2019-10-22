@@ -54,21 +54,24 @@
         </ion-row>
         <ion-row>
           <ion-col col-7 style="color:#FF0000;">Fama in città</ion-col>
-          <ion-col><img src="assets/img/5b/{{scheda['fama1']}}.png"></ion-col>
+          <!-- <ion-col><img src="assets/img/5b/{{scheda['fama1']}}.png"></ion-col> -->
+          <ion-col><i *ngFor="let item of 5|times ; let ix = index" class="fas fa-circle mymedicon myred2" [ngClass]="{'mywhite': ix >= scheda['fama1']}"></i></ion-col>
         </ion-row>
         <ion-row>
           <ion-col col-7 style="color:#FF0000;">Fama tra i Vampiri</ion-col>
-          <ion-col><img src="assets/img/5b/{{scheda['fama2']}}.png"></ion-col>
+          <!-- <ion-col><img src="assets/img/5b/{{scheda['fama2']}}.png"></ion-col> -->
+          <ion-col><i *ngFor="let item of 5|times ; let ix = index" class="fas fa-circle mymedicon myred2" [ngClass]="{'mywhite': ix >= scheda['fama2']}"></i></ion-col>
         </ion-row>
         <ion-row>
           <ion-col col-7 style="color:#FF0000;">Fama nel Mondo Oscuro</ion-col>
-          <ion-col><img src="assets/img/5b/{{scheda['fama3']}}.png"></ion-col>
+          <!-- <ion-col><img src="assets/img/5b/{{scheda['fama3']}}.png"></ion-col> -->
+          <ion-col><i *ngFor="let item of 5|times ; let ix = index" class="fas fa-circle mymedicon myred2" [ngClass]="{'mywhite': ix >= scheda['fama3']}"></i></ion-col>
         </ion-row>
         <ion-row>
           <ion-col col-3 style="color:#FF0000;" >Livello Sete: </ion-col>
           <ion-col col-2 >{{scheda['PScorrenti']}}/{{scheda['setetot']}}</ion-col>
-          <ion-col><img *ngFor="let item of scheda['PScorrenti']|times" src="assets/img/red.png"><img *ngFor="let item of scheda['psvuoti']|times" src="assets/img/white.png"></ion-col>
-          <!-- <ion-col><i *ngFor="let item of scheda['PScorrenti']|times ; let ix = index" class="fas fa-circle myred2"></i><i *ngFor="let item of scheda['psvuoti']|times ; let ix = index" class="fas fa-circle mywhite"></i></ion-col> -->
+          <!-- <ion-col><img *ngFor="let item of scheda['PScorrenti']|times" src="assets/img/red.png"><img *ngFor="let item of scheda['psvuoti']|times" src="assets/img/white.png"></ion-col> -->
+          <ion-col><i *ngFor="let item of scheda['PScorrenti']|times ; let ix = index" class="fas fa-circle mysmallicon myred2"></i><i *ngFor="let item of scheda['psvuoti']|times ; let ix = index" class="fas fa-circle mysmallicon mywhite"></i></ion-col>
         </ion-row>
         <ion-row>
           <ion-col col-4 style="color:#FF0000;" >Punti Ferita</ion-col>
@@ -105,9 +108,23 @@
       <ion-col>Attutimento</ion-col>
     </ion-row>
     <ion-row>
-      <ion-col><img src="assets/img/10/{{scheda.forza}}.png"></ion-col>
-      <ion-col><img src="assets/img/10/{{scheda.destrezza}}.png"></ion-col>
-      <ion-col><img src="assets/img/10/{{scheda.attutimento}}.png"></ion-col>
+      <!--
+        <ion-col><img src="assets/img/10/{{scheda.forza}}.png"></ion-col>
+        <ion-col><img src="assets/img/10/{{scheda.destrezza}}.png"></ion-col>
+        <ion-col><img src="assets/img/10/{{scheda.attutimento}}.png"></ion-col>
+      -->
+      <ion-col>
+        <i *ngFor="let item of 5|times ; let ix = index" class="fas fa-circle myxsmallicon myred2" [ngClass]="{'mywhite': ix >= scheda.forza}"></i><br>
+        <i *ngFor="let item of 5|times ; let ix = index" class="fas fa-circle myxsmallicon myred2" [ngClass]="{'mywhite': ix+5 >= scheda.forza}"></i>
+      </ion-col>
+      <ion-col>
+        <i *ngFor="let item of 5|times ; let ix = index" class="fas fa-circle myxsmallicon myred2" [ngClass]="{'mywhite': ix >= scheda.destrezza}"></i><br>
+        <i *ngFor="let item of 5|times ; let ix = index" class="fas fa-circle myxsmallicon myred2" [ngClass]="{'mywhite': ix+5 >= scheda.destrezza}"></i>
+      </ion-col>
+      <ion-col>
+        <i *ngFor="let item of 5|times ; let ix = index" class="fas fa-circle myxsmallicon myred2" [ngClass]="{'mywhite': ix >= scheda.attutimento}"></i><br>
+        <i *ngFor="let item of 5|times ; let ix = index" class="fas fa-circle myxsmallicon myred2" [ngClass]="{'mywhite': ix+5 >= scheda.attutimento}"></i>
+      </ion-col>
     </ion-row>
     <ion-row style="align-items: center;">
       <ion-col col-1 ><hr/></ion-col>
@@ -120,9 +137,23 @@
       <ion-col>Saggezza</ion-col>
     </ion-row>
     <ion-row>
+      <!--
       <ion-col><img src="assets/img/10/{{scheda.carisma}}.png"></ion-col>
       <ion-col><img src="assets/img/10/{{scheda.persuasione}}.png"></ion-col>
       <ion-col><img src="assets/img/10/{{scheda.saggezza}}.png"></ion-col>
+      -->
+      <ion-col>
+        <i *ngFor="let item of 5|times ; let ix = index" class="fas fa-circle myxsmallicon myred2" [ngClass]="{'mywhite': ix >= scheda.carisma}"></i><br>
+        <i *ngFor="let item of 5|times ; let ix = index" class="fas fa-circle myxsmallicon myred2" [ngClass]="{'mywhite': ix+5 >= scheda.carisma}"></i>
+      </ion-col>
+      <ion-col>
+        <i *ngFor="let item of 5|times ; let ix = index" class="fas fa-circle myxsmallicon myred2" [ngClass]="{'mywhite': ix >= scheda.persuasione}"></i><br>
+        <i *ngFor="let item of 5|times ; let ix = index" class="fas fa-circle myxsmallicon myred2" [ngClass]="{'mywhite': ix+5 >= scheda.persuasione}"></i>
+      </ion-col>
+      <ion-col>
+        <i *ngFor="let item of 5|times ; let ix = index" class="fas fa-circle myxsmallicon myred2" [ngClass]="{'mywhite': ix >= scheda.saggezza}"></i><br>
+        <i *ngFor="let item of 5|times ; let ix = index" class="fas fa-circle myxsmallicon myred2" [ngClass]="{'mywhite': ix+5 >= scheda.saggezza}"></i>
+      </ion-col>
     </ion-row>
     <ion-row style="align-items: center;">
       <ion-col col-1 ><hr/></ion-col>
@@ -135,9 +166,23 @@
       <ion-col>Prontezza</ion-col>
     </ion-row>
     <ion-row>
+      <!--
       <ion-col><img src="assets/img/10/{{scheda.percezione}}.png"></ion-col>
       <ion-col><img src="assets/img/10/{{scheda.intelligenza}}.png"></ion-col>
       <ion-col><img src="assets/img/10/{{scheda.prontezza}}.png"></ion-col>
+      -->
+      <ion-col>
+        <i *ngFor="let item of 5|times ; let ix = index" class="fas fa-circle myxsmallicon myred2" [ngClass]="{'mywhite': ix >= scheda.percezione}"></i><br>
+        <i *ngFor="let item of 5|times ; let ix = index" class="fas fa-circle myxsmallicon myred2" [ngClass]="{'mywhite': ix+5 >= scheda.percezione}"></i>
+      </ion-col>
+      <ion-col>
+        <i *ngFor="let item of 5|times ; let ix = index" class="fas fa-circle myxsmallicon myred2" [ngClass]="{'mywhite': ix >= scheda.intelligenza}"></i><br>
+        <i *ngFor="let item of 5|times ; let ix = index" class="fas fa-circle myxsmallicon myred2" [ngClass]="{'mywhite': ix+5 >= scheda.intelligenza}"></i>
+      </ion-col>
+      <ion-col>
+        <i *ngFor="let item of 5|times ; let ix = index" class="fas fa-circle myxsmallicon myred2" [ngClass]="{'mywhite': ix >= scheda.prontezza}"></i><br>
+        <i *ngFor="let item of 5|times ; let ix = index" class="fas fa-circle myxsmallicon myred2" [ngClass]="{'mywhite': ix+5 >= scheda.prontezza}"></i>
+      </ion-col>
     </ion-row>
   </ion-grid>
   </div>
