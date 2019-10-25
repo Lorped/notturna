@@ -35,8 +35,11 @@
 	$Result=mysql_query($Mysql);
 	if (mysql_errno()) die ( mysql_errno().": ".mysql_error() ."+".$Mysql);
 
+
+	$numrows = mysql_num_rows($Result);
+
 	$extra="";
-	$esterno=$res['fissomobile'];
+	// $esterno=$res['fissomobile'];
 
 	$ok = 0;
 	while ( $res=mysql_fetch_array($Result)) {
@@ -140,6 +143,13 @@
 		$Mysql="UPDATE personaggio set notemaster = '$testo' WHERE idutente=$idutente";
 		mysql_query($Mysql);
 
+
+	}
+
+	if ($numrows == 0){
+		$esito=[];
+		$esito[] = 'Attenzione';
+		$esito[] = ' Oggetto non valido';
 
 	}
 
