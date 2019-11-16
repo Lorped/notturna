@@ -104,7 +104,7 @@ if (isset($postdata) && $username != "" && $password !="" ) {
       } elseif ( $hunt == '1') { //HUNTER
         controlla_fdv ( $idutente) ;
         $MySql = "SELECT *  FROM HUNTERpersonaggio
-          LEFT JOIN conspiracy ON personaggio.idcospiracy=conspiracy.idcospiracy
+          LEFT JOIN HUNconspiracy ON HUNTERpersonaggio.idclan=HUNconspiracy.idconspiracy
           WHERE idutente = '$idutente' ";
         $Result = mysql_query($MySql);
         $res = mysql_fetch_array($Result,MYSQL_ASSOC);

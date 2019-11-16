@@ -9,6 +9,7 @@ import { Push, PushObject, PushOptions } from '@ionic-native/push';
 
 
 export class User {
+  type: string;
   username: string;
   userid: string;
   fulldata: Array<any>;
@@ -66,7 +67,7 @@ export class LoginPage {
 		let headers = new Headers();
 		headers.append('Content-Type', 'application/json');
 		var link = 'https://www.roma-by-night.it/ionicPHP/login.php';
-		var mypost = JSON.stringify({username: this.registerCredentials.username , password: this.registerCredentials.password });
+		var mypost = JSON.stringify({username: this.registerCredentials.username , password: this.registerCredentials.password , version: '2' });
 
 		this.showLoading("Please wait...");
 
@@ -74,8 +75,10 @@ export class LoginPage {
 		.map(res => res.json())
 		.subscribe(res =>  {
 
-			this.currentUser['userid'] = res["idutente"];
-			this.currentUser.fulldata = res;
+      this.currentUser.type=res.tipo;
+
+			this.currentUser['userid'] = res.res["idutente"];
+			this.currentUser.fulldata = res.res;
 
 			this.loading.dismiss();
 
@@ -124,7 +127,12 @@ export class LoginPage {
     			  this.auth.setUserInfo(this.currentUser);
 //console.log(this.currentUser);
     			  this.loading.dismiss();
-    		     this.nav.push('TabsPage');
+              if (this.currentUser.type == 'V'){
+                this.nav.push('TabsPage');
+              } else {
+                this.nav.push('TabshPage');
+              }
+
           });
         });
 			}, (err) => {

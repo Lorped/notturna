@@ -32,12 +32,17 @@ include ("db.inc.php");
 
 
 
-		$Mysql="SELECT nomepg FROM personaggio WHERE idutente=$idutente";
-		if ( $res=mysql_fetch_array(mysql_query($Mysql)) ) {
-		  $nomepg= mysql_real_escape_string( $res['nomepg'] );
-		} else {
-			$nomepg="NARRAZIONE";
-		}
+  $Mysql="SELECT nomepg FROM personaggio WHERE idutente=$idutente";
+  if ( $res=mysql_fetch_array(mysql_query($Mysql)) ) {
+    $nomepg= mysql_real_escape_string( $res['nomepg'] );
+  } else {
+    $Mysql="SELECT nomepg FROM HUNTERpersonaggio WHERE idutente=$idutente";
+    if ( $res=mysql_fetch_array(mysql_query($Mysql)) ) {
+      $nomepg= mysql_real_escape_string( $res['nomepg'] );
+    } else {
+      $nomepg="NARRAZIONE";
+    }
+  }
 
 
 

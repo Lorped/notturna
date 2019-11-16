@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AuthService } from '../../providers/auth-service/auth-service';
+import { AuthService, User } from '../../providers/auth-service/auth-service';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -25,11 +25,20 @@ export class BackgroundPage {
   rifugio: string;
 
   link: string;
+  titolo: string;
+  myuser: User;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthService , private iab: InAppBrowser) {
 		this.myskill=this.auth.getUserSKILLInfo();
 		this.fulldata=this.auth.getUserPGInfo();
+    this.myuser=this.auth.getUserInfo();
 		this.rifugio=this.fulldata['rifugio'];
+
+    if (this.myuser.type == 'V') {
+      this.titolo = 'Rifugio';
+    } else {
+      this.titolo = 'SafeHouse';
+    }
 
     this.note=this.nl2br(this.fulldata['note']);
     this.notemaster=this.nl2br(this.fulldata['notemaster']);
@@ -118,6 +127,14 @@ export class BackgroundPage {
   openUrl2() {
 
     const link = 'https://drive.google.com/file/d/0BwbyMyT-GT-UZFBwNmp4SHZ6SFk/view';
+		//const browser = this.iab.create(this.link);
+		this.iab.create(link,'_system');
+
+	}
+
+  openUrl3() {
+
+    const link = 'https://drive.google.com/file/d/1RoDz3IopLmZtTK_7zDms7ClkcBlZdI31/view';
 		//const browser = this.iab.create(this.link);
 		this.iab.create(link,'_system');
 

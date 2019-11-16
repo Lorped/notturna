@@ -30,6 +30,7 @@
 		<form (ngSubmit)="usafdv()" #registerForm="ngForm">
 <button ion-button class="submit-btn3" full type="submit" [disabled]="fdv==0" >Usa Forza di Volontà</button>
 </form>
+<div *ngIf="myuser.type == 'V'">
 <form (ngSubmit)="menops()" #registerForm="ngForm">
 <button ion-button class="submit-btn2" full type="submit" [disabled]="PScorrenti==0" >Cura Ferite - {{cura}}</button>
 </form>
@@ -47,7 +48,7 @@
 <form (ngSubmit)="gomorte()" #registerForm="ngForm" >
 <button ion-button class="submit-btn" full type="submit" >Morte Ultima</button>
 </form>
-
+</div >
 <ion-row >
 <ion-col col-6 *ngFor="let pot of poteri">
   <button  (click)="godisciplina(pot.iddisciplina,pot.nomedisc )" ion-button class="submit-btn2" full type="submit" [disabled]="PScorrenti==0" >{{pot.nomedisc}}</button>

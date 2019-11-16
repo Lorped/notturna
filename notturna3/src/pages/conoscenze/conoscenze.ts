@@ -44,11 +44,34 @@ export class ConoscenzePage {
   treti2 = 0;
   trefuoco2 = 0;
 
+  titolo = '';
+
   constructor(public navCtrl: NavController, private auth: AuthService, public navParams: NavParams , private barcodeScanner: BarcodeScanner) {
 
   this.myskill=this.auth.getUserSKILLInfo();
 	this.scheda=this.auth.getUserPGInfo();
 	this.myuser=this.auth.getUserInfo();
+
+//console.log(this.myuser);
+
+  if (this.myuser.type == 'V') {
+    this.titolo = 'Discipline e Taumaturgie';
+  } else {
+    switch ( this.scheda['idstatus']) {
+      case '1' : {
+        this.titolo = 'Equip. Potenziato';
+        break;
+      }
+      case '2' : {
+        this.titolo = 'Reliquie';
+        break;
+      }
+      case '3' : {
+        this.titolo = 'Elisir';
+        break;
+      }
+    }
+  }
 
   // console.log("myskill");
   // console.log(this.myskill);

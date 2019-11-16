@@ -4,6 +4,7 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 export class User {
+  type: string;
   username: string;
   userid: string;
   fulldata: Array<any>;
