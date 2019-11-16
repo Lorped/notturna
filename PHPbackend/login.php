@@ -30,6 +30,7 @@ $password = $request->password;
 //$username = "user";
 //$password = "secret";
 
+$version = $request->version;
 
 if (isset($postdata) && $username != "" && $password !="" ) {
 
@@ -38,99 +39,53 @@ if (isset($postdata) && $username != "" && $password !="" ) {
 	// pulizia periodica
 	$MM="DELETE FROM dadi WHERE DATE_ADD( Ora , INTERVAL 24 HOUR )<NOW()";
 	mysql_query($MM);
-	//
+
 
   $MySql = "SELECT idutente FROM utente WHERE nome = '".addslashes($username)."' AND password = '".addslashes($password)."'";
-    $Result = mysql_query($MySql);
+  $Result = mysql_query($MySql);
   if ( $res = mysql_fetch_array($Result)   ) {
-
     $idutente = $res['idutente'];
 
+    if ( $version == "") {   // OLD - NO VERSION -> Vampire
 
+      controlla_ps ( $idutente) ;
+      controlla_fdv ( $idutente) ;
+      controlla_legami ($idutente) ;
 
-		//controllo-aggiorno fdv
+      $MySql = "SELECT *  FROM personaggio
+            LEFT JOIN clan ON personaggio.idclan=clan.idclan
+            LEFT JOIN statuscama ON personaggio.idstatus=statuscama.idstatus
+            LEFT JOIN sentieri ON personaggio.idsentiero=sentieri.idsentiero
+            LEFT JOIN generazione ON personaggio.generazione=generazione.generazione
+            LEFT JOIN blood ON personaggio.bloodp=blood.bloodp
+            WHERE idutente = '$idutente' ";
 
-		$Mysql="SELECT fdv,fdvmax,lastfdv FROM personaggio WHERE idutente=$idutente";
-		$Result=mysql_query ($Mysql);
-		$res=mysql_fetch_array($Result);
+      $Result = mysql_query($MySql);
+      if ( $res = mysql_fetch_array($Result,MYSQL_ASSOC)   ) {
+        $output = json_encode($res);
+        echo $output;
+      } else {
+          header("HTTP/1.1 404 Not Found");
+      }
 
-		$fdv=$res['fdv'];
-		$fdvmax=$res['fdvmax'];
-		$lastfdv=$res['lastfdv'];
+    } else {
+      // NEW VERSION -> VAMP OR HUNTER
 
-		if ( $fdv == $fdvmax ) {  // tutto ok
+      $MySql = "SELECT COUNT(*) as c FROM personaggio WHERE idutente = '$idutente'";
+      $Result = mysql_query($MySql);
+      $res = mysql_fetch_array($Result) ;
+      $vamp = $res['c'];
+      $MySql = "SELECT COUNT(*) as c FROM HUNTERpersonaggio WHERE idutente = '$idutente'";
+      $Result = mysql_query($MySql);
+      $res = mysql_fetch_array($Result) ;
+      $hunt = $res['c'];
 
-			$Mysql="UPDATE personaggio SET lastfdv=NOW()  WHERE idutente=$idutente";
-			$Result=mysql_query ($Mysql);
-		} else {
+      if ( $vamp == '1' ) { //VAMPIRO
+        controlla_ps ( $idutente) ;
+        controlla_fdv ( $idutente) ;
+        controlla_legami ($idutente) ;
 
-			$base=strtotime("2017-01-01 18:00:00");
-			$qlastftv=strtotime($lastfdv);
-			$now=time();
-
-			$tramonti0=floor( ($qlastftv - $base)/( 24*60*60 )) ;
-			$tramonti1=floor(($now - $base) / ( 24*60*60 ) );
-
-			$difftramonti=$tramonti1-$tramonti0;
-
-
-			if ( $difftramonti > 0 ) {
-
-				$newfdv=$fdv+$difftramonti;
-				if ($newfdv > $fdvmax)  {$newfdv=$fdvmax ;}
-
-				$newlastfdv=$base + $tramonti1*( 24*60*60 )+1;
-
-				$newlastfdvstring=date("Y-m-d H:i:s",$newlastfdv );
-
-				$Mysql="UPDATE personaggio SET fdv = $newfdv , lastfdv = '$newlastfdvstring' WHERE idutente=$idutente";
-				$Result=mysql_query ($Mysql);
-
-			} else {
-				// echo "<br>da quando ho controlato fdv non è passato un tramonto";
-			}
-
-		}// fine controllo fdv
-
-		//inizio test su ps
-
-		$Mysql="SELECT PScorrenti, sete, addsete, lastps FROM personaggio
-      LEFT JOIN statuscama ON personaggio.idstatus = statuscama.idstatus
-      LEFT JOIN blood ON personaggio.bloodp = blood.bloodp
-    WHERE idutente=$idutente";
-		$Result=mysql_query ($Mysql);
-		$res=mysql_fetch_array($Result);
-
-		$PScorrenti=$res['PScorrenti'];
-		$setetot=$res['sete']+$res['addsete'];
-		$lastps=$res['lastps'];
-
-		if ( $PScorrenti == $setetot ) {  // tutto ok
-			//
-		} else {
-			$now=time();
-			$qlastps=strtotime($lastps);
-
-			$diff =  ($now - $qlastps) / (24*60*60);
-
-			if ( $diff > 1 ) {
-				$newlastps=date("Y-m-d H:i:s",$now );
-				$Mysql="UPDATE personaggio SET PScorrenti = $setetot , lastps = '$newlastps' WHERE idutente=$idutente";
-				$Result=mysql_query ($Mysql);
-			}
-
-		}
-
-		//fine test su ps
-    // legami
-	  $Mysql="DELETE FROM legami WHERE target = $idutente and livello = 1 and (DATE_ADD(dataultima, INTERVAL 60 DAY) < NOW())";
-    $Result = mysql_query($Mysql);
-	  $Mysql="UPDATE legami SET livello=1 , dataultima=NOW() WHERE target = $idutente and livello = 2 and (DATE_ADD(dataultima, INTERVAL 150 DAY) < NOW())";
-    $Result = mysql_query($Mysql);
-    $Mysql="UPDATE legami SET livello=2 , dataultima=NOW() WHERE target = $idutente and livello = 3 and (DATE_ADD(dataultima, INTERVAL 300 DAY) < NOW())";
-    $Result = mysql_query($Mysql);
-
-    $MySql = "SELECT *  FROM personaggio
+        $MySql = "SELECT *  FROM personaggio
           LEFT JOIN clan ON personaggio.idclan=clan.idclan
           LEFT JOIN statuscama ON personaggio.idstatus=statuscama.idstatus
           LEFT JOIN sentieri ON personaggio.idsentiero=sentieri.idsentiero
@@ -138,17 +93,125 @@ if (isset($postdata) && $username != "" && $password !="" ) {
           LEFT JOIN blood ON personaggio.bloodp=blood.bloodp
           WHERE idutente = '$idutente' ";
 
-    $Result = mysql_query($MySql);
-    if ( $res = mysql_fetch_array($Result,MYSQL_ASSOC)   ) {
-      $output = json_encode($res);
-      echo $output;
-    } else {
+        $Result = mysql_query($MySql);
+        $res = mysql_fetch_array($Result,MYSQL_ASSOC);
+        $out = array (
+          'tipo' => "V" ,
+          'res' => $res
+        );
+        $output = json_encode($out);
+        echo $output;
+      } elseif ( $hunt == '1') { //HUNTER
+        controlla_fdv ( $idutente) ;
+        $MySql = "SELECT *  FROM HUNTERpersonaggio
+          LEFT JOIN conspiracy ON personaggio.idcospiracy=conspiracy.idcospiracy
+          WHERE idutente = '$idutente' ";
+        $Result = mysql_query($MySql);
+        $res = mysql_fetch_array($Result,MYSQL_ASSOC);
+        $out = array (
+          'tipo' => "H" ,
+          'res' => $res
+        );
+        $output = json_encode($out);
+        echo $output;
+      } else {
         header("HTTP/1.1 404 Not Found");
+      }
+
     }
-  } else {
+
+  } else {  // WRONG PWD
     header("HTTP/1.1 401 Unauthorized");
   }
-} else {
+
+} else { // NO post data (!!)
     header("HTTP/1.1 401 Unauthorized");
 }
+
+
+//  ================================  //
+
+function controlla_fdv ( $idutente ) {    //controllo-aggiorno fdv
+
+  $Mysql="SELECT fdv,fdvmax,lastfdv FROM personaggio WHERE idutente=$idutente";
+  $Result=mysql_query ($Mysql);
+  $res=mysql_fetch_array($Result);
+
+  $fdv=$res['fdv'];
+  $fdvmax=$res['fdvmax'];
+  $lastfdv=$res['lastfdv'];
+
+  if ( $fdv == $fdvmax ) {  // tutto ok
+    $Mysql="UPDATE personaggio SET lastfdv=NOW()  WHERE idutente=$idutente";
+    $Result=mysql_query ($Mysql);
+
+  } else {
+    $base=strtotime("2017-01-01 18:00:00");
+    $qlastftv=strtotime($lastfdv);
+    $now=time();
+
+    $tramonti0=floor( ($qlastftv - $base)/( 24*60*60 )) ;
+    $tramonti1=floor(($now - $base) / ( 24*60*60 ) );
+
+    $difftramonti=$tramonti1-$tramonti0;
+
+    if ( $difftramonti > 0 ) {
+      $newfdv=$fdv+$difftramonti;
+      if ($newfdv > $fdvmax)  {$newfdv=$fdvmax ;}
+
+      $newlastfdv=$base + $tramonti1*( 24*60*60 )+1;
+
+      $newlastfdvstring=date("Y-m-d H:i:s",$newlastfdv );
+
+      $Mysql="UPDATE personaggio SET fdv = $newfdv , lastfdv = '$newlastfdvstring' WHERE idutente=$idutente";
+      $Result=mysql_query ($Mysql);
+
+    } else {
+      // echo "<br>da quando ho controlato fdv non è passato un tramonto";
+    }
+  } // fine verifica se fdv < fdvmax
+} // fine controllo fdv
+
+
+
+function controlla_ps ( $idutente) {  //inizio test su ps
+
+  $Mysql="SELECT PScorrenti, sete, addsete, lastps FROM personaggio
+    LEFT JOIN statuscama ON personaggio.idstatus = statuscama.idstatus
+    LEFT JOIN blood ON personaggio.bloodp = blood.bloodp
+  WHERE idutente=$idutente";
+  $Result=mysql_query ($Mysql);
+  $res=mysql_fetch_array($Result);
+
+  $PScorrenti=$res['PScorrenti'];
+  $setetot=$res['sete']+$res['addsete'];
+  $lastps=$res['lastps'];
+
+  if ( $PScorrenti == $setetot ) {  // tutto ok
+    //
+  } else {
+    $now=time();
+    $qlastps=strtotime($lastps);
+
+    $diff =  ($now - $qlastps) / (24*60*60);
+
+    if ( $diff > 1 ) {
+      $newlastps=date("Y-m-d H:i:s",$now );
+      $Mysql="UPDATE personaggio SET PScorrenti = $setetot , lastps = '$newlastps' WHERE idutente=$idutente";
+      $Result=mysql_query ($Mysql);
+    }
+  }
+}  //fine test su ps
+
+function controlla_legami ($idutente) {
+  // legami
+  $Mysql="DELETE FROM legami WHERE target = $idutente and livello = 1 and (DATE_ADD(dataultima, INTERVAL 60 DAY) < NOW())";
+  $Result = mysql_query($Mysql);
+  $Mysql="UPDATE legami SET livello=1 , dataultima=NOW() WHERE target = $idutente and livello = 2 and (DATE_ADD(dataultima, INTERVAL 150 DAY) < NOW())";
+  $Result = mysql_query($Mysql);
+  $Mysql="UPDATE legami SET livello=2 , dataultima=NOW() WHERE target = $idutente and livello = 3 and (DATE_ADD(dataultima, INTERVAL 300 DAY) < NOW())";
+  $Result = mysql_query($Mysql);
+}
+
+
 ?>
