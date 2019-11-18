@@ -36,8 +36,17 @@ function user2master ( $idutente , $testo ) {
 
 	$Mysql="SELECT nomepg FROM personaggio WHERE idutente=$idutente";
 	$Result=mysql_query($Mysql);
-	$res=mysql_fetch_array($Result) ;
-	$nomepg=$res['nomepg'];
+	if ( $res=mysql_fetch_array($Result) ) {
+		$nomepg=$res['nomepg'];
+	} else {
+		$Mysql="SELECT nomepg FROM HUNTERpersonaggio WHERE idutente=$idutente";
+		$Result=mysql_query($Mysql);
+		$res=mysql_fetch_array($Result);
+		$nomepg=$res['nomepg'];
+	}
+
+
+
 
 	$fields =  array(
 		'to' => '/topics/master',

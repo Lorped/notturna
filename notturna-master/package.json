@@ -55,7 +55,6 @@
   "config": {
     "ionic_copy": "./scripts/copy-custom-libs.js"
   },
-  "description": "An Ionic project",
   "cordova": {
     "plugins": {
       "phonegap-plugin-barcodescanner": {},

@@ -40,6 +40,18 @@ export class BackgroundPage {
       this.titolo = 'SafeHouse';
     }
 
+
+    if (this.myuser.type == 'H') {
+      for (var j = 0; j < this.myskill.length; j++) {
+        if ( this.myskill[j].nomeskill=="Seguaci")  {
+          this.myskill[j].nomeskill="Collaboratori";
+        }
+        if ( this.myskill[j].nomeskill=="Rifugio")  {
+          this.myskill[j].nomeskill="SafeHouse";
+        }
+      }
+    }
+
     this.note=this.nl2br(this.fulldata['note']);
     this.notemaster=this.nl2br(this.fulldata['notemaster']);
 

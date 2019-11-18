@@ -212,36 +212,14 @@ export class PersonaggiohPage {
         this.notemaster=this.nl2br(this.scheda['notemaster']);
 
 
-				this.psvuoti=1*this.scheda['sete']+1*this.scheda['addsete']-this.scheda['PScorrenti'];
+
 
 			});
 		});
 
 	}
 
-	piups() {
-		//console.log("aggiungi");
-		//console.log(this.requestID);
-
-    	var link = 'https://www.roma-by-night.it/ionicPHP/piups.php?id='+this.requestID;
-
-   		this.http.get(link)
-      	.subscribe(res =>  {
-			this.scheda['PScorrenti']=1+1*this.scheda['PScorrenti'];
-			this.psvuoti=this.psvuoti-1;
-     	 });
-	}
-
-	menops() {
-		var link = 'https://www.roma-by-night.it/ionicPHP/menops.php?id='+this.requestID;
-
-   		this.http.get(link)
-      	.subscribe(res =>  {
-			this.scheda['PScorrenti']=-1+1*this.scheda['PScorrenti'];
-			this.psvuoti=this.psvuoti+1;
-     	 });
-
-	}
+	
 
 	ionViewDidLoad() {
 		//console.log('ionViewDidLoad PersonaggioPage');
