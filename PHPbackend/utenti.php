@@ -23,24 +23,46 @@
 
 
 	$excl=$_GET['excl'];
+	$incl=$_GET['incl'];
 
 
 	include ('db.inc.php');
 
  	$out1 = [];
+	$out2 = [];
 
-	if ($excl == '') {
-		$MySql = "SELECT idutente, nomepg FROM personaggio ORDER BY nomepg ";
-	} else {
-		$MySql = "SELECT idutente, nomepg FROM personaggio WHERE idutente != $excl ORDER BY nomepg"; 
-	}
-	$Result = mysql_query($MySql);
-	while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC)   ) {
-		$out1 [] =$res;
+	if ( $incl != 'H') {
+		if ($excl == '') {
+			$MySql = "SELECT idutente, nomepg FROM personaggio ORDER BY nomepg ";
+		} else {
+			$MySql = "SELECT idutente, nomepg FROM personaggio WHERE idutente != $excl ORDER BY nomepg";
+		}
+		$Result = mysql_query($MySql);
+		while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC)   ) {
+			$out1 [] =$res;
+		}
+		$output = json_encode ($out1, JSON_UNESCAPED_UNICODE);
+
+	} else  {
+		$MySql = "SELECT idutente, nomepg FROM personaggio  ORDER BY nomepg";
+		$Result = mysql_query($MySql);
+		while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC)   ) {
+			$out1 [] =$res;
+		}
+		$MySql = "SELECT idutente, nomepg FROM HUNTERpersonaggio ORDER BY nomepg";
+		$Result = mysql_query($MySql);
+		while ( $res = mysql_fetch_array($Result,MYSQL_ASSOC)   ) {
+			$out2 [] =$res;
+		}
+		$out = [
+			'V' => $out1,
+			'H' => $out2
+		];
+		$output = json_encode ($out, JSON_UNESCAPED_UNICODE);
 	}
 
-	$output = json_encode ($out1, JSON_UNESCAPED_UNICODE);
-    echo $output;
+
+  echo $output;
 
 
 ?>

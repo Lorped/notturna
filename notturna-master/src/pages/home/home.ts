@@ -7,10 +7,12 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 export class Utente {
 	nomepg: string;
 	id: number;
+	type: string;
 
-	constructor(nomepg: string, id: number) {
+	constructor(nomepg: string, id: number, type: string) {
 		this.nomepg = nomepg;
 		this.id = id;
+		this.type = type;
 	}
 
 }
@@ -41,17 +43,23 @@ export class HomePage {
 	}
 
 	loadUtenti() {
-		var url = 'https://www.roma-by-night.it/ionicPHP/utenti.php';
+		var url = 'https://www.roma-by-night.it/ionicPHP/utenti.php?incl=H';
 
 			var mialista = [];
 
 			this.http.get(url)
 			.map(data => data.json())
 			.map((res) => {
+				//console.log(res);
 				if (res != null) {
-					for (let i = 0; i < res.length; i++) {
-						let item = res[i];
-						let newutente = new Utente(item.nomepg, item.idutente);
+					for (let i = 0; i < res.V.length; i++) {
+						let item = res.V[i];
+						let newutente = new Utente(item.nomepg, item.idutente, 'V');
+						mialista.push(newutente);
+					}
+					for (let i = 0; i < res.H.length; i++) {
+						let item = res.H[i];
+						let newutente = new Utente(item.nomepg+' (H)', item.idutente, 'H');
 						mialista.push(newutente);
 					}
 				}
@@ -76,7 +84,13 @@ export class HomePage {
 
 	vedischeda(){
 		if ( this.pgscelto ) {
-			this.navCtrl.push('PersonaggioPage', { "RequestID": this.pgscelto });
+			for ( let i = 0 ; i < this.listautenti.length; i++) {
+				if (this.listautenti[i].id == this.pgscelto) {
+					//console.log(this.listautenti[i]);
+					if (this.listautenti[i].type == 'V') { this.navCtrl.push('PersonaggioPage', { "RequestID": this.pgscelto }); }
+					if (this.listautenti[i].type == 'H') { this.navCtrl.push('PersonaggiohPage', { "RequestID": this.pgscelto }); }
+				}
+			}
 		}
 	}
 
