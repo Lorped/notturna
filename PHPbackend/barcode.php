@@ -64,6 +64,11 @@
 			$Result2=mysql_query($Mysql2);
 			if (mysql_errno()) die ( mysql_errno().": ".mysql_error() ."+".$Mysql2);
 			$res2=mysql_fetch_array($Result2);
+			if ( $res2[$cc]=='' ) {
+				$Mysql2 = "SELECT ".$cc." FROM HUNTERpersonaggio WHERE idutente ='$idutente' ";
+				$Result2=mysql_query($Mysql2);
+				$res2=mysql_fetch_array($Result2);
+			}
 			if ($res2[$cc] >= $res['valcond'] ) {
 				$ok=1;
 				$extra=$extra." ".$res['descrX'];
