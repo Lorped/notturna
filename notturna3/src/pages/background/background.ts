@@ -152,6 +152,15 @@ export class BackgroundPage {
 
 	}
 
+  openUrlDT() {
+
+    //console.log (this.myuser);
+    var link = this.fulldata['urldt'];
+		//const browser = this.iab.create(this.link);
+		this.iab.create(link,'_system');
+
+	}
+
 	 //filterItemsLOTzero(){
 	 //   return this.myskill.filter(x => x.tipologia == 8).filter(x => x.livello <0);
 	 //}
