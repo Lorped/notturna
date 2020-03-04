@@ -25,6 +25,7 @@ export class PersonaggioPage {
   myuser: User;
 
   pf = 0 ;
+  rp = 0 ;
 
 	//psvuoti: number;
 
@@ -61,6 +62,7 @@ export class PersonaggioPage {
     // this.pf = ( 3 + 1*this.scheda['attutimento'])*2;
     this.pf = ( 3 + this.scheda['attutimento'])*2;
 
+    this.rp = Math.floor ( this.scheda['attutimento'] / 2 ) ;
 
     for (let i = 0 ; i< this.myskill.length ; i++) {
       this.myskill[i].livello = Number (this.myskill[i].livello);
@@ -70,6 +72,8 @@ export class PersonaggioPage {
       }
       if ( this.myskill[i].nomeskill == 'Robustezza' ) {
         this.pf +=  this.myskill[i].livello;
+
+        this.rp = Math.floor ( ( this.scheda['attutimento'] + this.myskill[i].livello ) / 2 ) ;
 
         // vedo se ha poteri attivi
         for (let j = 0 ; j< this.myuser.poteri.length ; j++) {
