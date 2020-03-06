@@ -60,6 +60,7 @@ export class PersonaggioPage {
 	psvuoti:	number;
 
   pf = 0 ;
+  rp = 0 ;
 
   listalegami: Legame[];
   listalegamidomitor: Legame[];
@@ -118,31 +119,54 @@ export class PersonaggioPage {
 			var mypost = JSON.stringify({userid: this.currentUser['userid'] });
 
 			this.http.post(link, mypost)
-      		.map(res => res.json())
-      		.subscribe(res => {
+      	.map(res => res.json())
+      	.subscribe(res => {
 
-        		this.currentUser.skill = res;
-				this.myskill = res;
+        	this.currentUser.skill = res;
+				  this.myskill = res;
 
-				this.rituali=0;
+				  this.rituali=0;
 
-				for (var j = 0; j < this.myskill.length; j++) {
-  					if ( this.myskill[j].tipologia==11)  {
-    		 			this.rituali=1;
-    					break;
-  					}
-				}
+				    for (var j = 0; j < this.myskill.length; j++) {
+  					  if ( this.myskill[j].tipologia==11)  {
+    		 			  this.rituali=1;
+    					  break;
+  					  }
+				    }
 
 
- //console.log ( this.currentUser );
+              this.rp = Math.floor ( this.scheda['attutimento'] / 2 ) ;
 
-        this.pf = ( 3 + 1*this.currentUser.fulldata['attutimento'])*2;
-        for (let i = 0 ; i< this.myskill.length ; i++) {
-          if ( this.myskill[i].nomeskill == 'Schivare' ) {
-            this.pf +=  1*this.myskill[i].livello;
-          }
-          if ( this.myskill[i].nomeskill == 'Robustezza' ) {
-            this.pf +=  1*this.myskill[i].livello;
+
+
+            this.pf = ( 3 + Number(this.currentUser.fulldata['attutimento']) )*2;
+            for (let i = 0 ; i< this.myskill.length ; i++) {
+              if ( this.myskill[i].nomeskill == 'Schivare' ) {
+                this.pf +=  Number (this.myskill[i].livello );
+              }
+              if ( this.myskill[i].nomeskill == 'Robustezza' ) {
+                this.pf +=  Number ( this.myskill[i].livello );
+
+                this.rp = Math.floor ( ( Number(this.scheda['attutimento']) + Number(this.myskill[i].livello) ) / 2 ) ;
+
+
+                console.log(this.poteri);
+
+                // vedo se ha poteri attivi
+                for (let j = 0 ; j< this.poteri.length ; j++) {
+
+
+                      // console.log(this.myuser.poteri[j].poteri[k]);
+                      if (this.poteri[j].nomepotere=='Resilienza') this.pf += 5 + Number (this.myskill[i].livello);
+                      if (this.poteri[j].nomepotere=='Sconfiggere le Debolezze') this.pf += 5 ; //perchè +5 da liv.1
+
+
+                }
+
+
+
+
+
           }
         }
 
