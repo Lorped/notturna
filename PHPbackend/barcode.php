@@ -121,18 +121,31 @@
 			}
 		}
 
+		$domanda = [];
+		if ( $res['ifdomanda'] == 1 ) {
+			$domanda = [
+				'Domanda' => $res['domanda'],
+				'R1' => $res['r1'],
+				'R2' => $res['r2']
+	 		];
+		}
+
+
 		$esito=[];
 		if ( $ok == 0 ) {
 			if ( $res['descrizione']!="") {
 				$esito[] = $res['nomeoggetto'];
 				$esito[] = $res['descrizione'] ;
+				$esito[] = $domanda;
 			} else {
 				$esito[] = $res['nomeoggetto'];
 				$esito[] = "- Nulla di speciale -";
+				$esito[] = $domanda;
 			}
 		} else {
-		$esito[] = $res['nomeoggetto'];
-		$esito[] = $res['descrizione'].$extra;
+			$esito[] = $res['nomeoggetto'];
+			$esito[] = $res['descrizione'].'. '.$extra;
+			$esito[] = $domanda;
 		}
 
 	}

@@ -149,6 +149,11 @@ export class ConoscenzePage {
 				// An error occurred
 		});
 
+    // TEST !!!
+      this.oggetto='838211720855';
+      //this.oggetto='829560907790';
+      this.navCtrl.push('OggettoPage', { "parentPage": this });
+    ///
 	}
 
   ionViewDidLoad() {

@@ -28,4 +28,12 @@
       <ion-col style="color:#FFFFFF; text-align: center; font-size: 1.1em;" class="selectable">{{descrizione}}</ion-col>
     </ion-row>
 
+    <ion-row *ngIf="ifdomanda != 0" >
+        <ion-col ><hr/></ion-col>
+    </ion-row>
+    <ion-row *ngIf="ifdomanda != 0" >
+        <ion-col style="color:#FFFFFF; text-align: center; font-size: 1.1em;" ><h3 class="mypad2">{{domanda}}</h3></ion-col>
+    </ion-row>
+
+
 </ion-content>

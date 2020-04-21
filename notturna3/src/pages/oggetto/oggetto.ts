@@ -21,9 +21,15 @@ export class OggettoPage {
 	nomeoggetto: string;
 	descrizione: string;
 
+  ifdomanda = 0 ;
+  domanda: string;
+  r1: string;
+  r2: string;
+
 	userid: number;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
+
 
 		this.barcode = this.navParams.get("parentPage").oggetto;
 		this.userid = this.navParams.get("parentPage").myuser['userid'];
@@ -41,6 +47,17 @@ export class OggettoPage {
 			this.nomeoggetto=data[0];
 			this.descrizione=data[1];
 			// console.log(this.descrizione);
+      if(typeof data[2].Domanda !='undefined' && data[2].Domanda ) {
+
+        this.ifdomanda = 1;
+        this.domanda = data[2].Domanda;
+        this.r1 = data[2].R1;
+        this.r2 = data[2].R2;
+         console.log (this.domanda);
+         console.log (this.r1);
+         console.log (this.r2);
+      }
+
 		});
 	}
 
