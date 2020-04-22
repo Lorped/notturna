@@ -53,7 +53,9 @@ function user2master ( $idutente , $testo ) {
 		'data'=> [
 			'message'=> $testo ,
 			'title'=> $nomepg,
-			'image'=> 'icon'
+			'image'=> 'icon',
+			'soundname' => 'default',
+			'priority' => 2
 		]
 	);
 	pushmsg ($fields);
@@ -66,7 +68,9 @@ function master2master ( $testo ) {
 		'data'=> [
 			'message'=> $testo ,
 			'title'=> 'NARRAZIONE',
-			'image'=> 'icon'
+			'image'=> 'icon',
+			'soundname' => 'default',
+			'priority' => 2
 		]
 	);
 	pushmsg ($fields);
@@ -85,7 +89,9 @@ function master2user ( $idutente , $testo ) {
 			'data'=> [
 				'message'=> $testo ,
 				'title'=> 'NARRAZIONE',
-				'image'=> 'icon'
+				'image'=> 'icon',
+				'soundname' => 'default',
+				'priority' => 2
 			]
 		);
 
@@ -96,7 +102,9 @@ function master2user ( $idutente , $testo ) {
 			'data'=> [
 				'message'=> $testo ,
 				'title'=> 'NARRAZIONE',
-				'image'=> 'icon'
+				'image'=> 'icon',
+				'soundname' => 'default',
+				'priority' => 2
 			]
 		);
 

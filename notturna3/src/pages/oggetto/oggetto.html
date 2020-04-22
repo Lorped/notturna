@@ -35,5 +35,13 @@
         <ion-col style="color:#FFFFFF; text-align: center; font-size: 1.1em;" ><h3 class="mypad2">{{domanda}}</h3></ion-col>
     </ion-row>
 
+    <ion-row *ngIf="ifdomanda != 0" >
+      <ion-col style="text-align: center;" *ngIf="esito != 2" ><button ion-button color="#FFFFFF;" round outline (click)="rispSI()" >SI</button></ion-col>
+      <ion-col style="text-align: center;" *ngIf="esito != 1" ><button ion-button color="#FFFFFF;" round outline (click)="rispNO()" >NO</button></ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="ifdomanda != 0 && esito !=0 " >
+      <ion-col style="color:#FFFFFF; text-align: center; font-size: 1.1em;" class="selectable">{{esitotext}}</ion-col>
+    </ion-row>
 
 </ion-content>
