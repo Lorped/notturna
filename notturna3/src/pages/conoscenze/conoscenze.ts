@@ -152,8 +152,8 @@ export class ConoscenzePage {
     // TEST !!!
     //  this.oggetto='838211720855';
     //this.oggetto='829560907790';
-      this.oggetto='970228734705';
-      this.navCtrl.push('OggettoPage', { "parentPage": this });
+    //  this.oggetto='970228734705';
+    //  this.navCtrl.push('OggettoPage', { "parentPage": this });
     ///
 	}
 
