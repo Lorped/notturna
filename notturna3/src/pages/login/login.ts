@@ -178,6 +178,15 @@ export class LoginPage {
 			windows: {}
 		};
 
+    this.push.createChannel(
+      {
+        id: 'PushPluginChannel',
+        description: 'Notturna Channel',
+        importance: 5,
+        sound: 'notturna_sound'
+      }
+    );
+
 		const pushObject: PushObject = this.push.init(options);
 
 		pushObject.on('notification').subscribe((notification: any) => {

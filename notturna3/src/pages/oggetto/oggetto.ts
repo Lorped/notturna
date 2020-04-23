@@ -24,7 +24,7 @@ export class OggettoPage {
 
   ifdomanda = 0 ;
   esito = 0 ;
-  nodoppioesito: 0 ;
+  nodoppioesito = 0 ;
   esitotext: string;
   domanda: string;
   r1: string;
