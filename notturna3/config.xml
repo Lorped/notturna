@@ -20,6 +20,7 @@
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
+    <preference name="WKWebViewOnly" value="true" />
     <hook src="package-hooks/copy_google_services_config_files.js" type="after_prepare" />
     <platform name="android">
         <allow-intent href="market:*" />
