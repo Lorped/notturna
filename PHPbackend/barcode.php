@@ -71,7 +71,16 @@
 			}
 			if ($res2[$cc] >= $res['valcond'] ) {
 				$ok=1;
-				$extra=$extra." ".$res['descrX'];
+				if ($res['risp'] == '') {
+					$extra=$extra." ".$res['descrX'];
+				}
+				if ($res['risp'] == 'S') {
+					$extra_si=$extra_si." ".$res['descrX'];
+				}
+				if ($res['risp'] == 'N') {
+					$extra_no=$extra_no." ".$res['descrX'];
+				}
+
 			}
 //echo " cc =" .$cc. " valore = ". $res2[$cc] . "vs. " .$res['valcond'] . " OK = ".$ok ;
 		}
@@ -86,7 +95,15 @@
 				$res4=mysql_fetch_array($Result4);
 				if ($res4['livello'] >= $res['valcond'] ) {
 					$ok=1;
-					$extra=$extra." ".$res['descrX'];
+					if ($res['risp'] == '') {
+						$extra=$extra." ".$res['descrX'];
+					}
+					if ($res['risp'] == 'S') {
+						$extra_si=$extra_si." ".$res['descrX'];
+					}
+					if ($res['risp'] == 'N') {
+						$extra_no=$extra_no." ".$res['descrX'];
+					}
 				}
 			}
 
@@ -102,7 +119,15 @@
 				$res4=mysql_fetch_array($Result4);
 				if ($res4['livello'] >= $res['valcond'] ) {
 					$ok=1;
-					$extra=$extra." ".$res['descrX'];
+					if ($res['risp'] == '') {
+						$extra=$extra." ".$res['descrX'];
+					}
+					if ($res['risp'] == 'S') {
+						$extra_si=$extra_si." ".$res['descrX'];
+					}
+					if ($res['risp'] == 'N') {
+						$extra_no=$extra_no." ".$res['descrX'];
+					}
 				}
 			}
 
@@ -117,7 +142,15 @@
 
 			if (mysql_num_rows($Result4) !=0  ) {
 				$ok=1;
-				$extra=$extra." ".$res['descrX'];
+				if ($res['risp'] == '') {
+					$extra=$extra." ".$res['descrX'];
+				}
+				if ($res['risp'] == 'S') {
+					$extra_si=$extra_si." ".$res['descrX'];
+				}
+				if ($res['risp'] == 'N') {
+					$extra_no=$extra_no." ".$res['descrX'];
+				}
 			}
 		}
 
@@ -125,8 +158,8 @@
 		if ( $res['ifdomanda'] == 1 ) {
 			$domanda = [
 				'Domanda' => $res['domanda'],
-				'R1' => $res['r1'],
-				'R2' => $res['r2']
+				'R1' => $res['r1'].' '.$extra_si,
+				'R2' => $res['r2'].' '.$extra_no
 	 		];
 		}
 
