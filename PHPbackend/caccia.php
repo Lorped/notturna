@@ -34,6 +34,8 @@
 	$vitae=$_GET['vitae'];
 	$BS=$_GET['BS'];
 
+	// $idutente = 1 ;   // TEST *****************
+
 	$toxic=$_GET['toxic'];
 
  	$Mysql="SELECT * FROM personaggio
@@ -48,6 +50,8 @@
 	$lastps=$res['lastps'];
 	$nomepg=$res['nomepg'];
 	$xnomepg=mysql_real_escape_string($nomepg);
+
+
 
 	$PScorrenti=$PScorrenti+$recuperati;
 	if ($PScorrenti > $setetot) {
@@ -94,34 +98,39 @@
 
 	//die(print_r($response));
 
+	$Mysql="SELECT chance from chanceviolazione";
+	$Result=mysql_query($Mysql);
+	$res=mysql_fetch_array($Result);
+	$chance=$res['chance'];
+
 	if ( $BS == 1) {
+		$chance =	$chance * 2;
+	}
 
-		$Mysql="SELECT chance from chanceviolazione";
-		$Result=mysql_query($Mysql);
-		$res=mysql_fetch_array($Result);
-		$chance=$res['chance'];
-		$tiro=rand(1,100);
-		if ($tiro < $chance)  {
-			$testo="VIOLAZIONE della MASQUERADE per ".$nomepg;
-			$xtesto=mysql_real_escape_string($testo);
-			$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( 0, 'NARRAZIONE', NOW(), '$xtesto' , 0 ) ";
-			mysql_query($Mysql);
+	$tiro=rand(1,100);
 
-			master2master($testo);
+	if ($tiro < $chance)  {
 
-		}
+		$testo="VIOLAZIONE della MASQUERADE per ".$nomepg;
+		$xtesto=mysql_real_escape_string($testo);
+		$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( 0, 'NARRAZIONE', NOW(), '$xtesto' , 0 ) ";
+		mysql_query($Mysql);
+
+		//die ("here tiro =" . $tiro. ' mysql = '.$Mysql);
+		sleep(1);
+		master2master($testo);
 	}
 
 
 	if ( $toxic == 1) {
 
-
 		$testo="Caccia sfortunata (Tossicodipendenza) per ".$nomepg;
 		$xtesto=mysql_real_escape_string($testo);
 		$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo, Destinatario) VALUES ( 0, 'NARRAZIONE', NOW(), '$xtesto' , 0 ) ";
 		mysql_query($Mysql);
-		master2master($testo);
 
+		sleep(1);
+		master2master($testo);
 
 	}
 
