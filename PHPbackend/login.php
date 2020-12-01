@@ -205,11 +205,11 @@ function controlla_ps ( $idutente) {  //inizio test su ps
 
 function controlla_legami ($idutente) {
   // legami
-  $Mysql="DELETE FROM legami WHERE target = $idutente and livello = 1 and (DATE_ADD(dataultima, INTERVAL 60 DAY) < NOW())";
+  $Mysql="DELETE FROM legami WHERE target = $idutente and livello = 1 and (DATE_ADD(dataultima, INTERVAL 75 DAY) < NOW())";
   $Result = mysql_query($Mysql);
-  $Mysql="UPDATE legami SET livello=1 , dataultima=NOW() WHERE target = $idutente and livello = 2 and (DATE_ADD(dataultima, INTERVAL 150 DAY) < NOW())";
+  $Mysql="UPDATE legami SET livello=1 , dataultima=NOW() WHERE target = $idutente and livello = 2 and (DATE_ADD(dataultima, INTERVAL 165 DAY) < NOW())";
   $Result = mysql_query($Mysql);
-  $Mysql="UPDATE legami SET livello=2 , dataultima=NOW() WHERE target = $idutente and livello = 3 and (DATE_ADD(dataultima, INTERVAL 300 DAY) < NOW())";
+  $Mysql="UPDATE legami SET livello=2 , dataultima=NOW() WHERE target = $idutente and livello = 3 and (DATE_ADD(dataultima, INTERVAL 315 DAY) < NOW())";
   $Result = mysql_query($Mysql);
 }
 
