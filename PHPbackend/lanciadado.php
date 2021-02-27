@@ -47,6 +47,12 @@ include ("db.inc.php");
 
 
 		$tiro=rand(1,5);
+    if ( $idutente == 228 && $tiro == 5 ) {
+      $tiro=rand(1,5);
+    }
+    if ( $idutente == 1 && $tiro == 1 ) {
+      $tiro=rand(1,5);
+    }
 		$testo="tira ".$tiro;
 		$Mysql="INSERT INTO dadi ( idutente, nomepg, Ora, Testo) VALUES ( $idutente, '$nomepg', NOW(), '$testo' ) ";
 		mysql_query($Mysql);
