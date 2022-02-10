@@ -45,7 +45,7 @@
     "ionic": "^5.4.4",
     "ionic-angular": "3.9.9",
     "ionicons": "3.0.0",
-    "node-sass": "^5.0.0",
+    "node-sass": "^7.0.0",
     "phonegap-plugin-barcodescanner": "^8.1.0",
     "phonegap-plugin-multidex": "^1.0.0",
     "phonegap-plugin-push": "^2.2.3",
